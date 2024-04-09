@@ -6,18 +6,7 @@ namespace ShoMenu;
 
 final class Hook
 {
-    public function init(): void
-    {
-        foreach (get_class_methods($this) as $method) {
-            if ($method === __FUNCTION__) {
-                continue;
-            }
-
-            $this->{$method}();
-        }
-    }
-
-    private function registerMenuAssets(): void
+    public function registerMenuAssets(): self
     {
         add_action('wp_enqueue_scripts', function (): void {
             $css_url = SHO_MENU_URL . 'assets/main.css';
@@ -33,14 +22,46 @@ final class Hook
                 'nonce' => wp_create_nonce('nalognl_pdf_offer'),
             ]);
         });
+
+        return $this;
     }
 
-    private function registerShortcodes(): void
+    public function registerShortcodes(): self
     {
         add_shortcode('sho_menu', function (): string {
             wp_enqueue_script('sho-menu-js');
             wp_enqueue_style('sho-menu-style');
             return '<div id="sho-menu"><main-menu /></div>';
         });
+
+        return $this;
+    }
+
+    public function registerCustomPostType(): self
+    {
+        add_action('init', function (): void {
+            register_post_type('menu', [
+                'label' => __('Наше Меню'),
+                'public' => true,
+                'has_archive' => true,
+                'menu_icon' => 'dashicons-menu',
+                'supports' => ['title', 'editor'],
+            ]);
+        });
+
+        return $this;
+    }
+
+    public function registerActivationHooks(): self
+    {
+        register_activation_hook(SHO_MENU_ENTRY_FILE, function (): void {
+            flush_rewrite_rules();
+        });
+
+        register_deactivation_hook(SHO_MENU_ENTRY_FILE, function (): void {
+            flush_rewrite_rules();
+        });
+
+        return $this;
     }
 }

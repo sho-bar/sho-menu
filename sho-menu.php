@@ -13,7 +13,12 @@ Tags: custom-menu
 defined('ABSPATH') || exit;
 define('SHO_MENU_PATH', plugin_dir_path(__FILE__));
 define('SHO_MENU_URL', plugin_dir_url(__FILE__));
+define('SHO_MENU_ENTRY_FILE', __FILE__);
 
 require_once 'vendor/autoload.php';
 
-(new \ShoMenu\Hook)->init();
+(new \ShoMenu\Hook)
+    ->registerActivationHooks()
+    ->registerMenuAssets()
+    ->registerShortcodes()
+    ->registerCustomPostType();
