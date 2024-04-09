@@ -31,6 +31,7 @@ final class Hook
         add_shortcode('sho_menu', function (): string {
             wp_enqueue_script('sho-menu-js');
             wp_enqueue_style('sho-menu-style');
+
             return '<div id="sho-menu"><main-menu /></div>';
         });
 
@@ -40,12 +41,43 @@ final class Hook
     public function registerCustomPostType(): self
     {
         add_action('init', function (): void {
-            register_post_type('menu', [
-                'label' => __('Наше Меню'),
+            register_post_type('dishes', [
+                'labels' => [
+                    'name' => __('Блюда', 'sho-menu'),
+                    'singular_name' => __('Блюдо', 'sho-menu'),
+                    'new_item_name' => __('Новое блюдо', 'sho-menu'),
+                    'edit_item' => __('Редактировать блюдо', 'sho-menu'),
+                    'update_item' => __('Обновить блюдо', 'sho-menu'),
+                    'add_new_item' => __('Добавить', 'sho-menu'),
+                ],
                 'public' => true,
                 'has_archive' => true,
-                'menu_icon' => 'dashicons-menu',
+                'menu_icon' => 'dashicons-food',
                 'supports' => ['title', 'editor'],
+                'taxonomies' => ['dish-category']
+            ]);
+        });
+
+        return $this;
+    }
+
+    public function registerDishCategoryTaxonomy(): self
+    {
+        add_action('init', function (): void {
+            register_taxonomy('dish-category', 'dishes', [
+                'labels' => [
+                    'name' => __('Категории блюд', 'sho-menu'),
+                    'singular_name' => __('Категория блюда', 'sho-menu'),
+                    'new_item_name' => __('Новая категория', 'sho-menu'),
+                    'edit_item' => __('Редактировать категорию', 'sho-menu'),
+                    'update_item' => __('Обновить категорию', 'sho-menu'),
+                    'add_new_item' => __('Добавить', 'sho-menu'),
+                ],
+                'public' => true,
+                'hierarchical' => true,
+                'show_ui' => true,
+                'show_admin_column' => true,
+                'query_var' => true,
             ]);
         });
 

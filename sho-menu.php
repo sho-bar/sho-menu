@@ -21,4 +21,5 @@ require_once 'vendor/autoload.php';
     ->registerActivationHooks()
     ->registerMenuAssets()
     ->registerShortcodes()
-    ->registerCustomPostType();
+    ->registerCustomPostType()
+    ->registerDishCategoryTaxonomy();
