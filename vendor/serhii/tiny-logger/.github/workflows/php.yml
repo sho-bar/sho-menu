@@ -1,0 +1,29 @@
+name: Tiny Logger
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php_version: ['7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3']
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Validate composer.json
+      run: composer validate
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress --no-suggest
+
+    - name: Run tests and checks
+      run: make check
+

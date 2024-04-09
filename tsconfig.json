@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "es2022",
+        "moduleResolution": "Node",
+        "lib": [
+            "es2021",
+            "dom",
+            "WebWorker"
+        ],
+        "sourceMap": true,
+        "removeComments": true,
+        "noEmitOnError": true,
+        "strict": true,
+        "noImplicitAny": false,
+        "paths": {
+            "@/*": [
+                "./resources/common/ts/*"
+            ],
+            "@menu/*": [
+                "./resources/menu/ts/*"
+            ],
+        },
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true
+    }
+}

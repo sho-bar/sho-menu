@@ -9,4 +9,5 @@ return array(
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Component\\VarDumper\\' => array($vendorDir . '/symfony/var-dumper'),
     'ShoMenu\\' => array($baseDir . '/app'),
+    'Serhii\\TinyLogger\\' => array($vendorDir . '/serhii/tiny-logger/src'),
 );

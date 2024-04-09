@@ -8,6 +8,7 @@ class ComposerStaticInit6c87968e593dc9535bc6daa6a481a1c6
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '75b88b4ed4d07a48c26155d671e68412' => __DIR__ . '/..' . '/serhii/tiny-logger/logger.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
     );
 
@@ -17,6 +18,7 @@ class ComposerStaticInit6c87968e593dc9535bc6daa6a481a1c6
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Component\\VarDumper\\' => 28,
             'ShoMenu\\' => 8,
+            'Serhii\\TinyLogger\\' => 18,
         ),
     );
 
@@ -33,6 +35,20 @@ class ComposerStaticInit6c87968e593dc9535bc6daa6a481a1c6
         array (
             0 => __DIR__ . '/../..' . '/app',
         ),
+        'Serhii\\TinyLogger\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/serhii/tiny-logger/src',
+        ),
+    );
+
+    public static $prefixesPsr0 = array (
+        'C' => 
+        array (
+            'Curl' => 
+            array (
+                0 => __DIR__ . '/..' . '/curl/curl/src',
+            ),
+        ),
     );
 
     public static $classMap = array (
@@ -44,6 +60,7 @@ class ComposerStaticInit6c87968e593dc9535bc6daa6a481a1c6
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit6c87968e593dc9535bc6daa6a481a1c6::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit6c87968e593dc9535bc6daa6a481a1c6::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit6c87968e593dc9535bc6daa6a481a1c6::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit6c87968e593dc9535bc6daa6a481a1c6::$classMap;
 
         }, null, ClassLoader::class);
