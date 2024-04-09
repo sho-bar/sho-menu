@@ -1,0 +1,17 @@
+{
+    "name": "sho-bar/sho-menu",
+    "autoload": {
+        "psr-4": {
+            "ShoMenu\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "SerhiiCho",
+            "email": "serhiicho@protonmail.com"
+        }
+    ],
+    "require-dev": {
+        "symfony/var-dumper": "^7.0"
+    }
+}
