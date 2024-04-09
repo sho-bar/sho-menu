@@ -54,7 +54,8 @@ final class Hook
                 'has_archive' => true,
                 'menu_icon' => 'dashicons-food',
                 'supports' => ['title', 'editor'],
-                'taxonomies' => ['dish-category']
+                'taxonomies' => ['dish-category'],
+                'supports' => ['title', 'editor', 'thumbnail'],
             ]);
         });
 
@@ -66,11 +67,11 @@ final class Hook
         add_action('init', function (): void {
             register_taxonomy('dish-category', 'dishes', [
                 'labels' => [
-                    'name' => __('Категории блюд', 'sho-menu'),
-                    'singular_name' => __('Категория блюда', 'sho-menu'),
+                    'name' => __('Категории', 'sho-menu'),
+                    'singular_name' => __('Категория', 'sho-menu'),
                     'new_item_name' => __('Новая категория', 'sho-menu'),
-                    'edit_item' => __('Редактировать категорию', 'sho-menu'),
-                    'update_item' => __('Обновить категорию', 'sho-menu'),
+                    'edit_item' => __('Редактировать', 'sho-menu'),
+                    'update_item' => __('Обновить', 'sho-menu'),
                     'add_new_item' => __('Добавить', 'sho-menu'),
                 ],
                 'public' => true,
