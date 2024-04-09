@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace ShoMenu;
 
+use ShoMenu\PostTypes\DishesPostType;
+
 final class Hook
 {
     public function registerMenuAssets(): self
@@ -40,47 +42,7 @@ final class Hook
 
     public function registerCustomPostType(): self
     {
-        add_action('init', function (): void {
-            register_post_type('dishes', [
-                'labels' => [
-                    'name' => __('Блюда', 'sho-menu'),
-                    'singular_name' => __('Блюдо', 'sho-menu'),
-                    'new_item_name' => __('Новое блюдо', 'sho-menu'),
-                    'edit_item' => __('Редактировать блюдо', 'sho-menu'),
-                    'update_item' => __('Обновить блюдо', 'sho-menu'),
-                    'add_new_item' => __('Добавить', 'sho-menu'),
-                ],
-                'public' => true,
-                'has_archive' => true,
-                'menu_icon' => 'dashicons-food',
-                'supports' => ['title', 'editor'],
-                'taxonomies' => ['dish-category'],
-                'supports' => ['title', 'editor', 'thumbnail'],
-            ]);
-        });
-
-        return $this;
-    }
-
-    public function registerDishCategoryTaxonomy(): self
-    {
-        add_action('init', function (): void {
-            register_taxonomy('dish-category', 'dishes', [
-                'labels' => [
-                    'name' => __('Категории', 'sho-menu'),
-                    'singular_name' => __('Категория', 'sho-menu'),
-                    'new_item_name' => __('Новая категория', 'sho-menu'),
-                    'edit_item' => __('Редактировать', 'sho-menu'),
-                    'update_item' => __('Обновить', 'sho-menu'),
-                    'add_new_item' => __('Добавить', 'sho-menu'),
-                ],
-                'public' => true,
-                'hierarchical' => true,
-                'show_ui' => true,
-                'show_admin_column' => true,
-                'query_var' => true,
-            ]);
-        });
+        (new DishesPostType())->registerAll();
 
         return $this;
     }
