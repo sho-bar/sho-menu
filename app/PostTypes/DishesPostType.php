@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace ShoMenu\PostTypes;
 
 use WP_Post;
+use ShoMenu\Dish;
 
 final class DishesPostType
 {
-    private const POST_TYPE = 'sho-menu-dishes';
-    private const TAXONOMY = 'sho-menu-dish-category';
+    public const POST_TYPE = 'sho-menu-dishes';
+    public const TAXONOMY = 'sho-menu-dish-category';
 
     /**
      * Meta boxes for the post type dishes
@@ -23,7 +24,7 @@ final class DishesPostType
         $this->meta_boxes = $this->setMetaBoxes();
     }
 
-    public function registerAll(): void
+    public function register(): void
     {
         $this->savePostHook();
         $this->disableGutenberg();
@@ -122,7 +123,7 @@ final class DishesPostType
     {
         wp_nonce_field('save_meta', 'sho_menu_nonce');
 
-        $value = get_post_meta($post->ID, '_sho_menu_price', true);
+        $value = Dish::getMeta('price', $post->ID);
         $value = $value === '' ? 0 : $value;
 
         echo "<input type='number' name='sho-menu-price' value='{$value}'>";
@@ -132,7 +133,7 @@ final class DishesPostType
     {
         wp_nonce_field('save_meta', 'sho_menu_nonce');
 
-        $value = get_post_meta($post->ID, '_sho_menu_weight', true);
+        $value = Dish::getMeta('weight', $post->ID);
         $value = $value === '' ? 0 : $value;
 
         echo "<input type='number' name='sho-menu-weight' value='{$value}'>";

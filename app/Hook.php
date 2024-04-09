@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace ShoMenu;
 
+use ShoMenu\PostTypes\Columns;
 use ShoMenu\PostTypes\DishesPostType;
 
 final class Hook
@@ -42,7 +43,8 @@ final class Hook
 
     public function registerCustomPostType(): self
     {
-        (new DishesPostType())->registerAll();
+        (new DishesPostType())->register();
+        (new Columns())->register();
 
         return $this;
     }
