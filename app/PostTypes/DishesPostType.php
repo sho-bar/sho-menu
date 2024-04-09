@@ -25,6 +25,7 @@ final class DishesPostType
 
     public function registerAll(): void
     {
+        $this->savePostHook();
         $this->disableGutenberg();
 
         add_action('init', function () {
@@ -134,6 +135,25 @@ final class DishesPostType
         $value = get_post_meta($post->ID, '_sho_menu_weight', true);
         $value = $value === '' ? 0 : $value;
 
-        echo "<input type='number' name='sho-menu-price' value='{$value}'>";
+        echo "<input type='number' name='sho-menu-weight' value='{$value}'>";
+    }
+
+    public function savePostHook(): void
+    {
+        foreach ($this->meta_boxes as $box) {
+            add_action('save_post', function ($post_id) use ($box) {
+                $nonce = $_POST['sho_menu_nonce'] ?? null;
+                $verify_nonce = wp_verify_nonce($nonce, 'save_meta');
+                $user_can_edit = current_user_can('edit_post', $post_id);
+
+                if (!$nonce || !$verify_nonce || !$user_can_edit) {
+                    return;
+                }
+
+                $value = sanitize_text_field($_POST[$box['id']] ?? '');
+
+                update_post_meta($post_id, "_sho_menu_{$box['slug']}", $value);
+            });
+        }
     }
 }
