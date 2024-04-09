@@ -21,7 +21,7 @@ final class Hook
 
             wp_localize_script('sho-menu-js', 'sho_menu_globals', [
                 'ajaxUrl' => admin_url('admin-ajax.php'),
-                'nonce' => wp_create_nonce('nalognl_pdf_offer'),
+                'nonce' => wp_create_nonce('sho_menu_nonce'),
             ]);
         });
 

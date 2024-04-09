@@ -4,8 +4,25 @@ declare(strict_types=1);
 
 namespace ShoMenu\PostTypes;
 
+use WP_Post;
+
 final class DishesPostType
 {
+    private const POST_TYPE = 'sho-menu-dishes';
+    private const TAXONOMY = 'sho-menu-dish-category';
+
+    /**
+     * Meta boxes for the post type dishes
+     *
+     * @var array[]
+     */
+    private array $meta_boxes;
+
+    public function __construct()
+    {
+        $this->meta_boxes = $this->setMetaBoxes();
+    }
+
     public function registerAll(): void
     {
         $this->disableGutenberg();
@@ -14,11 +31,17 @@ final class DishesPostType
             $this->registerTaxonomy();
             $this->registerPostType();
         });
+
+        add_action('add_meta_boxes', function () {
+            foreach ($this->meta_boxes as $box) {
+                add_meta_box($box['id'], $box['title'], $box['callback'], self::POST_TYPE, 'side');
+            }
+        });
     }
 
     private function registerPostType(): void
     {
-        register_post_type('dishes', [
+        register_post_type(self::POST_TYPE, [
             'labels' => [
                 'name' => __('Блюда', 'sho-menu'),
                 'singular_name' => __('Блюдо', 'sho-menu'),
@@ -43,7 +66,7 @@ final class DishesPostType
 
     private function registerTaxonomy(): void
     {
-        register_taxonomy('dish-category', 'dishes', [
+        register_taxonomy(self::TAXONOMY, self::POST_TYPE, [
             'labels' => [
                 'name' => __('Категории', 'sho-menu'),
                 'singular_name' => __('Категория', 'sho-menu'),
@@ -63,7 +86,7 @@ final class DishesPostType
     private function disableGutenberg(): void
     {
         add_filter('use_block_editor_for_post_type', function ($current_status, $post_type) {
-            $disabled_post_types = ['dishes'];
+            $disabled_post_types = [self::POST_TYPE];
 
             if (in_array($post_type, $disabled_post_types, true)) {
                 return false;
@@ -71,5 +94,46 @@ final class DishesPostType
 
             return $current_status;
         }, 10, 2);
+    }
+
+    /**
+     * @return array[]
+     */
+    private function setMetaBoxes(): array
+    {
+        return [
+            [
+                'id' => 'sho-menu-price',
+                'title' => __('Цена', 'sho-menu'),
+                'slug' => 'price',
+                'callback' => [$this, 'priceBoxMarkup'],
+            ],
+            [
+                'id' => 'sho-menu-weight',
+                'title' => __('Вес (г)', 'sho-menu'),
+                'slug' => 'weight',
+                'callback' => [$this, 'weightBoxMarkup'],
+            ],
+        ];
+    }
+
+    public function priceBoxMarkup(WP_Post $post): void
+    {
+        wp_nonce_field('save_meta', 'sho_menu_nonce');
+
+        $value = get_post_meta($post->ID, '_sho_menu_price', true);
+        $value = $value === '' ? 0 : $value;
+
+        echo "<input type='number' name='sho-menu-price' value='{$value}'>";
+    }
+
+    public function weightBoxMarkup(WP_Post $post): void
+    {
+        wp_nonce_field('save_meta', 'sho_menu_nonce');
+
+        $value = get_post_meta($post->ID, '_sho_menu_weight', true);
+        $value = $value === '' ? 0 : $value;
+
+        echo "<input type='number' name='sho-menu-price' value='{$value}'>";
     }
 }
