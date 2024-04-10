@@ -1,1 +1,23 @@
+.sho-menu__sidebar {
+  color: red !important;
+}
 
+.sho-menu {
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 15px;
+}
+.sho-menu__header img {
+  border-radius: 15px 15px 0 0;
+  width: 100%;
+  height: 300px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+.sho-menu__columns {
+  display: flex;
+  gap: 14px;
+  padding: 10px 20px;
+}

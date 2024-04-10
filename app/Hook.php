@@ -18,7 +18,7 @@ final class Hook
             $js_path = SHO_MENU_PATH . 'assets/main.js';
 
             wp_register_script('sho-menu-js', $js_url, [], Helper::fileVersion($js_path), true);
-            wp_register_style('sho-menu-style', $css_url, [], Helper::fileVersion($css_path), true);
+            wp_register_style('sho-menu-style', $css_url, [], Helper::fileVersion($css_path));
 
             wp_localize_script('sho-menu-js', 'shoMenuGlobals', [
                 'ajaxUrl' => admin_url('admin-ajax.php'),
