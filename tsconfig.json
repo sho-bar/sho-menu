@@ -1,4 +1,9 @@
 {
+    "include": [
+        "resources/common/ts/**/*",
+        "resources/menu/ts/**/*",
+        "resources/common/ts/globals.d.ts"
+    ],
     "compilerOptions": {
         "target": "es5",
         "module": "es2022",

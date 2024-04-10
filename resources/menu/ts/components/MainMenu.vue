@@ -1,7 +1,7 @@
 <script setup lang="ts">
-console.log("Test here")
+import TopHeader from '@menu/components/TopHeader.vue'
 </script>
 
 <template>
-    <h1>Test</h1>
+    <top-header />
 </template>

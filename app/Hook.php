@@ -20,9 +20,10 @@ final class Hook
             wp_register_script('sho-menu-js', $js_url, [], Helper::fileVersion($js_path), true);
             wp_register_style('sho-menu-style', $css_url, [], Helper::fileVersion($css_path), true);
 
-            wp_localize_script('sho-menu-js', 'sho_menu_globals', [
+            wp_localize_script('sho-menu-js', 'shoMenuGlobals', [
                 'ajaxUrl' => admin_url('admin-ajax.php'),
                 'nonce' => wp_create_nonce('sho_menu_nonce'),
+                'mainUrl' => SHO_MENU_URL,
             ]);
         });
 

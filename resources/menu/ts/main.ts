@@ -7,4 +7,6 @@ const app = createApp({
     },
 })
 
+app.config.globalProperties.shoMenuGlobals = window.shoMenuGlobals
+
 app.mount("#sho-menu")
