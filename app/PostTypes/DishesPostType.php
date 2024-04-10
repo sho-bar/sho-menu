@@ -151,13 +151,14 @@ final class DishesPostType
                 return;
             }
 
-            if ($this->categoryHasParent() === false) {
+            if ($this->categoryMissingParent()) {
                 $this->showValidationError(
                     title: __('Неправильная категория', 'sho-menu'),
-                    content: __('Вы выбрали главную категорию без родительской. Вместо
-                        этого выберите подкатегорию, к которой относится блюдо.
-                        Например, если блюдо относится к категории "Супы", то
-                        выберите подкатегорию "Супы".', 'sho-menu')
+                    content: __('Вы выбрали общую категорию вместо конкретной. Вместо
+                        этого выберите подкатегорию, к которой относится позиция.
+                        Например, если позиция относится к супам, то
+                        выберите подкатегорию "Супы". Если позиция относится к
+                        чаю, то выберите категорию "Чаи"', 'sho-menu')
                 );
 
                 return;
@@ -171,38 +172,54 @@ final class DishesPostType
         });
     }
 
-    private function categoryHasParent(): bool|null
+    private function categoryMissingParent(): bool|null
     {
-        $category_id = $this->getCategoryIdFromRequest();
+        $ids = $this->getCategoryIdsFromRequest();
 
-        if (!$category_id) {
-            return null;
+        foreach ($ids as $id) {
+            /** @var WP_Term|null $term */
+            $term = get_term_by('id', $id, self::TAXONOMY);
+
+            $parent = $term->parent ?? 0;
+
+            if ($parent === 0) {
+                return true;
+            }
         }
 
-        /** @var WP_Term|null $term */
-        $term = get_term_by('id', $category_id, self::TAXONOMY);
-
-        $parent = $term->parent ?? 0;
-
-        return $parent !== 0;
+        return false;
     }
 
-    private function getCategoryIdFromRequest(): int|null
+    /**
+     * @return int[]
+     */
+    private function getCategoryIdsFromRequest(): array
     {
-        $result = $_POST['tax_input']['sho-menu-dish-category'][1] ?? null;
-        return $result ? (int) $result : null;
+        $result = [];
+
+        $categories = $_POST['tax_input']['sho-menu-dish-category'] ?? [];
+
+        // First category doesn't count. We ignore it
+        if (count($categories) <= 1) {
+            return [];
+        }
+
+        // Skip the first category
+        $categories = array_slice($categories, 1);
+
+        foreach ($categories as $category) {
+            $result[] = (int) $category;
+        }
+
+        return $result;
     }
 
     private function showValidationError(string $title, string $content): void
     {
         echo <<<HTML
             <div class="error">
-                <h2>⚠️ Неправильная категория</h2>
-                <h3>Вы выбрали главную категорию без родительской. Вместо
-                    этого выберите подкатегорию, к которой относится блюдо.
-                    Например, если блюдо относится к категории "Супы", то
-                    выберите подкатегорию "Супы".
-                </h3>
+                <h2>{$title}</h2>
+                <h3>{$content}</h3>
 
                 <a
                     href="#"
