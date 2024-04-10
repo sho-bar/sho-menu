@@ -37,7 +37,14 @@ final class DishesPostType
 
         add_action('add_meta_boxes', function () {
             foreach ($this->meta_boxes as $box) {
-                add_meta_box($box['id'], $box['title'], $box['callback'], self::POST_TYPE, 'side');
+                add_meta_box(
+                    $box['id'],
+                    $box['title'],
+                    $box['callback'],
+                    self::POST_TYPE,
+                    $box['context'],
+                    $box['priority'] ?? 'default',
+                );
             }
         });
     }
@@ -79,6 +86,7 @@ final class DishesPostType
                 'add_new_item' => __('Добавить', 'sho-menu'),
             ],
             'public' => true,
+            'show_in_rest' => true,
             'hierarchical' => true,
             'show_ui' => true,
             'show_admin_column' => true,
@@ -109,13 +117,23 @@ final class DishesPostType
                 'id' => 'sho-menu-price',
                 'title' => __('Цена', 'sho-menu'),
                 'slug' => 'price',
+                'context' => 'side', // 'normal', 'advanced', 'side'
                 'callback' => [$this, 'priceBoxMarkup'],
             ],
             [
                 'id' => 'sho-menu-weight',
                 'title' => __('Вес (г)', 'sho-menu'),
                 'slug' => 'weight',
+                'context' => 'side',
                 'callback' => [$this, 'weightBoxMarkup'],
+            ],
+            [
+                'id' => 'sho-menu-info',
+                'title' => '<span>ℹ️ ' . __('Информация', 'sho-menu') . '</span>',
+                'slug' => 'info',
+                'context' => 'normal',
+                'priority' => 'high',
+                'callback' => [$this, 'infoBoxMarkup'],
             ],
         ];
     }
@@ -140,9 +158,21 @@ final class DishesPostType
         echo "<input type='number' name='sho-menu-weight' value='{$value}'>";
     }
 
+    public function infoBoxMarkup(WP_Post $post): void
+    {
+        echo <<<HTML
+        <b>Категории:</b><br>
+        <span>
+            Когда вы выбираете категорию, то автоматически выбирается родительская категория.
+            Это значит что у каждой позиции должно быть минимум две категории: основная и
+            родительская. Например: "Супы" и "Первые блюда".
+        </span>
+        HTML;
+    }
+
     public function savePostHook(): void
     {
-        add_action('save_post', function ($post_id) {
+        add_action('save_post', function (int $post_id): void {
             $nonce = $_POST['sho_menu_nonce'] ?? null;
             $verify_nonce = wp_verify_nonce($nonce, 'save_meta');
             $user_can_edit = current_user_can('edit_post', $post_id);
@@ -151,18 +181,7 @@ final class DishesPostType
                 return;
             }
 
-            if ($this->categoryMissingParent()) {
-                $this->showValidationError(
-                    title: __('Неправильная категория', 'sho-menu'),
-                    content: __('Вы выбрали общую категорию вместо конкретной. Вместо
-                        этого выберите подкатегорию, к которой относится позиция.
-                        Например, если позиция относится к супам, то
-                        выберите подкатегорию "Супы". Если позиция относится к
-                        чаю, то выберите категорию "Чаи"', 'sho-menu')
-                );
-
-                return;
-            }
+            $this->selectParentCategory($post_id);
 
             $price = sanitize_text_field($_POST['sho-menu-price'] ?? '');
             $weight = sanitize_text_field($_POST['sho-menu-weight'] ?? '');
@@ -172,7 +191,7 @@ final class DishesPostType
         });
     }
 
-    private function categoryMissingParent(): bool|null
+    private function selectParentCategory(int $post_id): void
     {
         $ids = $this->getCategoryIdsFromRequest();
 
@@ -183,11 +202,11 @@ final class DishesPostType
             $parent = $term->parent ?? 0;
 
             if ($parent === 0) {
-                return true;
+                continue;
             }
-        }
 
-        return false;
+            wp_set_post_terms($post_id, [$parent], self::TAXONOMY, true);
+        }
     }
 
     /**
@@ -212,21 +231,5 @@ final class DishesPostType
         }
 
         return $result;
-    }
-
-    private function showValidationError(string $title, string $content): void
-    {
-        echo <<<HTML
-            <div class="error">
-                <h2>{$title}</h2>
-                <h3>{$content}</h3>
-
-                <a
-                    href="#"
-                    style="background: lightgray; padding: 7px 15px; border-radius: 5px; text-decoration: none; color: black;"
-                    onclick="history.back()"
-                >Назад</a>
-            </div>
-        HTML;
     }
 }
