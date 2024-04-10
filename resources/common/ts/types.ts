@@ -9,6 +9,7 @@ export type Category = {
     name: string
     slug: string
     parent: number
+    dishes?: Dish[]
 }
 
 export type Dish = {
@@ -29,4 +30,5 @@ export type Dish = {
     "sho-menu-dish-category": number[]
     price: number | null
     weight: number | null
+    weight_unit: string | null
 }

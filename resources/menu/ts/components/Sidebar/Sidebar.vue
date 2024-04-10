@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Category } from '@/types'
+import type { ParentCategoryIsSelectedEventData } from '@menu/types'
 import { onMounted, ref } from 'vue'
 import { events } from '@menu/config'
 import dispatchEvent from '@/modules/dispatchEvent'
@@ -24,6 +25,10 @@ function fetchCategories(): void {
         .then(resp => {
             allCategories.value = resp.data
             categories.value = resp.data.filter(c => c.parent === 0)
+
+            if (resp.data.length > 0) {
+                selectParentCategory(resp.data[0])
+            }
         })
         .catch(err => console.error(err))
         .finally(() => loading.value = false)
@@ -31,8 +36,13 @@ function fetchCategories(): void {
 
 function selectParentCategory(category: Category): void {
     selectedParentCategory.value = category.id
+
     displayChildren(category.id)
-    dispatchEvent(events.parentCategoryIsSelected, category)
+
+    dispatchEvent<ParentCategoryIsSelectedEventData>(events.parentCategoryIsSelected, {
+        parentCategory: category,
+        childCategories: children.value,
+    })
 }
 
 function selectChildCategory(category: Category): void {

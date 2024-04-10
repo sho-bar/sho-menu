@@ -1,5 +1,5 @@
 .sho-menu__sidebar {
-  width: 270px;
+  min-width: 200px;
 }
 .sho-menu__sidebar__label {
   color: #777;
