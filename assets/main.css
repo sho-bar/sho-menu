@@ -1,5 +1,27 @@
 .sho-menu__sidebar {
-  color: red !important;
+  width: 280px;
+}
+.sho-menu__sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sho-menu__sidebar ul li {
+  font-weight: bold;
+  color: #424242;
+  cursor: pointer;
+  transition: color 0.3s;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 4px;
+  margin-bottom: 2px;
+}
+.sho-menu__sidebar ul li:hover {
+  color: #a57315;
+}
+.sho-menu__sidebar ul li:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .sho-menu {

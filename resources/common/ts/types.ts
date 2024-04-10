@@ -3,3 +3,10 @@ export type Globals = {
     nonce: string
     mainUrl: string
 }
+
+export type Category = {
+    id: number
+    name: string
+    slug: string
+    parent: number
+}

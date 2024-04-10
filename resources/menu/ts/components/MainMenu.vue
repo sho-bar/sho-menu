@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import TopHeader from '@menu/components/TopHeader.vue'
 import Sidebar from '@menu/components/Sidebar/Sidebar.vue'
+import Dishes from '@menu/components/Dishes/Dishes.vue'
 </script>
 
 <template>
@@ -9,7 +10,7 @@ import Sidebar from '@menu/components/Sidebar/Sidebar.vue'
 
         <div class="sho-menu__columns">
             <sidebar />
-            <div>dishes</div>
+            <dishes />
         </div>
     </div>
 </template>

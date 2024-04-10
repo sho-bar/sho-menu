@@ -1,5 +1,4 @@
 <script setup lang="ts">
-console.log(window.shoMenuGlobals)
 </script>
 
 <template>
