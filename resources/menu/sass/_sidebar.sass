@@ -19,8 +19,8 @@ $font-color: black
             cursor: pointer
             transition: color 0.3s
             border-bottom: 1px solid #eee
-            padding-bottom: 4px
-            margin-bottom: 2px
+            padding-bottom: 5px
+            margin-bottom: 3px
             user-select: none
 
             &.is-selected
@@ -36,15 +36,17 @@ $font-color: black
 
             ul
                 list-style: none
-                padding: 0
                 margin: 0
-                padding-left: 20px
+                padding: 0 0 0 15px
 
                 li
                     color: $font-color
                     font-weight: bold
                     font-size: .75em
-                    margin-bottom: 2px
+                    padding: 3px 0
+
+                    &.is-selected
+                        color: $gold-color
 
                     &:hover
                         color: $gold-color

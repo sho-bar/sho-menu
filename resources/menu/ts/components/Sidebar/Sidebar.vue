@@ -8,7 +8,8 @@ import axios from 'axios'
 const loading = ref<boolean>(false)
 const allCategories = ref<Category[]>([])
 const categories = ref<Category[]>([])
-const selectedCategory = ref<number | null>(null)
+const selectedParentCategory = ref<number | null>(null)
+const selectedChildCategory = ref<number | null>(null)
 const children = ref<Category[]>([])
 
 onMounted(() => fetchCategories())
@@ -26,10 +27,15 @@ function fetchCategories(): void {
         .finally(() => loading.value = false)
 }
 
-function setSelectedCategory(category: Category): void {
-    selectedCategory.value = category.id
+function selectParentCategory(category: Category): void {
+    selectedParentCategory.value = category.id
     displayChildren(category.id)
-    dispatchEvent(events.categoryIsSelected, category)
+    dispatchEvent(events.parentCategoryIsSelected, category)
+}
+
+function selectChildCategory(category: Category): void {
+    selectedChildCategory.value = category.id
+    dispatchEvent(events.childCategoryIsSelected, category)
 }
 
 function displayChildren(id: number): void {
@@ -45,15 +51,17 @@ function displayChildren(id: number): void {
             <li
                 v-for="c in categories"
                 :key="c.id"
-                @click.self="setSelectedCategory(c)"
-                :class="{ 'is-selected': c.id === selectedCategory }"
+                @click.self="selectParentCategory(c)"
+                :class="{ 'is-selected': c.id === selectedParentCategory }"
             >
                 {{ c.name }}
 
-                <ul v-if="children.length > 0 && selectedCategory == c.id">
+                <ul v-if="children.length > 0 && selectedParentCategory == c.id">
                     <li
                         v-for="child in children"
                         :key="child.id"
+                        @click="selectChildCategory(child)"
+                        :class="{ 'is-selected': child.id === selectedChildCategory }"
                     >
                         {{ child.name }}
                     </li>

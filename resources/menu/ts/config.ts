@@ -1,3 +1,4 @@
 export const events = {
-    categoryIsSelected: 'categoryisselected',
+    parentCategoryIsSelected: 'parentcategoryisselected',
+    childCategoryIsSelected: 'childcategoryisselected',
 }
