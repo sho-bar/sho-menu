@@ -45,17 +45,17 @@ function displayChildren(id: number): void {
             <li
                 v-for="c in categories"
                 :key="c.id"
-                @click="setSelectedCategory(c)"
+                @click.self="setSelectedCategory(c)"
                 :class="{ 'is-selected': c.id === selectedCategory }"
             >
-                <span>{{ c.name }}</span>
+                {{ c.name }}
 
                 <ul v-if="children.length > 0 && selectedCategory == c.id">
                     <li
                         v-for="child in children"
                         :key="child.id"
                     >
-                        <small>{{ child.name }}</small>
+                        {{ child.name }}
                     </li>
                 </ul>
             </li>

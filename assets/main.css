@@ -23,10 +23,10 @@
      -moz-user-select: none;
           user-select: none;
 }
-.sho-menu__sidebar > ul > li.is-selected span {
+.sho-menu__sidebar > ul > li.is-selected {
   color: #a57315;
 }
-.sho-menu__sidebar > ul > li:hover span {
+.sho-menu__sidebar > ul > li:hover {
   color: #a57315;
 }
 .sho-menu__sidebar > ul > li:last-child {
@@ -40,12 +40,17 @@
   margin: 0;
   padding-left: 20px;
 }
-.sho-menu__sidebar > ul > li ul li:hover small {
-  color: #a57315;
-}
-.sho-menu__sidebar > ul > li ul li small {
+.sho-menu__sidebar > ul > li ul li {
+  color: black;
   font-weight: bold;
   font-size: 0.75em;
+  margin-bottom: 2px;
+}
+.sho-menu__sidebar > ul > li ul li:hover {
+  color: #a57315;
+}
+.sho-menu__sidebar > ul > li ul li:last-child {
+  margin-bottom: 0;
 }
 
 .sho-menu {
