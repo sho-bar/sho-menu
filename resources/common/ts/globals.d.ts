@@ -1,8 +1,4 @@
-type Globals = {
-    ajaxUrl: string
-    nonce: string
-    mainUrl: string
-}
+import { Globals } from '@/types'
 
 export { }
 

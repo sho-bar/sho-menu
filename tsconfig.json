@@ -1,8 +1,7 @@
 {
     "include": [
         "resources/common/ts/**/*",
-        "resources/menu/ts/**/*",
-        "resources/common/ts/globals.d.ts"
+        "resources/menu/ts/**/*"
     ],
     "compilerOptions": {
         "target": "es5",
