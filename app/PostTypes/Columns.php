@@ -14,8 +14,9 @@ final class Columns
 
         /** What columns should be shown in admin panel */
         add_filter("manage_{$post_type}_posts_columns", function ($columns) {
-            $columns['price'] = __('Цена', 'sho-menu');
-            $columns['weight'] = __('Вес', 'sho-menu');
+            $columns['price'] = 'Ціна';
+            $columns['weight'] = 'Вага';
+            $columns['weight_unit'] = 'Од. ваги';
 
             return $columns;
         });

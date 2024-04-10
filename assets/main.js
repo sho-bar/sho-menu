@@ -18434,6 +18434,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _menu_config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @menu/config */ "./resources/menu/ts/config.ts");
+/* harmony import */ var _modules_listenEvent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/modules/listenEvent */ "./resources/common/ts/modules/listenEvent.ts");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+
+
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
@@ -18441,11 +18447,25 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup(__props, _a) {
     var __expose = _a.expose;
     __expose();
+    var dishes = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]);
+    var loading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
-      return fetchDishes();
+      (0,_modules_listenEvent__WEBPACK_IMPORTED_MODULE_2__["default"])(_menu_config__WEBPACK_IMPORTED_MODULE_1__.events.parentCategoryIsSelected, fetchDishes);
     });
-    function fetchDishes() {}
+    function fetchDishes(category) {
+      var url = '/wp-json/wp/v2/sho-menu-dishes' + '?per_page=100' + '&page=1' + "&sho-menu-dish-category=".concat(category.id) + '&_fields=id,slug,title.rendered,content.rendered,price,weight';
+      loading.value = true;
+      axios__WEBPACK_IMPORTED_MODULE_3__["default"].get(url).then(function (resp) {
+        return dishes.value = resp.data;
+      })["catch"](function (err) {
+        return console.error(err);
+      })["finally"](function () {
+        return loading.value = false;
+      });
+    }
     var __returned__ = {
+      dishes: dishes,
+      loading: loading,
       fetchDishes: fetchDishes
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
@@ -18532,8 +18552,8 @@ __webpack_require__.r(__webpack_exports__);
       return fetchCategories();
     });
     function fetchCategories() {
-      var url = '/wp-json/wp/v2/sho-menu-dish-category';
-      url += '?_fields=id,slug,name,parent';
+      var url = '/wp-json/wp/v2/sho-menu-dish-category' + '?_fields=id,slug,name,parent';
+      loading.value = true;
       axios__WEBPACK_IMPORTED_MODULE_3__["default"].get(url).then(function (resp) {
         allCategories.value = resp.data;
         categories.value = resp.data.filter(function (c) {
@@ -18598,7 +18618,11 @@ var _hoisted_1 = {
   "class": "sho-menu__dishes"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, " Dishes ");
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.dishes, function (dish) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      key: dish.id
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(dish.title.rendered), 1)]);
+  }), 128))]);
 }
 
 /***/ }),
@@ -18694,6 +18718,25 @@ __webpack_require__.r(__webpack_exports__);
     detail: params
   });
   window.dispatchEvent(event);
+});
+
+/***/ }),
+
+/***/ "./resources/common/ts/modules/listenEvent.ts":
+/*!****************************************************!*\
+  !*** ./resources/common/ts/modules/listenEvent.ts ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (name, callback) {
+  window.addEventListener(name, function (e) {
+    return callback(e.detail);
+  });
 });
 
 /***/ }),

@@ -16,7 +16,9 @@ onMounted(() => fetchCategories())
 
 function fetchCategories(): void {
     let url = '/wp-json/wp/v2/sho-menu-dish-category'
-    url += '?_fields=id,slug,name,parent'
+        + '?_fields=id,slug,name,parent'
+
+    loading.value = true
 
     axios.get<Category[]>(url)
         .then(resp => {

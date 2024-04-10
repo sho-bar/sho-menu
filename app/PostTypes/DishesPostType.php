@@ -29,6 +29,7 @@ final class DishesPostType
     {
         $this->savePostHook();
         $this->disableGutenberg();
+        $this->registerCustomRestApiFields();
 
         add_action('init', function () {
             $this->registerTaxonomy();
@@ -42,7 +43,7 @@ final class DishesPostType
                     $box['title'],
                     $box['callback'],
                     self::POST_TYPE,
-                    $box['context'],
+                    'side',
                     $box['priority'] ?? 'default',
                 );
             }
@@ -53,12 +54,12 @@ final class DishesPostType
     {
         register_post_type(self::POST_TYPE, [
             'labels' => [
-                'name' => __('Блюда', 'sho-menu'),
-                'singular_name' => __('Блюдо', 'sho-menu'),
-                'new_item_name' => __('Новое блюдо', 'sho-menu'),
-                'edit_item' => __('Редактировать блюдо', 'sho-menu'),
-                'update_item' => __('Обновить блюдо', 'sho-menu'),
-                'add_new_item' => __('Добавить', 'sho-menu'),
+                'name' => 'Страви',
+                'singular_name' => 'Страва',
+                'new_item_name' => 'Нова страва',
+                'edit_item' => 'Редагувати страву',
+                'update_item' => 'Оновити страву',
+                'add_new_item' => 'Додати',
             ],
             'public' => true,
             'show_in_rest' => true,
@@ -78,12 +79,12 @@ final class DishesPostType
     {
         register_taxonomy(self::TAXONOMY, self::POST_TYPE, [
             'labels' => [
-                'name' => __('Категории', 'sho-menu'),
-                'singular_name' => __('Категория', 'sho-menu'),
-                'new_item_name' => __('Новая категория', 'sho-menu'),
-                'edit_item' => __('Редактировать', 'sho-menu'),
-                'update_item' => __('Обновить', 'sho-menu'),
-                'add_new_item' => __('Добавить', 'sho-menu'),
+                'name' => 'Категорії',
+                'singular_name' => 'Категорія',
+                'new_item_name' => 'Нова категорія',
+                'edit_item' => 'Редагувати',
+                'update_item' => 'Оновити',
+                'add_new_item' => 'Додати',
             ],
             'public' => true,
             'show_in_rest' => true,
@@ -115,23 +116,26 @@ final class DishesPostType
         return [
             [
                 'id' => 'sho-menu-price',
-                'title' => __('Цена', 'sho-menu'),
+                'title' => 'Ціна',
                 'slug' => 'price',
-                'context' => 'side', // 'normal', 'advanced', 'side'
                 'callback' => [$this, 'priceBoxMarkup'],
             ],
             [
                 'id' => 'sho-menu-weight',
-                'title' => __('Вес (г)', 'sho-menu'),
+                'title' => 'Вага',
                 'slug' => 'weight',
-                'context' => 'side',
                 'callback' => [$this, 'weightBoxMarkup'],
             ],
             [
+                'id' => 'sho-menu-weight-unit',
+                'title' => 'Одиниця ваги (мл, г...)',
+                'slug' => 'weight-unit',
+                'callback' => [$this, 'weightUnitBoxMarkup'],
+            ],
+            [
                 'id' => 'sho-menu-info',
-                'title' => '<span>ℹ️ ' . __('Информация', 'sho-menu') . '</span>',
+                'title' => '<span>ℹ️ Інформація</span>',
                 'slug' => 'info',
-                'context' => 'normal',
                 'priority' => 'high',
                 'callback' => [$this, 'infoBoxMarkup'],
             ],
@@ -158,14 +162,24 @@ final class DishesPostType
         echo "<input type='number' name='sho-menu-weight' value='{$value}'>";
     }
 
+    public function weightUnitBoxMarkup(WP_Post $post): void
+    {
+        wp_nonce_field('save_meta', 'sho_menu_nonce');
+
+        $value = Dish::getMeta('weight_unit', $post->ID);
+        $value = $value === '' ? ' г' : $value;
+
+        echo "<input type='text' name='sho-menu-weight-unit' value='{$value}'>";
+    }
+
     public function infoBoxMarkup(WP_Post $post): void
     {
         echo <<<HTML
-        <b>Категории:</b><br>
+        <b>Категорії:</b><br>
         <span>
-            Когда вы выбираете категорию, то автоматически выбирается родительская категория.
-            Это значит что у каждой позиции должно быть минимум две категории: основная и
-            родительская. Например: "Супы" и "Первые блюда".
+            Коли ви вибираєте категорію, то автоматично вибирається батьківська категорія.
+                Це означає, що у кожної позиції має бути мінімум дві категорії: основна і
+                батьківська. Наприклад: "Супи" і "Перші страви".
         </span>
         HTML;
     }
@@ -185,9 +199,11 @@ final class DishesPostType
 
             $price = sanitize_text_field($_POST['sho-menu-price'] ?? '');
             $weight = sanitize_text_field($_POST['sho-menu-weight'] ?? '');
+            $weight_unit = sanitize_text_field($_POST['sho-menu-weight-unit'] ?? '');
 
             update_post_meta($post_id, '_sho_menu_price', $price);
             update_post_meta($post_id, '_sho_menu_weight', $weight);
+            update_post_meta($post_id, '_sho_menu_weight_unit', $weight_unit);
         });
     }
 
@@ -231,5 +247,31 @@ final class DishesPostType
         }
 
         return $result;
+    }
+
+    private function registerCustomRestApiFields(): void
+    {
+        add_action('rest_api_init', function () {
+            register_rest_field('sho-menu-dishes', 'price', [
+                'get_callback' => function ($post) {
+                    $price = get_post_meta($post['id'], '_sho_menu_price', true);
+                    return $price === false ? null : (int) $price;
+                },
+            ]);
+
+            register_rest_field('sho-menu-dishes', 'weight', [
+                'get_callback' => function ($post) {
+                    $weight = get_post_meta($post['id'], '_sho_menu_weight', true);
+                    return $weight === false ? null : (int) $weight;
+                },
+            ]);
+
+            register_rest_field('sho-menu-dishes', 'weight_unit', [
+                'get_callback' => function ($post) {
+                    $unit = get_post_meta($post['id'], '_sho_menu_weight_unit', true);
+                    return $unit === false ? null : $unit;
+                },
+            ]);
+        });
     }
 }
