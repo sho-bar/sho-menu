@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ShoMenu\PostTypes;
 
 use WP_Post;
+use WP_Term;
 use ShoMenu\Dish;
 
 final class DishesPostType
@@ -141,20 +142,74 @@ final class DishesPostType
 
     public function savePostHook(): void
     {
-        foreach ($this->meta_boxes as $box) {
-            add_action('save_post', function ($post_id) use ($box) {
-                $nonce = $_POST['sho_menu_nonce'] ?? null;
-                $verify_nonce = wp_verify_nonce($nonce, 'save_meta');
-                $user_can_edit = current_user_can('edit_post', $post_id);
+        add_action('save_post', function ($post_id) {
+            $nonce = $_POST['sho_menu_nonce'] ?? null;
+            $verify_nonce = wp_verify_nonce($nonce, 'save_meta');
+            $user_can_edit = current_user_can('edit_post', $post_id);
 
-                if (!$nonce || !$verify_nonce || !$user_can_edit) {
-                    return;
-                }
+            if (!$nonce || !$verify_nonce || !$user_can_edit) {
+                return;
+            }
 
-                $value = sanitize_text_field($_POST[$box['id']] ?? '');
+            if ($this->categoryHasParent() === false) {
+                $this->showValidationError(
+                    title: __('Неправильная категория', 'sho-menu'),
+                    content: __('Вы выбрали главную категорию без родительской. Вместо
+                        этого выберите подкатегорию, к которой относится блюдо.
+                        Например, если блюдо относится к категории "Супы", то
+                        выберите подкатегорию "Супы".', 'sho-menu')
+                );
 
-                update_post_meta($post_id, "_sho_menu_{$box['slug']}", $value);
-            });
+                return;
+            }
+
+            $price = sanitize_text_field($_POST['sho-menu-price'] ?? '');
+            $weight = sanitize_text_field($_POST['sho-menu-weight'] ?? '');
+
+            update_post_meta($post_id, '_sho_menu_price', $price);
+            update_post_meta($post_id, '_sho_menu_weight', $weight);
+        });
+    }
+
+    private function categoryHasParent(): bool|null
+    {
+        $category_id = $this->getCategoryIdFromRequest();
+
+        if (!$category_id) {
+            return null;
         }
+
+        /** @var WP_Term|null $term */
+        $term = get_term_by('id', $category_id, self::TAXONOMY);
+
+        $parent = $term->parent ?? 0;
+
+        return $parent !== 0;
+    }
+
+    private function getCategoryIdFromRequest(): int|null
+    {
+        $result = $_POST['tax_input']['sho-menu-dish-category'][1] ?? null;
+        return $result ? (int) $result : null;
+    }
+
+    private function showValidationError(string $title, string $content): void
+    {
+        echo <<<HTML
+            <div class="error">
+                <h2>⚠️ Неправильная категория</h2>
+                <h3>Вы выбрали главную категорию без родительской. Вместо
+                    этого выберите подкатегорию, к которой относится блюдо.
+                    Например, если блюдо относится к категории "Супы", то
+                    выберите подкатегорию "Супы".
+                </h3>
+
+                <a
+                    href="#"
+                    style="background: lightgray; padding: 7px 15px; border-radius: 5px; text-decoration: none; color: black;"
+                    onclick="history.back()"
+                >Назад</a>
+            </div>
+        HTML;
     }
 }
