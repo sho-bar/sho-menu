@@ -1,12 +1,17 @@
 .sho-menu__sidebar
-    width: 280px
+    width: 270px
 
-    ul
+    &__label
+        color: #777
+        margin-bottom: 7px
+        display: inline-block
+
+    & > ul
         list-style: none
         padding: 0
         margin: 0
 
-        li
+        & > li
             font-weight: bold
             color: #424242
             cursor: pointer
@@ -14,11 +19,29 @@
             border-bottom: 1px solid #eee
             padding-bottom: 4px
             margin-bottom: 2px
+            user-select: none
 
-            &:hover
+            &.is-selected span
+                color: $gold-color
+
+            &:hover span
                 color: $gold-color
 
             &:last-child
                 border-bottom: none
                 margin-bottom: 0
                 padding-bottom: 0
+
+            ul
+                list-style: none
+                padding: 0
+                margin: 0
+                padding-left: 20px
+
+                li
+                    &:hover small
+                        color: $gold-color
+
+                    small
+                        font-weight: bold
+                        font-size: .75em
