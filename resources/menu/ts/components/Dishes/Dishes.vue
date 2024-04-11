@@ -5,6 +5,7 @@ import { onMounted, ref } from 'vue'
 import { events } from '@menu/config'
 import attachDishesToCategories from '@menu/modules/attachDishesToCategories'
 import DishItem from '@menu/components/Dishes/DishItem.vue'
+import ShowSidebarBtn from '@menu/components/Sidebar/ShowSidebarBtn.vue'
 import CategoryItem from '@menu/components/Dishes/CategoryItem.vue'
 import listenEvent from '@/modules/listenEvent'
 import axios from 'axios'
@@ -57,6 +58,8 @@ function fetchDishes(data: ParentCategoryIsSelectedEventData): void {
         class="sho-menu__dishes"
         :class="{ 'sho-menu__dishes--show': selectedCategory !== null }"
     >
+        <show-sidebar-btn />
+
         <div v-if="loading">Завантаження...</div>
         <div v-else="categories.length === 0">Позицій у цій категорії ще немає</div>
         <div v-else>

@@ -120,7 +120,7 @@
     display: none;
   }
   .sho-menu__dishes--show {
-    display: flex;
+    display: block;
   }
 }
 .sho-menu__dishes__category {
@@ -212,6 +212,19 @@
   background-color: #fff;
   font-family: "Montserrat-Regular", serif;
   position: relative;
+}
+.sho-menu__show-sidebar-btn {
+  color: black;
+  font-size: 1.5em;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #606060;
+  margin-bottom: 10px;
 }
 .sho-menu__header img {
   border-radius: 15px 15px 0 0;
