@@ -4,6 +4,8 @@ import type { ParentCategoryIsSelectedEventData } from '@menu/types'
 import { onMounted, ref } from 'vue'
 import { events } from '@menu/config'
 import attachDishesToCategories from '@menu/modules/attachDishesToCategories'
+import DishItem from '@menu/components/Dishes/DishItem.vue'
+import CategoryItem from '@menu/components/Dishes/CategoryItem.vue'
 import listenEvent from '@/modules/listenEvent'
 import axios from 'axios'
 
@@ -22,7 +24,7 @@ function fetchDishes(data: ParentCategoryIsSelectedEventData): void {
         + '?per_page=100'
         + '&page=1'
         + `&sho-menu-dish-category=${data.parentCategory.id}`
-        + '&_fields=id,slug,title.rendered,content.rendered,price,weight,sho-menu-dish-category'
+        + '&_fields=id,slug,title.rendered,content.rendered,price,weight,weight_unit,sho-menu-dish-category'
 
     loading.value = true
 
@@ -42,18 +44,15 @@ function fetchDishes(data: ParentCategoryIsSelectedEventData): void {
         <div
             v-for="category in categories"
             :key="category.id"
+            class="sho-menu__dishes__section"
         >
-            <h3>{{ category.name }}</h3>
+            <category-item :category="category" />
 
-            <div
+            <dish-item
                 v-for="dish in category.dishes"
                 :key="dish.id"
-            >
-                <h4>{{ dish.title.rendered }}</h4>
-                <div v-html="dish.content.rendered"></div>
-                <div>{{ dish.price }} грн</div>
-                <div>{{ dish.weight }} г</div>
-            </div>
+                :dish="dish"
+            />
         </div>
     </div>
 </template>

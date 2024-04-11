@@ -17,7 +17,7 @@ onMounted(() => fetchCategories())
 
 function fetchCategories(): void {
     let url = '/wp-json/wp/v2/sho-menu-dish-category'
-        + '?_fields=id,slug,name,parent'
+        + '?_fields=id,slug,name,parent,description'
 
     loading.value = true
 

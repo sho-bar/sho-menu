@@ -55,6 +55,16 @@
   margin-bottom: 0;
 }
 
+.sho-menu__dishes__category {
+  text-align: center;
+}
+.sho-menu__dishes__item {
+  padding: 16px;
+  display: flex;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
 .sho-menu {
   background-color: #fff;
   border: 1px solid #eee;
