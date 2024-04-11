@@ -4,9 +4,33 @@
     gap: 8px
     cursor: pointer
     border-bottom: 1px solid #eee
+    position: relative
+
+    &:hover .sho-menu__dishes__item__edit
+        opacity: .8
 
     &:last-child
         border-bottom: none
+
+    &__edit
+        position: absolute
+        right: 7px
+        top: 7px
+        color: black
+        background-color: white
+        width: 35px
+        height: 35px
+        display: flex
+        justify-content: center
+        align-items: center
+        border-radius: 50%
+        padding: 3px
+        border: 1px solid black
+        opacity: 0
+
+        &:hover
+            color: $gold-color
+            border-color: $gold-color
 
     &__content
         width: 100%

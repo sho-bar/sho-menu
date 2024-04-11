@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { Dish } from '@/types'
 import WeightIcon from '@/components/Icons/WeightIcon.vue'
+import PencilIcon from '@/components/Icons/PencilIcon.vue'
 
 type Props = {
     dish: Dish
@@ -11,9 +12,20 @@ const { dish } = defineProps<Props>()
 
 <template>
     <div class="sho-menu__dishes__item">
+        <a
+            :href="`/wp-admin/post.php?post=${dish.id}&action=edit`"
+            class="sho-menu__dishes__item__edit"
+        >
+            <pencil-icon width="20" height="20" />
+        </a>
+
         <div class="sho-menu__dishes__item__content">
             <h3 v-html="dish.title.rendered"></h3>
-            <span class="sho-menu__dishes__item__price">{{ dish.price }} грн</span>
+
+            <span class="sho-menu__dishes__item__price">
+                {{ dish.price }} грн
+            </span>
+
             <p
                 v-html="dish.content.rendered"
                 class="sho-menu__dishes__item__description"
