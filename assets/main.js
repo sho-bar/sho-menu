@@ -18531,7 +18531,8 @@ __webpack_require__.r(__webpack_exports__);
       (0,_modules_listenEvent__WEBPACK_IMPORTED_MODULE_5__["default"])(_menu_config__WEBPACK_IMPORTED_MODULE_1__.events.parentCategoryIsSelected, fetchDishes);
     });
     function fetchDishes(data) {
-      var url = '/wp-json/wp/v2/sho-menu-dishes' + '?per_page=100' + '&page=1' + "&sho-menu-dish-category=".concat(data.parentCategory.id) + '&_fields=id,slug,title.rendered,content.rendered,price,weight,weight_unit,sho-menu-dish-category';
+      var selectFields = ['id', 'slug', 'title.rendered', 'content.rendered', 'price', 'weight', 'weight_unit', 'sho-menu-dish-category', 'image_url'];
+      var url = '/wp-json/wp/v2/sho-menu-dishes' + '?per_page=100' + '&page=1' + "&sho-menu-dish-category=".concat(data.parentCategory.id) + "&_fields=".concat(selectFields.join(','));
       loading.value = true;
       axios__WEBPACK_IMPORTED_MODULE_6__["default"].get(url).then(function (resp) {
         categories.value = (0,_menu_modules_attachDishesToCategories__WEBPACK_IMPORTED_MODULE_2__["default"])(resp.data, data.childCategories);
@@ -18725,11 +18726,25 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "sho-menu__dishes__item"
 };
-var _hoisted_2 = ["innerHTML"];
+var _hoisted_2 = {
+  "class": "sho-menu__dishes__item__content"
+};
+var _hoisted_3 = ["innerHTML"];
+var _hoisted_4 = ["innerHTML"];
+var _hoisted_5 = {
+  "class": "sho-menu__dishes__item__image"
+};
+var _hoisted_6 = ["src", "alt"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.dish.title.rendered), 1), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+    innerHTML: $props.dish.title.rendered
+  }, null, 8, _hoisted_3), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     innerHTML: $props.dish.content.rendered
-  }, null, 8, _hoisted_2), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.dish.price) + " грн", 1), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.dish.weight) + " г", 1)]);
+  }, null, 8, _hoisted_4), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.dish.price) + " грн", 1), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.dish.weight) + " г", 1)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [$props.dish.image_url ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
+    key: 0,
+    src: $props.dish.image_url,
+    alt: $props.dish.title.rendered
+  }, null, 8, _hoisted_6)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
 }
 
 /***/ }),

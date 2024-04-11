@@ -20,11 +20,23 @@ onMounted(() => {
 })
 
 function fetchDishes(data: ParentCategoryIsSelectedEventData): void {
+    const selectFields = [
+        'id',
+        'slug',
+        'title.rendered',
+        'content.rendered',
+        'price',
+        'weight',
+        'weight_unit',
+        'sho-menu-dish-category',
+        'image_url',
+    ]
+
     let url = '/wp-json/wp/v2/sho-menu-dishes'
         + '?per_page=100'
         + '&page=1'
         + `&sho-menu-dish-category=${data.parentCategory.id}`
-        + '&_fields=id,slug,title.rendered,content.rendered,price,weight,weight_unit,sho-menu-dish-category'
+        + `&_fields=${selectFields.join(',')}`
 
     loading.value = true
 

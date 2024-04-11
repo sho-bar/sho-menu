@@ -272,6 +272,13 @@ final class DishesPostType
                     return $unit === false ? null : $unit;
                 },
             ]);
+
+            register_rest_field('sho-menu-dishes', 'image_url', [
+                'get_callback' => function ($post) {
+                    $image = get_the_post_thumbnail_url($post['id']);
+                    return $image === false ? null : $image;
+                },
+            ]);
         });
     }
 }
