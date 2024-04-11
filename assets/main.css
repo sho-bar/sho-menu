@@ -110,12 +110,34 @@
   cursor: pointer;
   border-bottom: 1px solid #eee;
 }
+.sho-menu__dishes__item:last-child {
+  border-bottom: none;
+}
 .sho-menu__dishes__item__content {
   width: 100%;
 }
 .sho-menu__dishes__item__content h3 {
   font-family: "Montserrat-Bold", serif;
   margin: 0;
+}
+.sho-menu__dishes__item__price {
+  font-family: "Montserrat-Bold", serif;
+  color: #a57315;
+}
+.sho-menu__dishes__item__description {
+  font-size: 0.9rem;
+  margin: 3px 0;
+}
+.sho-menu__dishes__item__description p:last-child {
+  margin: 0;
+}
+.sho-menu__dishes__item__weight {
+  font-size: 0.7em;
+  color: #666;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
 }
 .sho-menu__dishes__item__image {
   width: 170px;
@@ -128,8 +150,6 @@
 
 .sho-menu {
   background-color: #fff;
-  border: 1px solid #eee;
-  border-radius: 15px;
   font-family: "Montserrat-Regular", serif;
 }
 .sho-menu__header img {
@@ -144,5 +164,5 @@
 .sho-menu__columns {
   display: flex;
   gap: 14px;
-  padding: 10px 20px;
+  padding: 10px;
 }

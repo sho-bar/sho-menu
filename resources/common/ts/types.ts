@@ -2,6 +2,7 @@ export type Globals = {
     ajaxUrl: string
     nonce: string
     mainUrl: string
+    isAuth: '1' | '0'
 }
 
 export type Category = {

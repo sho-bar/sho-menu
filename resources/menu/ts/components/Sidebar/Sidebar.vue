@@ -26,21 +26,20 @@ function fetchCategories(): void {
             allCategories.value = resp.data
             categories.value = resp.data.filter(c => c.parent === 0)
 
-            if (resp.data.length > 0) {
-                selectParentCategory(resp.data[0])
+            if (categories.value.length > 0) {
+                selectParentCategory(categories.value[0])
             }
         })
         .catch(err => console.error(err))
         .finally(() => loading.value = false)
 }
 
-function selectParentCategory(category: Category): void {
-    selectedParentCategory.value = category.id
-
-    displayChildren(category.id)
+function selectParentCategory(parentCategory: Category): void {
+    displayChildren(parentCategory.id)
+    selectedParentCategory.value = parentCategory.id
 
     dispatchEvent<ParentCategoryIsSelectedEventData>(events.parentCategoryIsSelected, {
-        parentCategory: category,
+        parentCategory,
         childCategories: children.value,
     })
 }

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Dish } from '@/types'
+import WeightIcon from '@/components/Icons/WeightIcon.vue'
 
 type Props = {
     dish: Dish
@@ -12,10 +13,19 @@ const { dish } = defineProps<Props>()
     <div class="sho-menu__dishes__item">
         <div class="sho-menu__dishes__item__content">
             <h3 v-html="dish.title.rendered"></h3>
-            <div v-html="dish.content.rendered"></div>
-            <div>{{ dish.price }} грн</div>
-            <div>{{ dish.weight }} г</div>
+            <span class="sho-menu__dishes__item__price">{{ dish.price }} грн</span>
+            <p
+                v-html="dish.content.rendered"
+                class="sho-menu__dishes__item__description"
+            ></p>
+
+            <small class="sho-menu__dishes__item__weight">
+                <weight-icon width="16" height="16" />
+                {{ dish.weight }}
+                {{ dish.weight_unit }}
+            </small>
         </div>
+
         <div class="sho-menu__dishes__item__image">
             <img
                 v-if="dish.image_url"

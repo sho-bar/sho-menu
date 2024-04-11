@@ -24,6 +24,7 @@ final class Hook
                 'ajaxUrl' => admin_url('admin-ajax.php'),
                 'nonce' => wp_create_nonce('sho_menu_nonce'),
                 'mainUrl' => SHO_MENU_URL,
+                'isAuth' => is_user_logged_in(),
             ]);
         });
 
