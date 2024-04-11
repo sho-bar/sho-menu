@@ -86,6 +86,9 @@
     min-width: 100%;
     overflow: visible;
   }
+  .sho-menu__sidebar--hide {
+    display: none;
+  }
   .sho-menu__sidebar > ul > li {
     display: flex;
     align-items: center;
@@ -106,9 +109,6 @@
 .sho-menu__dishes {
   width: 100%;
 }
-.sho-menu__dishes.sho-menu--show {
-  display: flex !important;
-}
 .sho-menu__dishes__section {
   border-radius: 15px;
   border: 1px solid #eee;
@@ -118,6 +118,9 @@
 @media (max-width: 810px) {
   .sho-menu__dishes {
     display: none;
+  }
+  .sho-menu__dishes--show {
+    display: flex;
   }
 }
 .sho-menu__dishes__category {

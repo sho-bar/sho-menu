@@ -3,6 +3,7 @@ import type { Category } from '@/types'
 import type { ParentCategoryIsSelectedEventData } from '@menu/types'
 import { onMounted, ref } from 'vue'
 import { events } from '@menu/config'
+import screenSizeIs from '@/modules/screenSizeIs'
 import dispatchEvent from '@/modules/dispatchEvent'
 import ChevronRightIcon from '@/components/Icons/ChevronRightIcon.vue'
 import axios from 'axios'
@@ -27,7 +28,8 @@ function fetchCategories(): void {
             allCategories.value = resp.data
             categories.value = resp.data.filter(c => c.parent === 0)
 
-            if (categories.value.length > 0) {
+            if (categories.value.length > 0 && screenSizeIs(811)) {
+                console.log('nice')
                 selectParentCategory(categories.value[0])
             }
         })
@@ -56,7 +58,10 @@ function displayChildren(id: number): void {
 </script>
 
 <template>
-    <div class="sho-menu__sidebar">
+    <div
+        class="sho-menu__sidebar"
+        :class="{ 'sho-menu__sidebar--hide': selectedParentCategory !== null }"
+    >
         <small class="sho-menu__sidebar__label is-selected">Меню:</small>
 
         <ul>

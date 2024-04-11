@@ -1,9 +1,6 @@
 .sho-menu__dishes
     width: 100%
 
-    &.sho-menu--show
-        display: flex !important
-
     &__section
         border-radius: $dishes-radius
         border: 1px solid #eee
@@ -12,3 +9,6 @@
 @media (max-width: 810px)
     .sho-menu__dishes
         display: none
+
+        &--show
+            display: flex

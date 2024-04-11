@@ -11,6 +11,7 @@ import axios from 'axios'
 
 const categories = ref<Category[]>([])
 const loading = ref<boolean>(true)
+const selectedCategory = ref<Category | null>(null)
 
 onMounted(() => {
     listenEvent<ParentCategoryIsSelectedEventData>(
@@ -20,6 +21,8 @@ onMounted(() => {
 })
 
 function fetchDishes(data: ParentCategoryIsSelectedEventData): void {
+    selectedCategory.value = data.parentCategory
+
     const selectFields = [
         'id',
         'slug',
@@ -50,7 +53,10 @@ function fetchDishes(data: ParentCategoryIsSelectedEventData): void {
 </script>
 
 <template>
-    <div class="sho-menu__dishes">
+    <div
+        class="sho-menu__dishes"
+        :class="{ 'sho-menu__dishes--show': selectedCategory !== null }"
+    >
         <div v-if="loading">Завантаження...</div>
         <div v-else="categories.length === 0">Позицій у цій категорії ще немає</div>
         <div v-else>
