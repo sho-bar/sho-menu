@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import ChevronLeftIcon from '@/components/Icons/ChevronLeftIcon.vue'
-import dispatchEvent from '@/modules/dispatchEvent'
-import { events } from '@menu/config'
+import { useStore } from 'vuex'
+
+const store = useStore()
 
 function showSidebar(): void {
-    dispatchEvent(events.showMobileSidebar)
+    store.dispatch('sidebar/resetSidebarCategories')
 }
 </script>
 

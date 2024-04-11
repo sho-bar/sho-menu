@@ -1,92 +1,52 @@
 <script setup lang="ts">
 import type { Category } from '@/types'
-import type { ParentCategoryIsSelectedEventData } from '@menu/types'
-import { onMounted, ref } from 'vue'
-import { events } from '@menu/config'
-import screenSizeIs from '@/modules/screenSizeIs'
-import dispatchEvent from '@/modules/dispatchEvent'
-import listenEvent from '@/modules/listenEvent'
+import { onMounted, computed } from 'vue'
+import { useStore } from 'vuex'
 import ChevronRightIcon from '@/components/Icons/ChevronRightIcon.vue'
-import axios from 'axios'
 
-const loading = ref<boolean>(false)
-const allCategories = ref<Category[]>([])
-const categories = ref<Category[]>([])
-const selectedParentCategory = ref<number | null>(null)
-const selectedChildCategory = ref<number | null>(null)
-const children = ref<Category[]>([])
+const store = useStore()
+const parentCategories = computed<Category[]>(() => store.getters['sidebar/parentCategories'])
+const selectedParent = computed<number | null>(() => store.getters['sidebar/selectedParent'])
+const selectedChild = computed<number | null>(() => store.getters['sidebar/selectedChild'])
+const childCategories = computed<Category[]>(() => store.getters['sidebar/childCategories'])
 
 onMounted(() => {
-    fetchCategories()
-
-    listenEvent(events.showMobileSidebar, () => {
-        selectedParentCategory.value = null
-    })
+    store.dispatch('sidebar/fetchCategories')
 })
 
-function fetchCategories(): void {
-    let url = '/wp-json/wp/v2/sho-menu-dish-category'
-        + '?_fields=id,slug,name,parent,description'
-
-    loading.value = true
-
-    axios.get<Category[]>(url)
-        .then(resp => {
-            allCategories.value = resp.data
-            categories.value = resp.data.filter(c => c.parent === 0)
-
-            if (categories.value.length > 0 && screenSizeIs(811)) {
-                selectParentCategory(categories.value[0])
-            }
-        })
-        .catch(err => console.error(err))
-        .finally(() => loading.value = false)
-}
-
-function selectParentCategory(parentCategory: Category): void {
-    displayChildren(parentCategory.id)
-    selectedParentCategory.value = parentCategory.id
-
-    dispatchEvent<ParentCategoryIsSelectedEventData>(events.parentCategoryIsSelected, {
-        parentCategory,
-        childCategories: children.value,
-    })
+function selectParentCategory(category: Category): void {
+    store.dispatch('sidebar/selectParentCategory', category)
 }
 
 function selectChildCategory(category: Category): void {
-    selectedChildCategory.value = category.id
-    dispatchEvent(events.childCategoryIsSelected, category)
-}
-
-function displayChildren(id: number): void {
-    children.value = allCategories.value.filter(c => c.parent === id)
+    store.dispatch('sidebar/selectChildCategory', category)
 }
 </script>
 
 <template>
     <div
         class="sho-menu__sidebar"
-        :class="{ 'sho-menu__sidebar--hide': selectedParentCategory !== null }"
+        :class="{ 'sho-menu__sidebar--hide': selectedParent !== null }"
     >
         <small class="sho-menu__sidebar__label">Меню:</small>
 
         <ul>
             <li
-                v-for="c in categories"
+                v-for="c in parentCategories"
                 :key="c.id"
                 @click.self="selectParentCategory(c)"
-                :class="{ 'is-selected': c.id === selectedParentCategory }"
+                :class="{ 'is-selected': c.id === selectedParent }"
             >
                 {{ c.name }}
 
                 <chevron-right-icon width="22" height="22" />
 
-                <ul v-if="children.length > 0 && selectedParentCategory == c.id">
+                <ul v-if="childCategories.length > 0 && selectedParent == c.id">
                     <li
-                        v-for="child in children"
+                        v-for="child in childCategories"
                         :key="child.id"
                         @click="selectChildCategory(child)"
-                        :class="{ 'is-selected': child.id === selectedChildCategory }"
+                        :class="{ 'is-selected': child.id === selectedChild }"
                     >
                         {{ child.name }}
                     </li>
