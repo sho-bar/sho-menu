@@ -1,5 +1,12 @@
 .sho-menu__sidebar {
   min-width: 200px;
+  position: sticky;
+  top: 35px;
+  max-height: calc(100vh - 35px);
+  overflow: auto;
+}
+.sho-menu__sidebar::-webkit-scrollbar {
+  width: 1px;
 }
 .sho-menu__sidebar__label {
   color: #777;

@@ -2,6 +2,13 @@ $font-color: black
 
 .sho-menu__sidebar
     min-width: 200px
+    position: sticky
+    top: 35px
+    max-height: calc(100vh - 35px)
+    overflow: auto
+
+    &::-webkit-scrollbar
+        width: 1px
 
     &__label
         color: #777
