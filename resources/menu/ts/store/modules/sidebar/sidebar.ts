@@ -21,6 +21,7 @@ const sidebar: Module<SidebarState, RootState> = {
         selectedParent: s => s.selectedParent,
         selectedChild: s => s.selectedChild,
         childCategories: s => s.childCategories,
+        parentCategories: s => s.parentCategories,
     },
 
     mutations: {
@@ -69,8 +70,6 @@ const sidebar: Module<SidebarState, RootState> = {
         },
 
         attachDishesToChildCategories({ state }, dishes: Dish[]): void {
-            const result: Category[] = []
-
             for (const category of state.childCategories) {
                 const matchedDishes = dishes.filter(dish => dish['sho-menu-dish-category'].includes(category.id))
 
@@ -79,11 +78,7 @@ const sidebar: Module<SidebarState, RootState> = {
                 }
 
                 category.dishes = matchedDishes
-
-                result.push(category)
             }
-
-            state.childCategories = result
         },
     },
 }

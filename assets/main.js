@@ -18793,7 +18793,9 @@ __webpack_require__.r(__webpack_exports__);
     var selectedParent = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
       return store.getters['sidebar/selectedParent'];
     });
-    var loading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(true);
+    var loading = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return store.getters['dishes/loading'];
+    });
     var __returned__ = {
       store: store,
       childCategories: childCategories,
@@ -19168,19 +19170,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return $setup.selectParentCategory(c);
       }, ["self"]),
       "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-        'is-selected': c.id === $setup.selectedParent
+        'is-selected': $setup.selectedParent && c.id === $setup.selectedParent.id
       })
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(c.name) + " ", 1), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ChevronRightIcon"], {
       width: "22",
       height: "22"
-    }), $setup.childCategories.length > 0 && $setup.selectedParent == c.id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("ul", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.childCategories, function (child) {
+    }), $setup.childCategories.length > 0 && $setup.selectedParent && $setup.selectedParent.id == c.id ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("ul", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.childCategories, function (child) {
       return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", {
         key: child.id,
         onClick: function onClick($event) {
           return $setup.selectChildCategory(child);
         },
         "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
-          'is-selected': child.id === $setup.selectedChild
+          'is-selected': $setup.selectedChild && child.id === $setup.selectedChild.id
         })
       }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(child.name), 11, _hoisted_4);
     }), 128))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 10, _hoisted_2);
@@ -19338,6 +19340,9 @@ var sidebar = {
     },
     childCategories: function childCategories(s) {
       return s.childCategories;
+    },
+    parentCategories: function parentCategories(s) {
+      return s.parentCategories;
     }
   },
   mutations: {
@@ -19389,7 +19394,6 @@ var sidebar = {
     },
     attachDishesToChildCategories: function attachDishesToChildCategories(_a, dishes) {
       var state = _a.state;
-      var result = [];
       var _loop_1 = function _loop_1(category) {
         var matchedDishes = dishes.filter(function (dish) {
           return dish['sho-menu-dish-category'].includes(category.id);
@@ -19398,13 +19402,11 @@ var sidebar = {
           return "continue";
         }
         category.dishes = matchedDishes;
-        result.push(category);
       };
       for (var _i = 0, _b = state.childCategories; _i < _b.length; _i++) {
         var category = _b[_i];
         _loop_1(category);
       }
-      state.childCategories = result;
     }
   }
 };

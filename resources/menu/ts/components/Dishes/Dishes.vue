@@ -10,7 +10,7 @@ import { useStore } from 'vuex'
 const store = useStore()
 const childCategories = computed<Category[]>(() => store.getters['sidebar/childCategories'])
 const selectedParent = computed<Category | null>(() => store.getters['sidebar/selectedParent'])
-const loading = ref<boolean>(true)
+const loading = computed<boolean>(() => store.getters['dishes/loading'])
 </script>
 
 <template>
@@ -21,7 +21,7 @@ const loading = ref<boolean>(true)
         <show-sidebar-btn />
 
         <div v-if="loading">Завантаження...</div>
-        <div v-else="categories.length === 0">Позицій у цій категорії ще немає</div>
+        <div v-else="childCategories.length === 0">Позицій у цій категорії ще немає</div>
         <div v-else>
             <div v-for="category in childCategories" :key="category.id">
                 <div
