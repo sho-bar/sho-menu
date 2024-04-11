@@ -10,6 +10,7 @@ $border-radius: 15px
 .sho-menu
     background-color: #fff
     font-family: "Montserrat-Regular", serif
+    position: relative
 
     &__header
         img
@@ -23,3 +24,10 @@ $border-radius: 15px
         display: flex
         gap: 14px
         padding: 10px
+
+@media (max-width: 800px)
+    .sho-menu
+        &__header
+            img
+                border-radius: $border-radius
+                box-shadow: $shadow

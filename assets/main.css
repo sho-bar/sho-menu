@@ -16,6 +16,7 @@
   top: 35px;
   max-height: calc(100vh - 35px);
   overflow: auto;
+  background-color: white;
 }
 .sho-menu__sidebar::-webkit-scrollbar {
   width: 1px;
@@ -42,6 +43,10 @@
      -moz-user-select: none;
           user-select: none;
   font-family: "Montserrat-Bold", serif;
+  line-height: 1.2;
+}
+.sho-menu__sidebar > ul > li > svg {
+  display: none;
 }
 .sho-menu__sidebar > ul > li.is-selected {
   color: #a57315;
@@ -76,17 +81,47 @@
   margin-bottom: 0;
 }
 
+@media (max-width: 810px) {
+  .sho-menu__sidebar {
+    min-width: 100%;
+    overflow: visible;
+  }
+  .sho-menu__sidebar > ul > li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 18px !important;
+    font-size: 1.2em;
+    border-radius: 7px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 8px;
+  }
+  .sho-menu__sidebar > ul > li > svg {
+    display: inline-block;
+  }
+  .sho-menu__sidebar > ul > li ul {
+    display: none;
+  }
+}
 .sho-menu__dishes {
   display: flex;
   flex-direction: column;
   gap: 15px;
   width: 100%;
 }
+.sho-menu__dishes.sho-menu--show {
+  display: flex !important;
+}
 .sho-menu__dishes__section {
   border-radius: 15px;
   border: 1px solid #eee;
 }
 
+@media (max-width: 810px) {
+  .sho-menu__dishes {
+    display: none;
+  }
+}
 .sho-menu__dishes__category {
   text-align: center;
   background-color: #f5f5f5;
@@ -175,6 +210,7 @@
 .sho-menu {
   background-color: #fff;
   font-family: "Montserrat-Regular", serif;
+  position: relative;
 }
 .sho-menu__header img {
   border-radius: 15px 15px 0 0;
@@ -189,4 +225,11 @@
   display: flex;
   gap: 14px;
   padding: 10px;
+}
+
+@media (max-width: 800px) {
+  .sho-menu__header img {
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
 }

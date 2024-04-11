@@ -1,11 +1,10 @@
-$font-color: black
-
 .sho-menu__sidebar
     min-width: 200px
     position: sticky
     top: 35px
     max-height: calc(100vh - 35px)
     overflow: auto
+    background-color: white
 
     &::-webkit-scrollbar
         width: 1px
@@ -30,6 +29,10 @@ $font-color: black
             margin-bottom: 3px
             user-select: none
             font-family: "Montserrat-Bold", serif
+            line-height: 1.2
+
+            & > svg
+                display: none
 
             &.is-selected
                 color: $gold-color
@@ -48,7 +51,7 @@ $font-color: black
                 padding: 0 0 0 15px
 
                 li
-                    color: $font-color
+                    color: black
                     font-weight: bold
                     font-size: .75em
                     padding: 3px 0
@@ -62,3 +65,25 @@ $font-color: black
 
                     &:last-child
                         margin-bottom: 0
+
+@media (max-width: 810px)
+    .sho-menu__sidebar
+        min-width: 100%
+        overflow: visible
+
+        & > ul
+            & > li
+                display: flex
+                align-items: center
+                justify-content: space-between
+                padding: 15px 18px !important
+                font-size: 1.2em
+                border-radius: 7px
+                box-shadow: $shadow
+                margin-bottom: 8px
+
+                & > svg
+                    display: inline-block
+
+                ul
+                    display: none

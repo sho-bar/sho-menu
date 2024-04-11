@@ -4,6 +4,7 @@ import type { ParentCategoryIsSelectedEventData } from '@menu/types'
 import { onMounted, ref } from 'vue'
 import { events } from '@menu/config'
 import dispatchEvent from '@/modules/dispatchEvent'
+import ChevronRightIcon from '@/components/Icons/ChevronRightIcon.vue'
 import axios from 'axios'
 
 const loading = ref<boolean>(false)
@@ -66,6 +67,8 @@ function displayChildren(id: number): void {
                 :class="{ 'is-selected': c.id === selectedParentCategory }"
             >
                 {{ c.name }}
+
+                <chevron-right-icon width="22" height="22" />
 
                 <ul v-if="children.length > 0 && selectedParentCategory == c.id">
                     <li
