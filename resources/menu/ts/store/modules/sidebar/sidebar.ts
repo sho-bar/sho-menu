@@ -66,7 +66,6 @@ const sidebar: Module<SidebarState, RootState> = {
             state.selectedParent = null
             state.selectedChild = null
             state.childCategories = []
-            state.allCategories = []
         },
 
         attachDishesToChildCategories({ state }, dishes: Dish[]): void {

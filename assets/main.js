@@ -19390,7 +19390,6 @@ var sidebar = {
       state.selectedParent = null;
       state.selectedChild = null;
       state.childCategories = [];
-      state.allCategories = [];
     },
     attachDishesToChildCategories: function attachDishesToChildCategories(_a, dishes) {
       var state = _a.state;
