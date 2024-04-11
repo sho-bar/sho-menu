@@ -50,21 +50,23 @@ function fetchDishes(data: ParentCategoryIsSelectedEventData): void {
 </script>
 
 <template>
-    <div v-if="loading">Завантаження...</div>
-    <div v-else="categories.length === 0">Позицій у цій категорії ще немає</div>
-    <div v-else class="sho-menu__dishes">
-        <div v-for="category in categories" :key="category.id">
-            <div
-                v-if="category.dishes && category.dishes.length > 0"
-                class="sho-menu__dishes__section"
-            >
-                <category-item :category="category" />
+    <div class="sho-menu__dishes">
+        <div v-if="loading">Завантаження...</div>
+        <div v-else="categories.length === 0">Позицій у цій категорії ще немає</div>
+        <div v-else>
+            <div v-for="category in categories" :key="category.id">
+                <div
+                    v-if="category.dishes && category.dishes.length > 0"
+                    class="sho-menu__dishes__section"
+                >
+                    <category-item :category="category" />
 
-                <dish-item
-                    v-for="dish in category.dishes"
-                    :key="dish.id"
-                    :dish="dish"
-                />
+                    <dish-item
+                        v-for="dish in category.dishes"
+                        :key="dish.id"
+                        :dish="dish"
+                    />
+                </div>
             </div>
         </div>
     </div>
