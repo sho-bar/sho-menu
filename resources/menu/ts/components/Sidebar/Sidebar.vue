@@ -5,6 +5,7 @@ import { onMounted, ref } from 'vue'
 import { events } from '@menu/config'
 import screenSizeIs from '@/modules/screenSizeIs'
 import dispatchEvent from '@/modules/dispatchEvent'
+import listenEvent from '@/modules/listenEvent'
 import ChevronRightIcon from '@/components/Icons/ChevronRightIcon.vue'
 import axios from 'axios'
 
@@ -15,7 +16,13 @@ const selectedParentCategory = ref<number | null>(null)
 const selectedChildCategory = ref<number | null>(null)
 const children = ref<Category[]>([])
 
-onMounted(() => fetchCategories())
+onMounted(() => {
+    fetchCategories()
+
+    listenEvent(events.showMobileSidebar, () => {
+        selectedParentCategory.value = null
+    })
+})
 
 function fetchCategories(): void {
     let url = '/wp-json/wp/v2/sho-menu-dish-category'
@@ -29,7 +36,6 @@ function fetchCategories(): void {
             categories.value = resp.data.filter(c => c.parent === 0)
 
             if (categories.value.length > 0 && screenSizeIs(811)) {
-                console.log('nice')
                 selectParentCategory(categories.value[0])
             }
         })
@@ -62,7 +68,7 @@ function displayChildren(id: number): void {
         class="sho-menu__sidebar"
         :class="{ 'sho-menu__sidebar--hide': selectedParentCategory !== null }"
     >
-        <small class="sho-menu__sidebar__label is-selected">Меню:</small>
+        <small class="sho-menu__sidebar__label">Меню:</small>
 
         <ul>
             <li

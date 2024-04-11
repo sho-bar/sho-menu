@@ -9,6 +9,21 @@
     &::-webkit-scrollbar
         width: 1px
 
+    &__btn
+        display: none
+        justify-content: center
+        align-items: center
+        margin-bottom: 10px
+        gap: 5px
+        cursor: pointer
+        border-radius: 10px
+        border: 1px solid #606060
+        height: 40px
+        color: black
+        font-size: .9em
+        padding: 2px 20px
+        background: none
+
     &__label
         color: #777
         margin-bottom: 7px
@@ -73,6 +88,9 @@
 
         &--hide
             display: none
+
+        &__btn
+            display: inline-flex
 
         & > ul
             & > li

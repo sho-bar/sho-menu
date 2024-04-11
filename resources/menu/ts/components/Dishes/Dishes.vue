@@ -19,6 +19,11 @@ onMounted(() => {
         events.parentCategoryIsSelected,
         fetchDishes,
     )
+
+    listenEvent(events.showMobileSidebar, () => {
+        selectedCategory.value = null
+        categories.value = []
+    })
 })
 
 function fetchDishes(data: ParentCategoryIsSelectedEventData): void {

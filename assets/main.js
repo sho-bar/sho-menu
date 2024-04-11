@@ -18539,6 +18539,10 @@ __webpack_require__.r(__webpack_exports__);
     var selectedCategory = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
       (0,_modules_listenEvent__WEBPACK_IMPORTED_MODULE_6__["default"])(_menu_config__WEBPACK_IMPORTED_MODULE_1__.events.parentCategoryIsSelected, fetchDishes);
+      (0,_modules_listenEvent__WEBPACK_IMPORTED_MODULE_6__["default"])(_menu_config__WEBPACK_IMPORTED_MODULE_1__.events.showMobileSidebar, function () {
+        selectedCategory.value = null;
+        categories.value = [];
+      });
     });
     function fetchDishes(data) {
       selectedCategory.value = data.parentCategory;
@@ -18624,6 +18628,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _components_Icons_ChevronLeftIcon_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/Icons/ChevronLeftIcon.vue */ "./resources/common/ts/components/Icons/ChevronLeftIcon.vue");
+/* harmony import */ var _modules_dispatchEvent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/modules/dispatchEvent */ "./resources/common/ts/modules/dispatchEvent.ts");
+/* harmony import */ var _menu_config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @menu/config */ "./resources/menu/ts/config.ts");
+
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
@@ -18631,7 +18639,11 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup(__props, _a) {
     var __expose = _a.expose;
     __expose();
+    function showSidebar() {
+      (0,_modules_dispatchEvent__WEBPACK_IMPORTED_MODULE_2__["default"])(_menu_config__WEBPACK_IMPORTED_MODULE_3__.events.showMobileSidebar);
+    }
     var __returned__ = {
+      showSidebar: showSidebar,
       ChevronLeftIcon: _components_Icons_ChevronLeftIcon_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
@@ -18659,8 +18671,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _menu_config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @menu/config */ "./resources/menu/ts/config.ts");
 /* harmony import */ var _modules_screenSizeIs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/modules/screenSizeIs */ "./resources/common/ts/modules/screenSizeIs.ts");
 /* harmony import */ var _modules_dispatchEvent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/modules/dispatchEvent */ "./resources/common/ts/modules/dispatchEvent.ts");
-/* harmony import */ var _components_Icons_ChevronRightIcon_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/components/Icons/ChevronRightIcon.vue */ "./resources/common/ts/components/Icons/ChevronRightIcon.vue");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var _modules_listenEvent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/modules/listenEvent */ "./resources/common/ts/modules/listenEvent.ts");
+/* harmony import */ var _components_Icons_ChevronRightIcon_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/components/Icons/ChevronRightIcon.vue */ "./resources/common/ts/components/Icons/ChevronRightIcon.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+
 
 
 
@@ -18680,18 +18694,20 @@ __webpack_require__.r(__webpack_exports__);
     var selectedChildCategory = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
     var children = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([]);
     (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
-      return fetchCategories();
+      fetchCategories();
+      (0,_modules_listenEvent__WEBPACK_IMPORTED_MODULE_4__["default"])(_menu_config__WEBPACK_IMPORTED_MODULE_1__.events.showMobileSidebar, function () {
+        selectedParentCategory.value = null;
+      });
     });
     function fetchCategories() {
       var url = '/wp-json/wp/v2/sho-menu-dish-category' + '?_fields=id,slug,name,parent,description';
       loading.value = true;
-      axios__WEBPACK_IMPORTED_MODULE_5__["default"].get(url).then(function (resp) {
+      axios__WEBPACK_IMPORTED_MODULE_6__["default"].get(url).then(function (resp) {
         allCategories.value = resp.data;
         categories.value = resp.data.filter(function (c) {
           return c.parent === 0;
         });
         if (categories.value.length > 0 && (0,_modules_screenSizeIs__WEBPACK_IMPORTED_MODULE_2__["default"])(811)) {
-          console.log('nice');
           selectParentCategory(categories.value[0]);
         }
       })["catch"](function (err) {
@@ -18728,7 +18744,7 @@ __webpack_require__.r(__webpack_exports__);
       selectParentCategory: selectParentCategory,
       selectChildCategory: selectChildCategory,
       displayChildren: displayChildren,
-      ChevronRightIcon: _components_Icons_ChevronRightIcon_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+      ChevronRightIcon: _components_Icons_ChevronRightIcon_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -18903,15 +18919,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = {
-  type: "button",
-  "class": "sho-menu__show-sidebar-btn"
-};
+var _hoisted_1 = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "Назад", -1);
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ChevronLeftIcon"], {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+    onClick: $setup.showSidebar,
+    type: "button",
+    "class": "sho-menu__sidebar__btn"
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ChevronLeftIcon"], {
     width: "24",
     height: "24"
-  })]);
+  }), _hoisted_1]);
 }
 
 /***/ }),
@@ -18930,7 +18947,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", {
-  "class": "sho-menu__sidebar__label is-selected"
+  "class": "sho-menu__sidebar__label"
 }, "Меню:", -1);
 var _hoisted_2 = ["onClick"];
 var _hoisted_3 = {
@@ -19039,7 +19056,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 var events = {
   parentCategoryIsSelected: 'parentcategoryisselected',
-  childCategoryIsSelected: 'childcategoryisselected'
+  childCategoryIsSelected: 'childcategoryisselected',
+  showMobileSidebar: 'showmobilesidebar'
 };
 
 /***/ }),
