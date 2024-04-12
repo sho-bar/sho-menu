@@ -4,9 +4,10 @@ import type RootState from '@menu/store/RootState'
 import type { Dispatch } from 'vuex'
 import { Module } from 'vuex'
 import axios from 'axios'
-import screenSizeIs from '@/modules/screenSizeIs'
 import addParamToUrl from '@/modules/addParamToUrl'
-import getCategoryFromUrl from '@/modules/getCategoryFromUrl'
+import getCategoryFromUrl from '@menu/modules/getCategoryFromUrl'
+import removeParamToUrl from '@/modules/removeParamToUrl'
+import screenSizeIs from '@/modules/screenSizeIs'
 
 const sidebar: Module<SidebarState, RootState> = {
     namespaced: true,
@@ -56,6 +57,7 @@ const sidebar: Module<SidebarState, RootState> = {
             state.childCategories = state.allCategories.filter(c => c.parent === category.id)
             state.selectedParent = category
 
+            removeParamToUrl('child')
             addParamToUrl('parent', category.slug)
 
             dispatch('dishes/fetchDishes', null, { root: true })
@@ -70,10 +72,6 @@ const sidebar: Module<SidebarState, RootState> = {
         },
 
         selectNeedingParentCategory({ state, dispatch }): void {
-            if (!screenSizeIs(811)) {
-                return
-            }
-
             const categoryFromUrl = getCategoryFromUrl('parent', state.parentCategories)
 
             if (categoryFromUrl) {
@@ -81,14 +79,12 @@ const sidebar: Module<SidebarState, RootState> = {
                 return
             }
 
-            dispatch('selectFirstParentCategory')
+            if (screenSizeIs(811)) {
+                dispatch('selectFirstParentCategory')
+            }
         },
 
         selectNeedingChildCategory({ state, dispatch }): void {
-            if (!screenSizeIs(811)) {
-                return
-            }
-
             const categoryFromUrl = getCategoryFromUrl('child', state.childCategories)
 
             if (categoryFromUrl) {
@@ -108,6 +104,7 @@ const sidebar: Module<SidebarState, RootState> = {
             state.selectedParent = null
             state.selectedChild = null
             state.childCategories = []
+            removeParamToUrl('parent', 'child', 'dish')
         },
 
         attachDishesToChildCategories({ state }, dishes: Dish[]): void {

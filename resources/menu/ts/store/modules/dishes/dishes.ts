@@ -2,8 +2,11 @@ import type { Dish, Category } from '@/types'
 import type { Dispatch } from 'vuex'
 import type DishesState from './DishesState'
 import type RootState from '@menu/store/RootState'
-import { Module } from 'vuex'
 import axios from 'axios'
+import { Module } from 'vuex'
+import addParamToUrl from '@/modules/addParamToUrl'
+import removeParamToUrl from '@/modules/removeParamToUrl'
+import getDishFromUrl from '@menu/modules/getDishFromUrl'
 
 const selectFields = [
     'id',
@@ -28,6 +31,7 @@ const dishes: Module<DishesState, RootState> = {
     state: {
         loading: true,
         selectedDish: null,
+        dishes: [],
     },
 
     getters: {
@@ -47,9 +51,13 @@ const dishes: Module<DishesState, RootState> = {
 
             axios.get<Dish[]>(url)
                 .then(resp => {
+                    state.dishes = resp.data
+
                     dispatch('sidebar/attachDishesToChildCategories', resp.data, {
                         root: true,
                     })
+
+                    dispatch('selectNeedingDish')
                 })
                 .catch(err => console.error(err))
                 .finally(() => state.loading = false)
@@ -64,10 +72,20 @@ const dishes: Module<DishesState, RootState> = {
 
         selectDish({ state }, dish: Dish): void {
             state.selectedDish = dish
+            addParamToUrl('dish', dish.id.toString())
         },
 
         clearSelectedDish({ state }): void {
             state.selectedDish = null
+            removeParamToUrl('dish')
+        },
+
+        selectNeedingDish({ state, dispatch }): void {
+            const dishFromUrl = getDishFromUrl(state.dishes)
+
+            if (dishFromUrl) {
+                dispatch('selectDish', dishFromUrl)
+            }
         },
     },
 }
