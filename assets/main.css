@@ -76,7 +76,7 @@
 }
 .sho-menu__sidebar > ul > li ul {
   list-style: none;
-  margin: 0;
+  margin: 3px 0 0 0;
   padding: 0 0 0 15px;
 }
 .sho-menu__sidebar > ul > li ul li {
@@ -85,6 +85,7 @@
   font-size: 0.75em;
   padding: 3px 0;
   font-family: "Montserrat-Regular", serif;
+  margin-bottom: 3px;
 }
 .sho-menu__sidebar > ul > li ul li.is-selected {
   color: #a57315;
