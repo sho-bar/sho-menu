@@ -21,9 +21,11 @@ const loading = computed<boolean>(() => store.getters['dishes/loading'])
         <categories-bar />
 
         <loading v-if="loading" />
+
         <div v-else="childCategories.length === 0" class="sho-menu__dishes__empty">
             Позицій у цій категорії ще немає
         </div>
+
         <div v-else>
             <div v-for="category in childCategories" :key="category.id">
                 <div
