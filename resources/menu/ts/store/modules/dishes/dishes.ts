@@ -1,4 +1,5 @@
 import type { Dish, Category } from '@/types'
+import type { Dispatch } from 'vuex'
 import type DishesState from './DishesState'
 import type RootState from '@menu/store/RootState'
 import { Module } from 'vuex'
@@ -16,6 +17,11 @@ const selectFields = [
     'image_url',
 ]
 
+type FetchDishesParams = {
+    selectedParent: Category
+    dispatch: Dispatch
+}
+
 const dishes: Module<DishesState, RootState> = {
     namespaced: true,
 
@@ -23,11 +29,10 @@ const dishes: Module<DishesState, RootState> = {
         loading: false,
     },
 
-    getters: {
-    },
+    getters: {},
 
     mutations: {
-        FETCH_DISHES(state, selectedParent: Category): void {
+        FETCH_DISHES(state, { selectedParent, dispatch }: FetchDishesParams): void {
             let url = '/wp-json/wp/v2/sho-menu-dishes'
                 + '?per_page=100'
                 + '&page=1'
@@ -38,8 +43,7 @@ const dishes: Module<DishesState, RootState> = {
 
             axios.get<Dish[]>(url)
                 .then(resp => {
-                    // @ts-ignore
-                    this.dispatch('sidebar/attachDishesToChildCategories', resp.data)
+                    dispatch('sidebar/attachDishesToChildCategories', resp.data, { root: true })
                 })
                 .catch(err => console.error(err))
                 .finally(() => state.loading = false)
@@ -47,9 +51,9 @@ const dishes: Module<DishesState, RootState> = {
     },
 
     actions: {
-        fetchDishes({ commit, rootGetters }): void {
+        fetchDishes({ commit, rootGetters, dispatch }): void {
             const selectedParent = rootGetters['sidebar/selectedParent']
-            commit('FETCH_DISHES', selectedParent)
+            commit('FETCH_DISHES', { selectedParent, dispatch })
         },
     },
 }

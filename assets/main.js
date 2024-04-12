@@ -19382,12 +19382,15 @@ var dishes = {
   },
   getters: {},
   mutations: {
-    FETCH_DISHES: function FETCH_DISHES(state, selectedParent) {
-      var _this = this;
+    FETCH_DISHES: function FETCH_DISHES(state, _a) {
+      var selectedParent = _a.selectedParent,
+        dispatch = _a.dispatch;
       var url = '/wp-json/wp/v2/sho-menu-dishes' + '?per_page=100' + '&page=1' + "&sho-menu-dish-category=".concat(selectedParent.id) + "&_fields=".concat(selectFields.join(','));
       state.loading = true;
       axios__WEBPACK_IMPORTED_MODULE_0__["default"].get(url).then(function (resp) {
-        _this.dispatch('sidebar/attachDishesToChildCategories', resp.data);
+        dispatch('sidebar/attachDishesToChildCategories', resp.data, {
+          root: true
+        });
       })["catch"](function (err) {
         return console.error(err);
       })["finally"](function () {
@@ -19398,9 +19401,13 @@ var dishes = {
   actions: {
     fetchDishes: function fetchDishes(_a) {
       var commit = _a.commit,
-        rootGetters = _a.rootGetters;
+        rootGetters = _a.rootGetters,
+        dispatch = _a.dispatch;
       var selectedParent = rootGetters['sidebar/selectedParent'];
-      commit('FETCH_DISHES', selectedParent);
+      commit('FETCH_DISHES', {
+        selectedParent: selectedParent,
+        dispatch: dispatch
+      });
     }
   }
 };
@@ -19450,8 +19457,7 @@ var sidebar = {
     }
   },
   mutations: {
-    FETCH_CATEGORIES: function FETCH_CATEGORIES(state) {
-      var _this = this;
+    FETCH_CATEGORIES: function FETCH_CATEGORIES(state, dispatch) {
       var url = '/wp-json/wp/v2/sho-menu-dish-category' + '?_fields=id,slug,name,parent,description';
       state.loading = true;
       axios__WEBPACK_IMPORTED_MODULE_2__["default"].get(url).then(function (resp) {
@@ -19460,7 +19466,9 @@ var sidebar = {
           return c.parent === 0;
         });
         if (state.parentCategories.length > 0 && (0,_modules_screenSizeIs__WEBPACK_IMPORTED_MODULE_0__["default"])(811)) {
-          _this.dispatch('sidebar/selectParentCategory', state.parentCategories[0]);
+          dispatch('sidebar/selectParentCategory', state.parentCategories[0], {
+            root: true
+          });
         }
       })["catch"](function (err) {
         return console.error(err);
@@ -19471,8 +19479,9 @@ var sidebar = {
   },
   actions: {
     fetchCategories: function fetchCategories(_a) {
-      var commit = _a.commit;
-      commit('FETCH_CATEGORIES');
+      var commit = _a.commit,
+        dispatch = _a.dispatch;
+      commit('FETCH_CATEGORIES', dispatch);
     },
     selectParentCategory: function selectParentCategory(_a, category) {
       var state = _a.state,

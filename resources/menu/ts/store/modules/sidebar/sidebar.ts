@@ -1,6 +1,7 @@
 import type { Category, Dish } from '@/types'
 import type SidebarState from './SidebarState'
 import type RootState from '@menu/store/RootState'
+import type { Dispatch } from 'vuex'
 import { Module } from 'vuex'
 import axios from 'axios'
 import screenSizeIs from '@/modules/screenSizeIs'
@@ -26,7 +27,7 @@ const sidebar: Module<SidebarState, RootState> = {
     },
 
     mutations: {
-        FETCH_CATEGORIES(state): void {
+        FETCH_CATEGORIES(state, dispatch: Dispatch): void {
             let url = '/wp-json/wp/v2/sho-menu-dish-category'
                 + '?_fields=id,slug,name,parent,description'
 
@@ -38,8 +39,7 @@ const sidebar: Module<SidebarState, RootState> = {
                     state.parentCategories = resp.data.filter(c => c.parent === 0)
 
                     if (state.parentCategories.length > 0 && screenSizeIs(811)) {
-                        // @ts-ignore
-                        this.dispatch('sidebar/selectParentCategory', state.parentCategories[0])
+                        dispatch('sidebar/selectParentCategory', state.parentCategories[0], { root: true })
                     }
                 })
                 .catch(err => console.error(err))
@@ -48,8 +48,8 @@ const sidebar: Module<SidebarState, RootState> = {
     },
 
     actions: {
-        fetchCategories({ commit }): void {
-            commit('FETCH_CATEGORIES')
+        fetchCategories({ commit, dispatch }): void {
+            commit('FETCH_CATEGORIES', dispatch)
         },
 
         selectParentCategory({ state, dispatch }, category: Category): void {
