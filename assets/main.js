@@ -19307,14 +19307,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _modules_getParamFromUrl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/modules/getParamFromUrl */ "./resources/common/ts/modules/getParamFromUrl.ts");
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (categories) {
-  var parent = (0,_modules_getParamFromUrl__WEBPACK_IMPORTED_MODULE_0__["default"])('parent');
-  if (!parent) {
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (param, categories) {
+  var parentSlug = (0,_modules_getParamFromUrl__WEBPACK_IMPORTED_MODULE_0__["default"])(param);
+  if (!parentSlug) {
     return null;
   }
-  var parentId = parseInt(parent);
   var selectedParent = categories.find(function (c) {
-    return c.id === parentId;
+    return c.slug === parentSlug;
   });
   if (!selectedParent) {
     return null;
@@ -19516,9 +19515,8 @@ var sidebar = {
         state.parentCategories = resp.data.filter(function (c) {
           return c.parent === 0;
         });
-        dispatch('sidebar/selectNeedingParentCategory', null, {
-          root: true
-        });
+        dispatch('selectNeedingParentCategory');
+        dispatch('selectNeedingChildCategory');
       })["catch"](function (err) {
         return console.error(err);
       })["finally"](function () {
@@ -19539,7 +19537,7 @@ var sidebar = {
         return c.parent === category.id;
       });
       state.selectedParent = category;
-      (0,_modules_addParamToUrl__WEBPACK_IMPORTED_MODULE_1__["default"])('parent', category.id.toString());
+      (0,_modules_addParamToUrl__WEBPACK_IMPORTED_MODULE_1__["default"])('parent', category.slug);
       dispatch('dishes/fetchDishes', null, {
         root: true
       });
@@ -19548,6 +19546,7 @@ var sidebar = {
       var state = _a.state,
         dispatch = _a.dispatch;
       state.selectedChild = category;
+      (0,_modules_addParamToUrl__WEBPACK_IMPORTED_MODULE_1__["default"])('child', category.slug);
       dispatch('scrollToChildCategory', category.id);
     },
     selectNeedingParentCategory: function selectNeedingParentCategory(_a) {
@@ -19556,18 +19555,40 @@ var sidebar = {
       if (!(0,_modules_screenSizeIs__WEBPACK_IMPORTED_MODULE_0__["default"])(811)) {
         return;
       }
-      var categoryFromUrl = (0,_modules_getCategoryFromUrl__WEBPACK_IMPORTED_MODULE_2__["default"])(state.parentCategories);
+      var categoryFromUrl = (0,_modules_getCategoryFromUrl__WEBPACK_IMPORTED_MODULE_2__["default"])('parent', state.parentCategories);
       if (categoryFromUrl) {
         dispatch('selectParentCategory', categoryFromUrl);
         return;
       }
       dispatch('selectFirstParentCategory');
     },
+    selectNeedingChildCategory: function selectNeedingChildCategory(_a) {
+      var state = _a.state,
+        dispatch = _a.dispatch;
+      if (!(0,_modules_screenSizeIs__WEBPACK_IMPORTED_MODULE_0__["default"])(811)) {
+        return;
+      }
+      var categoryFromUrl = (0,_modules_getCategoryFromUrl__WEBPACK_IMPORTED_MODULE_2__["default"])('child', state.childCategories);
+      if (categoryFromUrl) {
+        setTimeout(function () {
+          return dispatch('selectChildCategory', categoryFromUrl);
+        }, 300);
+        return;
+      }
+      dispatch('selectFirstChildCategory');
+    },
     selectFirstParentCategory: function selectFirstParentCategory(_a) {
       var state = _a.state,
         dispatch = _a.dispatch;
       if (state.parentCategories.length) {
         dispatch('selectParentCategory', state.parentCategories[0]);
+      }
+    },
+    selectFirstChildCategory: function selectFirstChildCategory(_a) {
+      var state = _a.state,
+        dispatch = _a.dispatch;
+      if (state.childCategories.length) {
+        dispatch('selectChildCategory', state.childCategories[0]);
       }
     },
     resetSidebarCategories: function resetSidebarCategories(_a) {
@@ -19595,6 +19616,7 @@ var sidebar = {
     scrollToChildCategory: function scrollToChildCategory(_a, categoryId) {
       var state = _a.state;
       var elem = document.getElementById("sho-menu-category-".concat(categoryId));
+      console.log(elem);
       if (!elem) {
         return;
       }

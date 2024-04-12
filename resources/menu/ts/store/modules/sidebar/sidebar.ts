@@ -39,9 +39,8 @@ const sidebar: Module<SidebarState, RootState> = {
                     state.allCategories = resp.data
                     state.parentCategories = resp.data.filter(c => c.parent === 0)
 
-                    dispatch('sidebar/selectNeedingParentCategory', null, {
-                        root: true,
-                    })
+                    dispatch('selectNeedingParentCategory')
+                    dispatch('selectNeedingChildCategory')
                 })
                 .catch(err => console.error(err))
                 .finally(() => state.loading = false)
@@ -57,13 +56,16 @@ const sidebar: Module<SidebarState, RootState> = {
             state.childCategories = state.allCategories.filter(c => c.parent === category.id)
             state.selectedParent = category
 
-            addParamToUrl('parent', category.id.toString())
+            addParamToUrl('parent', category.slug)
 
             dispatch('dishes/fetchDishes', null, { root: true })
         },
 
         selectChildCategory({ state, dispatch }, category: Category): void {
             state.selectedChild = category
+
+            addParamToUrl('child', category.slug)
+
             dispatch('scrollToChildCategory', category.id)
         },
 
@@ -72,7 +74,7 @@ const sidebar: Module<SidebarState, RootState> = {
                 return
             }
 
-            const categoryFromUrl = getCategoryFromUrl(state.parentCategories)
+            const categoryFromUrl = getCategoryFromUrl('parent', state.parentCategories)
 
             if (categoryFromUrl) {
                 dispatch('selectParentCategory', categoryFromUrl)
@@ -82,9 +84,31 @@ const sidebar: Module<SidebarState, RootState> = {
             dispatch('selectFirstParentCategory')
         },
 
+        selectNeedingChildCategory({ state, dispatch }): void {
+            if (!screenSizeIs(811)) {
+                return
+            }
+
+            const categoryFromUrl = getCategoryFromUrl('child', state.childCategories)
+
+            if (categoryFromUrl) {
+                // This is a workaround, categories are not loaded into the DOM yet
+                setTimeout(() => dispatch('selectChildCategory', categoryFromUrl), 300)
+                return
+            }
+
+            dispatch('selectFirstChildCategory')
+        },
+
         selectFirstParentCategory({ state, dispatch }): void {
             if (state.parentCategories.length) {
                 dispatch('selectParentCategory', state.parentCategories[0])
+            }
+        },
+
+        selectFirstChildCategory({ state, dispatch }): void {
+            if (state.childCategories.length) {
+                dispatch('selectChildCategory', state.childCategories[0])
             }
         },
 
@@ -109,6 +133,7 @@ const sidebar: Module<SidebarState, RootState> = {
         scrollToChildCategory({ state }, categoryId: number): void {
             const elem = document.getElementById(`sho-menu-category-${categoryId}`)
 
+            console.log(elem)
             if (!elem) {
                 return
             }

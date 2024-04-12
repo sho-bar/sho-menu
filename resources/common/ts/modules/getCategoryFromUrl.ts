@@ -1,15 +1,14 @@
 import type { Category } from '@/types'
 import getParamFromUrl from '@/modules/getParamFromUrl'
 
-export default (categories: Category[]): Category | null => {
-    const parent = getParamFromUrl('parent')
+export default (param: string, categories: Category[]): Category | null => {
+    const parentSlug = getParamFromUrl(param)
 
-    if (!parent) {
+    if (!parentSlug) {
         return null
     }
 
-    const parentId = parseInt(parent)
-    const selectedParent = categories.find(c => c.id === parentId)
+    const selectedParent = categories.find(c => c.slug === parentSlug)
 
     if (!selectedParent) {
         return null
