@@ -4,15 +4,21 @@ import { useStore } from 'vuex'
 import { computed } from 'vue'
 import WeightIcon from '@/components/Icons/WeightIcon.vue'
 import EditButton from '@menu/components/Dishes/EditButton.vue'
+import CloseButton from '@menu/components/Popup/CloseButton.vue'
 
 const store = useStore()
 const selectedDish = computed<Dish | null>(() => store.getters['dishes/selectedDish'])
+
+function closePopup(): void {
+    store.dispatch('dishes/clearSelectedDish')
+}
 </script>
 
 <template>
     <div v-if="selectedDish" class="sho-menu__dish-popup--overlay">
         <div class="sho-menu__dish-popup">
             <edit-button :id="selectedDish.id" />
+            <close-button @click="closePopup" />
 
             <div class="sho-menu__dish-popup__content">
                 <div class="sho-menu__dish-popup__image">

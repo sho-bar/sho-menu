@@ -65,6 +65,10 @@ const dishes: Module<DishesState, RootState> = {
         selectDish({ state }, dish: Dish): void {
             state.selectedDish = dish
         },
+
+        clearSelectedDish({ state }): void {
+            state.selectedDish = null
+        },
     },
 }
 

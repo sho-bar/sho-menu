@@ -158,6 +158,26 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+}
+.sho-menu__dish-popup__close {
+  position: absolute;
+  right: 9px;
+  top: 9px;
+  width: 37px;
+  height: 37px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: none;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+.sho-menu__dish-popup__close:hover {
+  background-color: brown;
 }
 .sho-menu__dish-popup__image {
   text-align: center;
@@ -230,6 +250,7 @@
   background-color: #f5f5f5;
   padding: 16px;
   border-radius: 15px 15px 0 0;
+  border-bottom: 1px solid #eee;
 }
 .sho-menu__dishes__category h2 {
   font-family: "Montserrat-Bold", sans-serif;
@@ -262,7 +283,7 @@
   opacity: 0.8;
 }
 .sho-menu__dishes__item:hover {
-  background-color: #fdf9f9;
+  background-color: #f9f9f9;
 }
 .sho-menu__dishes__item:last-child {
   border-bottom: none;
@@ -279,7 +300,6 @@
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  padding: 3px;
   border: 1px solid black;
   opacity: 0;
 }
