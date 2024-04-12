@@ -6,7 +6,7 @@ import { Module } from 'vuex'
 import axios from 'axios'
 import screenSizeIs from '@/modules/screenSizeIs'
 import addParamToUrl from '@/modules/addParamToUrl'
-import getParamFromUrl from '@/modules/getParamFromUrl'
+import getCategoryFromUrl from '@/modules/getCategoryFromUrl'
 
 const sidebar: Module<SidebarState, RootState> = {
     namespaced: true,
@@ -71,18 +71,17 @@ const sidebar: Module<SidebarState, RootState> = {
                 return
             }
 
-            const parent = getParamFromUrl('parent')
+            const categoryFromUrl = getCategoryFromUrl(state.parentCategories)
 
-            if (parent) {
-                const parentId = parseInt(parent)
-                const selectedParent = state.parentCategories.find(c => c.id === parentId)
-
-                if (selectedParent) {
-                    dispatch('selectParentCategory', selectedParent)
-                    return
-                }
+            if (categoryFromUrl) {
+                dispatch('selectParentCategory', categoryFromUrl)
+                return
             }
 
+            dispatch('selectFirstParentCategory')
+        },
+
+        selectFirstParentCategory({ state, dispatch }): void {
             if (state.parentCategories.length) {
                 dispatch('selectParentCategory', state.parentCategories[0])
             }

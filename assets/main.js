@@ -19293,6 +19293,36 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/common/ts/modules/getCategoryFromUrl.ts":
+/*!***********************************************************!*\
+  !*** ./resources/common/ts/modules/getCategoryFromUrl.ts ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _modules_getParamFromUrl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/modules/getParamFromUrl */ "./resources/common/ts/modules/getParamFromUrl.ts");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (categories) {
+  var parent = (0,_modules_getParamFromUrl__WEBPACK_IMPORTED_MODULE_0__["default"])('parent');
+  if (!parent) {
+    return null;
+  }
+  var parentId = parseInt(parent);
+  var selectedParent = categories.find(function (c) {
+    return c.id === parentId;
+  });
+  if (!selectedParent) {
+    return null;
+  }
+  return selectedParent;
+});
+
+/***/ }),
+
 /***/ "./resources/common/ts/modules/getParamFromUrl.ts":
 /*!********************************************************!*\
   !*** ./resources/common/ts/modules/getParamFromUrl.ts ***!
@@ -19447,7 +19477,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 /* harmony import */ var _modules_screenSizeIs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/modules/screenSizeIs */ "./resources/common/ts/modules/screenSizeIs.ts");
 /* harmony import */ var _modules_addParamToUrl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/modules/addParamToUrl */ "./resources/common/ts/modules/addParamToUrl.ts");
-/* harmony import */ var _modules_getParamFromUrl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/modules/getParamFromUrl */ "./resources/common/ts/modules/getParamFromUrl.ts");
+/* harmony import */ var _modules_getCategoryFromUrl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/modules/getCategoryFromUrl */ "./resources/common/ts/modules/getCategoryFromUrl.ts");
 
 
 
@@ -19523,17 +19553,16 @@ var sidebar = {
       if (!(0,_modules_screenSizeIs__WEBPACK_IMPORTED_MODULE_0__["default"])(811)) {
         return;
       }
-      var parent = (0,_modules_getParamFromUrl__WEBPACK_IMPORTED_MODULE_2__["default"])('parent');
-      if (parent) {
-        var parentId_1 = parseInt(parent);
-        var selectedParent = state.parentCategories.find(function (c) {
-          return c.id === parentId_1;
-        });
-        if (selectedParent) {
-          dispatch('selectParentCategory', selectedParent);
-          return;
-        }
+      var categoryFromUrl = (0,_modules_getCategoryFromUrl__WEBPACK_IMPORTED_MODULE_2__["default"])(state.parentCategories);
+      if (categoryFromUrl) {
+        dispatch('selectParentCategory', categoryFromUrl);
+        return;
       }
+      dispatch('selectFirstParentCategory');
+    },
+    selectFirstParentCategory: function selectFirstParentCategory(_a) {
+      var state = _a.state,
+        dispatch = _a.dispatch;
       if (state.parentCategories.length) {
         dispatch('selectParentCategory', state.parentCategories[0]);
       }
