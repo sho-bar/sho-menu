@@ -36,11 +36,11 @@
         width: 100%
 
         h3
-            font-family: "Montserrat-Bold", serif
+            font-family: "Montserrat-Bold", sans-serif
             margin: 0
 
     &__price
-        font-family: "Montserrat-Bold", serif
+        font-family: "Montserrat-Bold", sans-serif
         color: $gold-color
 
     &__description
@@ -65,3 +65,8 @@
             border-radius: 8px
             display: block
             max-width: 100%
+
+@media (max-width: 810px)
+    .sho-menu__dishes__item
+        &__edit
+            opacity: .8

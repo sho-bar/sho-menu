@@ -1,0 +1,32 @@
+.sho-menu__categories-bar
+    display: none
+    gap: 5px
+    align-items: center
+    margin-bottom: 6px
+    padding-bottom: 6px
+    position: sticky
+    overflow-x: auto
+    top: 0
+
+    &::-webkit-scrollbar
+        height: 1px
+
+    &::-webkit-scrollbar-thumb
+        background: #e3e3e3
+
+    &__item
+        border-radius: 8px
+        padding: 6px 15px
+        border: 1px solid $border-color
+        text-transform: uppercase
+        font-family: "Montserrat-Bold", sans-serif
+        font-size: .9em
+        white-space: nowrap
+
+        &--is-selected
+            border-color: $gold-color
+            color: $gold-color
+
+@media (max-width: 810px)
+    .sho-menu__categories-bar
+        display: flex
