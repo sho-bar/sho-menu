@@ -3,10 +3,15 @@
     gap: 5px
     align-items: center
     margin-bottom: 6px
-    padding-bottom: 6px
+    padding: 6px 0
     position: sticky
     overflow-x: auto
     top: 0
+    background-color: white
+    z-index: 10
+
+    .admin-bar &
+        top: 32px
 
     &::-webkit-scrollbar
         height: 1px
@@ -30,3 +35,13 @@
 @media (max-width: 810px)
     .sho-menu__categories-bar
         display: flex
+
+@media (max-width: 782px)
+    .sho-menu__categories-bar
+        .admin-bar &
+            top: 46px
+
+@media (max-width: 600px)
+    .sho-menu__categories-bar
+        .admin-bar &
+            top: 0
