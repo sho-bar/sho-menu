@@ -6,6 +6,7 @@ import { Module } from 'vuex'
 import axios from 'axios'
 import screenSizeIs from '@/modules/screenSizeIs'
 import addParamToUrl from '@/modules/addParamToUrl'
+import getParamFromUrl from '@/modules/getParamFromUrl'
 
 const sidebar: Module<SidebarState, RootState> = {
     namespaced: true,
@@ -38,9 +39,9 @@ const sidebar: Module<SidebarState, RootState> = {
                     state.allCategories = resp.data
                     state.parentCategories = resp.data.filter(c => c.parent === 0)
 
-                    if (state.parentCategories.length > 0 && screenSizeIs(811)) {
-                        dispatch('sidebar/selectParentCategory', state.parentCategories[0], { root: true })
-                    }
+                    dispatch('sidebar/selectNeedingParentCategory', null, {
+                        root: true,
+                    })
                 })
                 .catch(err => console.error(err))
                 .finally(() => state.loading = false)
@@ -63,6 +64,28 @@ const sidebar: Module<SidebarState, RootState> = {
 
         selectChildCategory({ state }, category: Category): void {
             state.selectedChild = category
+        },
+
+        selectNeedingParentCategory({ state, dispatch }): void {
+            if (!screenSizeIs(811)) {
+                return
+            }
+
+            const parent = getParamFromUrl('parent')
+
+            if (parent) {
+                const parentId = parseInt(parent)
+                const selectedParent = state.parentCategories.find(c => c.id === parentId)
+
+                if (selectedParent) {
+                    dispatch('selectParentCategory', selectedParent)
+                    return
+                }
+            }
+
+            if (state.parentCategories.length) {
+                dispatch('selectParentCategory', state.parentCategories[0])
+            }
         },
 
         resetSidebarCategories({ state }): void {

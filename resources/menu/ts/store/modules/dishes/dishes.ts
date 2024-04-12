@@ -43,7 +43,9 @@ const dishes: Module<DishesState, RootState> = {
 
             axios.get<Dish[]>(url)
                 .then(resp => {
-                    dispatch('sidebar/attachDishesToChildCategories', resp.data, { root: true })
+                    dispatch('sidebar/attachDishesToChildCategories', resp.data, {
+                        root: true,
+                    })
                 })
                 .catch(err => console.error(err))
                 .finally(() => state.loading = false)

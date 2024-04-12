@@ -19293,6 +19293,24 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/common/ts/modules/getParamFromUrl.ts":
+/*!********************************************************!*\
+  !*** ./resources/common/ts/modules/getParamFromUrl.ts ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (param) {
+  var url = new URL(location.href);
+  return url.searchParams.get(param);
+});
+
+/***/ }),
+
 /***/ "./resources/common/ts/modules/screenSizeIs.ts":
 /*!*****************************************************!*\
   !*** ./resources/common/ts/modules/screenSizeIs.ts ***!
@@ -19426,9 +19444,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 /* harmony import */ var _modules_screenSizeIs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/modules/screenSizeIs */ "./resources/common/ts/modules/screenSizeIs.ts");
 /* harmony import */ var _modules_addParamToUrl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/modules/addParamToUrl */ "./resources/common/ts/modules/addParamToUrl.ts");
+/* harmony import */ var _modules_getParamFromUrl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/modules/getParamFromUrl */ "./resources/common/ts/modules/getParamFromUrl.ts");
+
 
 
 
@@ -19460,16 +19480,14 @@ var sidebar = {
     FETCH_CATEGORIES: function FETCH_CATEGORIES(state, dispatch) {
       var url = '/wp-json/wp/v2/sho-menu-dish-category' + '?_fields=id,slug,name,parent,description';
       state.loading = true;
-      axios__WEBPACK_IMPORTED_MODULE_2__["default"].get(url).then(function (resp) {
+      axios__WEBPACK_IMPORTED_MODULE_3__["default"].get(url).then(function (resp) {
         state.allCategories = resp.data;
         state.parentCategories = resp.data.filter(function (c) {
           return c.parent === 0;
         });
-        if (state.parentCategories.length > 0 && (0,_modules_screenSizeIs__WEBPACK_IMPORTED_MODULE_0__["default"])(811)) {
-          dispatch('sidebar/selectParentCategory', state.parentCategories[0], {
-            root: true
-          });
-        }
+        dispatch('sidebar/selectNeedingParentCategory', null, {
+          root: true
+        });
       })["catch"](function (err) {
         return console.error(err);
       })["finally"](function () {
@@ -19498,6 +19516,27 @@ var sidebar = {
     selectChildCategory: function selectChildCategory(_a, category) {
       var state = _a.state;
       state.selectedChild = category;
+    },
+    selectNeedingParentCategory: function selectNeedingParentCategory(_a) {
+      var state = _a.state,
+        dispatch = _a.dispatch;
+      if (!(0,_modules_screenSizeIs__WEBPACK_IMPORTED_MODULE_0__["default"])(811)) {
+        return;
+      }
+      var parent = (0,_modules_getParamFromUrl__WEBPACK_IMPORTED_MODULE_2__["default"])('parent');
+      if (parent) {
+        var parentId_1 = parseInt(parent);
+        var selectedParent = state.parentCategories.find(function (c) {
+          return c.id === parentId_1;
+        });
+        if (selectedParent) {
+          dispatch('selectParentCategory', selectedParent);
+          return;
+        }
+      }
+      if (state.parentCategories.length) {
+        dispatch('selectParentCategory', state.parentCategories[0]);
+      }
     },
     resetSidebarCategories: function resetSidebarCategories(_a) {
       var state = _a.state;
