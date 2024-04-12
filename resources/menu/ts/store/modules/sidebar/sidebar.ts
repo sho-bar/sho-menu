@@ -62,8 +62,9 @@ const sidebar: Module<SidebarState, RootState> = {
             dispatch('dishes/fetchDishes', null, { root: true })
         },
 
-        selectChildCategory({ state }, category: Category): void {
+        selectChildCategory({ state, dispatch }, category: Category): void {
             state.selectedChild = category
+            dispatch('scrollToChildCategory', category.id)
         },
 
         selectNeedingParentCategory({ state, dispatch }): void {
@@ -103,6 +104,16 @@ const sidebar: Module<SidebarState, RootState> = {
 
                 category.dishes = matchedDishes
             }
+        },
+
+        scrollToChildCategory({ state }, categoryId: number): void {
+            const elem = document.getElementById(`sho-menu-category-${categoryId}`)
+
+            if (!elem) {
+                return
+            }
+
+            elem.scrollIntoView({ behavior: 'smooth', block: 'start' })
         },
     },
 }

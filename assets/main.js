@@ -19056,11 +19056,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = {
-  "class": "sho-menu__dishes__category"
-};
+var _hoisted_1 = ["id"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.category.name), 1), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.category.description), 1)]);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+    "class": "sho-menu__dishes__category",
+    id: "sho-menu-category-".concat($props.category.id)
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.category.name), 1), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.category.description), 1)], 8, _hoisted_1);
 }
 
 /***/ }),
@@ -19544,8 +19545,10 @@ var sidebar = {
       });
     },
     selectChildCategory: function selectChildCategory(_a, category) {
-      var state = _a.state;
+      var state = _a.state,
+        dispatch = _a.dispatch;
       state.selectedChild = category;
+      dispatch('scrollToChildCategory', category.id);
     },
     selectNeedingParentCategory: function selectNeedingParentCategory(_a) {
       var state = _a.state,
@@ -19588,6 +19591,17 @@ var sidebar = {
         var category = _b[_i];
         _loop_1(category);
       }
+    },
+    scrollToChildCategory: function scrollToChildCategory(_a, categoryId) {
+      var state = _a.state;
+      var elem = document.getElementById("sho-menu-category-".concat(categoryId));
+      if (!elem) {
+        return;
+      }
+      elem.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
     }
   }
 };
