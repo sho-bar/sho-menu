@@ -15,7 +15,26 @@ $border-radius: 15px
     font-family: "Montserrat-Regular", serif
     position: relative
 
+    &__sidebar-btn
+        display: none
+        justify-content: space-between
+        align-items: center
+        gap: 5px
+        cursor: pointer
+        border-radius: 50px
+        border: 1px solid #dcdcdc
+        background-color: rgba(255, 255, 255, .9)
+        height: 40px
+        color: black
+        font-size: .9em
+        padding: 2px 20px 2px 12px
+        position: absolute
+        bottom: 8px
+        left: 11px
+
     &__header
+        position: relative
+
         img
             border-radius: $border-radius $border-radius 0 0
             width: 100%
@@ -34,3 +53,6 @@ $border-radius: 15px
             img
                 border-radius: $border-radius
                 box-shadow: $shadow
+
+        &__sidebar-btn
+            display: inline-flex

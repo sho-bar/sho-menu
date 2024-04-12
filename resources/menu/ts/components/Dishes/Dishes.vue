@@ -3,7 +3,6 @@ import type { Category } from '@/types'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import DishItem from '@menu/components/Dishes/DishItem.vue'
-import ShowSidebarBtn from '@menu/components/Sidebar/ShowSidebarBtn.vue'
 import CategoryItem from '@menu/components/Dishes/CategoryItem.vue'
 import CategoriesBar from '@menu/components/Dishes/CategoriesBar.vue'
 import Loading from '@/components/Loading.vue'
@@ -19,7 +18,6 @@ const loading = computed<boolean>(() => store.getters['dishes/loading'])
         class="sho-menu__dishes"
         :class="{ 'sho-menu__dishes--show': selectedParent !== null }"
     >
-        <show-sidebar-btn />
         <categories-bar />
 
         <loading v-if="loading" />

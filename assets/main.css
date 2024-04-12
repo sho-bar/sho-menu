@@ -25,20 +25,6 @@
 .sho-menu__sidebar::-webkit-scrollbar {
   width: 1px;
 }
-.sho-menu__sidebar__btn {
-  display: none;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-  cursor: pointer;
-  border-radius: 10px;
-  border: 1px solid #dcdcdc;
-  height: 40px;
-  color: black;
-  font-size: 0.9em;
-  padding: 2px 20px;
-  background: none;
-}
 .sho-menu__sidebar__label {
   color: #777;
   margin-bottom: 7px;
@@ -108,9 +94,6 @@
   }
   .sho-menu__sidebar--hide {
     display: none;
-  }
-  .sho-menu__sidebar__btn {
-    display: inline-flex;
   }
   .sho-menu__sidebar > ul > li {
     display: flex;
@@ -410,6 +393,26 @@
   font-family: "Montserrat-Regular", serif;
   position: relative;
 }
+.sho-menu__sidebar-btn {
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  border-radius: 50px;
+  border: 1px solid #dcdcdc;
+  background-color: rgba(255, 255, 255, 0.9);
+  height: 40px;
+  color: black;
+  font-size: 0.9em;
+  padding: 2px 20px 2px 12px;
+  position: absolute;
+  bottom: 8px;
+  left: 11px;
+}
+.sho-menu__header {
+  position: relative;
+}
 .sho-menu__header img {
   border-radius: 15px 15px 0 0;
   width: 100%;
@@ -429,5 +432,8 @@
   .sho-menu__header img {
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .sho-menu__sidebar-btn {
+    display: inline-flex;
   }
 }
