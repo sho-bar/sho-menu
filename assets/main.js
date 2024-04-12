@@ -19582,20 +19582,12 @@ var sidebar = {
         }, 300);
         return;
       }
-      dispatch('selectFirstChildCategory');
     },
     selectFirstParentCategory: function selectFirstParentCategory(_a) {
       var state = _a.state,
         dispatch = _a.dispatch;
       if (state.parentCategories.length) {
         dispatch('selectParentCategory', state.parentCategories[0]);
-      }
-    },
-    selectFirstChildCategory: function selectFirstChildCategory(_a) {
-      var state = _a.state,
-        dispatch = _a.dispatch;
-      if (state.childCategories.length) {
-        dispatch('selectChildCategory', state.childCategories[0]);
       }
     },
     resetSidebarCategories: function resetSidebarCategories(_a) {

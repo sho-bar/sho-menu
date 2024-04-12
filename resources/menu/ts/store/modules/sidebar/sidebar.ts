@@ -96,19 +96,11 @@ const sidebar: Module<SidebarState, RootState> = {
                 setTimeout(() => dispatch('selectChildCategory', categoryFromUrl), 300)
                 return
             }
-
-            dispatch('selectFirstChildCategory')
         },
 
         selectFirstParentCategory({ state, dispatch }): void {
             if (state.parentCategories.length) {
                 dispatch('selectParentCategory', state.parentCategories[0])
-            }
-        },
-
-        selectFirstChildCategory({ state, dispatch }): void {
-            if (state.childCategories.length) {
-                dispatch('selectChildCategory', state.childCategories[0])
             }
         },
 
