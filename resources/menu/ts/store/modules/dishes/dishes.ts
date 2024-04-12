@@ -27,10 +27,12 @@ const dishes: Module<DishesState, RootState> = {
 
     state: {
         loading: true,
+        selectedDish: null,
     },
 
     getters: {
         loading: s => s.loading,
+        selectedDish: s => s.selectedDish,
     },
 
     mutations: {
@@ -58,6 +60,10 @@ const dishes: Module<DishesState, RootState> = {
         fetchDishes({ commit, rootGetters, dispatch }): void {
             const selectedParent = rootGetters['sidebar/selectedParent']
             commit('FETCH_DISHES', { selectedParent, dispatch })
+        },
+
+        selectDish({ state }, dish: Dish): void {
+            state.selectedDish = dish
         },
     },
 }

@@ -130,6 +130,79 @@
     display: none;
   }
 }
+.sho-menu__dish-popup {
+  background: white;
+  width: 100%;
+  max-height: 80vh;
+  max-width: 470px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px 25px;
+  overflow-y: auto;
+  position: relative;
+}
+.sho-menu__dish-popup:hover .sho-menu__dishes__item__edit {
+  opacity: 0.8;
+}
+.sho-menu__dish-popup::-webkit-scrollbar {
+  width: 7px;
+}
+.sho-menu__dish-popup--overlay {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sho-menu__dish-popup__image {
+  text-align: center;
+}
+.sho-menu__dish-popup__image img {
+  height: 300px;
+  border-radius: 15px;
+}
+.sho-menu__dish-popup h2 {
+  font-family: "Montserrat-Bold", sans-serif;
+  font-size: 1.2rem;
+  margin: 0;
+  margin-top: 10px;
+}
+.sho-menu__dish-popup__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sho-menu__dish-popup__price {
+  font-family: "Montserrat-Bold", sans-serif;
+  color: #a57315;
+}
+.sho-menu__dish-popup__description {
+  font-size: 0.9rem;
+  margin: 3px 0;
+  opacity: 0.9;
+}
+.sho-menu__dish-popup__description p:last-child {
+  margin: 0;
+}
+.sho-menu__dish-popup__weight {
+  font-size: 0.7em;
+  color: #666;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+@media (max-width: 810px) {
+  .sho-menu__dish-popup h2 {
+    font-size: 1rem;
+  }
+}
 .sho-menu__dishes {
   width: 100%;
 }
@@ -196,8 +269,8 @@
 }
 .sho-menu__dishes__item__edit {
   position: absolute;
-  right: 7px;
-  top: 7px;
+  right: 9px;
+  bottom: 9px;
   color: black;
   background-color: white;
   width: 35px;
@@ -219,8 +292,8 @@
 }
 .sho-menu__dishes__item__content h3 {
   font-family: "Montserrat-Bold", sans-serif;
-  margin: 0;
   font-size: 1.2rem;
+  margin: 0;
 }
 .sho-menu__dishes__item__price {
   font-family: "Montserrat-Bold", sans-serif;
@@ -229,6 +302,7 @@
 .sho-menu__dishes__item__description {
   font-size: 0.9rem;
   margin: 3px 0;
+  opacity: 0.9;
 }
 .sho-menu__dishes__item__description p:last-child {
   margin: 0;

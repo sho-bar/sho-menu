@@ -1,23 +1,25 @@
 <script setup lang="ts">
 import type { Dish } from '@/types'
+import { useStore } from 'vuex'
 import WeightIcon from '@/components/Icons/WeightIcon.vue'
-import PencilIcon from '@/components/Icons/PencilIcon.vue'
+import EditButton from '@menu/components/Dishes/EditButton.vue'
 
 type Props = {
     dish: Dish
 }
 
 const { dish } = defineProps<Props>()
+
+const store = useStore()
+
+function selectDish(): void {
+    store.dispatch('dishes/selectDish', dish)
+}
 </script>
 
 <template>
-    <div class="sho-menu__dishes__item">
-        <a
-            :href="`/wp-admin/post.php?post=${dish.id}&action=edit`"
-            class="sho-menu__dishes__item__edit"
-        >
-            <pencil-icon width="20" height="20" />
-        </a>
+    <div @click="selectDish" class="sho-menu__dishes__item">
+        <edit-button :id="dish.id" />
 
         <div class="sho-menu__dishes__item__content">
             <h3 v-html="dish.title.rendered"></h3>
