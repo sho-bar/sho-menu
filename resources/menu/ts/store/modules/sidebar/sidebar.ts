@@ -133,7 +133,6 @@ const sidebar: Module<SidebarState, RootState> = {
         scrollToChildCategory({ state }, categoryId: number): void {
             const elem = document.getElementById(`sho-menu-category-${categoryId}`)
 
-            console.log(elem)
             if (!elem) {
                 return
             }

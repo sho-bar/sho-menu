@@ -133,6 +133,11 @@
 .sho-menu__dishes {
   width: 100%;
 }
+.sho-menu__dishes__empty {
+  padding: 20px;
+  text-align: center;
+  margin-top: 10px;
+}
 .sho-menu__dishes__section {
   border-radius: 15px;
   border: 1px solid #eee;

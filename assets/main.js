@@ -19139,7 +19139,8 @@ var _hoisted_1 = {
   key: 0
 };
 var _hoisted_2 = {
-  key: 1
+  key: 1,
+  "class": "sho-menu__dishes__empty"
 };
 var _hoisted_3 = {
   key: 2
@@ -19153,7 +19154,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["sho-menu__dishes", {
       'sho-menu__dishes--show': $setup.selectedParent !== null
     }])
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ShowSidebarBtn"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["CategoriesBar"]), $setup.loading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, "Завантаження...")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.childCategories, function (category) {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ShowSidebarBtn"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["CategoriesBar"]), !$setup.loading ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, "Завантаження...")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.childCategories, function (category) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: category.id
     }, [category.dishes && category.dishes.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["CategoryItem"], {
@@ -19616,7 +19617,6 @@ var sidebar = {
     scrollToChildCategory: function scrollToChildCategory(_a, categoryId) {
       var state = _a.state;
       var elem = document.getElementById("sho-menu-category-".concat(categoryId));
-      console.log(elem);
       if (!elem) {
         return;
       }

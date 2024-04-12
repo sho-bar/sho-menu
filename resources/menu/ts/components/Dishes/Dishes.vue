@@ -21,8 +21,10 @@ const loading = computed<boolean>(() => store.getters['dishes/loading'])
         <show-sidebar-btn />
         <categories-bar />
 
-        <div v-if="loading">Завантаження...</div>
-        <div v-else="childCategories.length === 0">Позицій у цій категорії ще немає</div>
+        <div v-if="!loading">Завантаження...</div>
+        <div v-else="childCategories.length === 0" class="sho-menu__dishes__empty">
+            Позицій у цій категорії ще немає
+        </div>
         <div v-else>
             <div v-for="category in childCategories" :key="category.id">
                 <div
