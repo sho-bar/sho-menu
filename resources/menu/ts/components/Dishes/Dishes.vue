@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import type { Category } from '@/types'
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 import DishItem from '@menu/components/Dishes/DishItem.vue'
 import ShowSidebarBtn from '@menu/components/Sidebar/ShowSidebarBtn.vue'
 import CategoryItem from '@menu/components/Dishes/CategoryItem.vue'
-import { useStore } from 'vuex'
 import CategoriesBar from '@menu/components/Dishes/CategoriesBar.vue'
+import Loading from '@/components/Loading.vue'
 
 const store = useStore()
 const childCategories = computed<Category[]>(() => store.getters['sidebar/childCategories'])
@@ -21,7 +22,7 @@ const loading = computed<boolean>(() => store.getters['dishes/loading'])
         <show-sidebar-btn />
         <categories-bar />
 
-        <div v-if="!loading">Завантаження...</div>
+        <loading v-if="loading" />
         <div v-else="childCategories.length === 0" class="sho-menu__dishes__empty">
             Позицій у цій категорії ще немає
         </div>

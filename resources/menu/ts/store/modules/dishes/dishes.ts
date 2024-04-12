@@ -26,10 +26,12 @@ const dishes: Module<DishesState, RootState> = {
     namespaced: true,
 
     state: {
-        loading: false,
+        loading: true,
     },
 
-    getters: {},
+    getters: {
+        loading: s => s.loading,
+    },
 
     mutations: {
         FETCH_DISHES(state, { selectedParent, dispatch }: FetchDishesParams): void {
