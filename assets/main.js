@@ -19274,6 +19274,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 /***/ }),
 
+/***/ "./resources/common/ts/modules/addParamToUrl.ts":
+/*!******************************************************!*\
+  !*** ./resources/common/ts/modules/addParamToUrl.ts ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (param, value) {
+  var url = new URL(location.href);
+  url.searchParams.set(param, value);
+  history.pushState({}, '', url.toString());
+});
+
+/***/ }),
+
 /***/ "./resources/common/ts/modules/screenSizeIs.ts":
 /*!*****************************************************!*\
   !*** ./resources/common/ts/modules/screenSizeIs.ts ***!
@@ -19400,8 +19419,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 /* harmony import */ var _modules_screenSizeIs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/modules/screenSizeIs */ "./resources/common/ts/modules/screenSizeIs.ts");
+/* harmony import */ var _modules_addParamToUrl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/modules/addParamToUrl */ "./resources/common/ts/modules/addParamToUrl.ts");
+
 
 
 var sidebar = {
@@ -19433,7 +19454,7 @@ var sidebar = {
       var _this = this;
       var url = '/wp-json/wp/v2/sho-menu-dish-category' + '?_fields=id,slug,name,parent,description';
       state.loading = true;
-      axios__WEBPACK_IMPORTED_MODULE_1__["default"].get(url).then(function (resp) {
+      axios__WEBPACK_IMPORTED_MODULE_2__["default"].get(url).then(function (resp) {
         state.allCategories = resp.data;
         state.parentCategories = resp.data.filter(function (c) {
           return c.parent === 0;
@@ -19460,6 +19481,7 @@ var sidebar = {
         return c.parent === category.id;
       });
       state.selectedParent = category;
+      (0,_modules_addParamToUrl__WEBPACK_IMPORTED_MODULE_1__["default"])('parent', category.id.toString());
       dispatch('dishes/fetchDishes', null, {
         root: true
       });

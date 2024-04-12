@@ -4,6 +4,7 @@ import type RootState from '@menu/store/RootState'
 import { Module } from 'vuex'
 import axios from 'axios'
 import screenSizeIs from '@/modules/screenSizeIs'
+import addParamToUrl from '@/modules/addParamToUrl'
 
 const sidebar: Module<SidebarState, RootState> = {
     namespaced: true,
@@ -54,6 +55,8 @@ const sidebar: Module<SidebarState, RootState> = {
         selectParentCategory({ state, dispatch }, category: Category): void {
             state.childCategories = state.allCategories.filter(c => c.parent === category.id)
             state.selectedParent = category
+
+            addParamToUrl('parent', category.id.toString())
 
             dispatch('dishes/fetchDishes', null, { root: true })
         },
