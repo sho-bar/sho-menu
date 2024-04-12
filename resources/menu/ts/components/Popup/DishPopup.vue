@@ -15,7 +15,10 @@ function closePopup(): void {
 </script>
 
 <template>
-    <div v-if="selectedDish" class="sho-menu__dish-popup--overlay">
+    <div
+        v-if="selectedDish" class="sho-menu__dish-popup--overlay"
+        @click.self="closePopup"
+    >
         <div class="sho-menu__dish-popup">
             <edit-button :id="selectedDish.id" />
             <close-button @click="closePopup" />

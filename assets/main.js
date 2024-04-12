@@ -19407,48 +19407,48 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  key: 0,
-  "class": "sho-menu__dish-popup--overlay"
-};
-var _hoisted_2 = {
   "class": "sho-menu__dish-popup"
 };
-var _hoisted_3 = {
+var _hoisted_2 = {
   "class": "sho-menu__dish-popup__content"
 };
-var _hoisted_4 = {
+var _hoisted_3 = {
   "class": "sho-menu__dish-popup__image"
 };
-var _hoisted_5 = ["src", "alt"];
-var _hoisted_6 = ["innerHTML"];
-var _hoisted_7 = {
+var _hoisted_4 = ["src", "alt"];
+var _hoisted_5 = ["innerHTML"];
+var _hoisted_6 = {
   "class": "sho-menu__dish-popup__meta"
 };
-var _hoisted_8 = {
+var _hoisted_7 = {
   "class": "sho-menu__dish-popup__price"
 };
-var _hoisted_9 = {
+var _hoisted_8 = {
   "class": "sho-menu__dish-popup__weight"
 };
-var _hoisted_10 = ["innerHTML"];
+var _hoisted_9 = ["innerHTML"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return $setup.selectedDish ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["EditButton"], {
+  return $setup.selectedDish ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+    key: 0,
+    "class": "sho-menu__dish-popup--overlay",
+    onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($setup.closePopup, ["self"])
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["EditButton"], {
     id: $setup.selectedDish.id
   }, null, 8, ["id"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["CloseButton"], {
     onClick: $setup.closePopup
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [$setup.selectedDish.image_url ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [$setup.selectedDish.image_url ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
     key: 0,
     src: $setup.selectedDish.image_url,
     alt: $setup.selectedDish.title.rendered
-  }, null, 8, _hoisted_5)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
+  }, null, 8, _hoisted_4)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", {
     innerHTML: $setup.selectedDish.title.rendered
-  }, null, 8, _hoisted_6), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.selectedDish.price) + " грн ", 1), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["WeightIcon"], {
+  }, null, 8, _hoisted_5), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.selectedDish.price) + " грн ", 1), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("small", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["WeightIcon"], {
     width: "16",
     height: "16"
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.selectedDish.weight) + " " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.selectedDish.weight_unit), 1)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
     innerHTML: $setup.selectedDish.content.rendered,
     "class": "sho-menu__dish-popup__description"
-  }, null, 8, _hoisted_10)])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
+  }, null, 8, _hoisted_9)])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
 }
 
 /***/ }),
