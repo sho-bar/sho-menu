@@ -37,6 +37,11 @@ const sidebar: Module<SidebarState, RootState> = {
 
             axios.get<Category[]>(url)
                 .then(resp => {
+                    if (resp.data.length === 0) {
+                        dispatch('dishes/changeLoading', null, { root: true })
+                        return
+                    }
+
                     state.allCategories = resp.data
                     state.parentCategories = resp.data.filter(c => c.parent === 0)
 

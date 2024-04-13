@@ -7,7 +7,7 @@ Plugin Name: Sho Menu
 Author: Serhii Cho
 Author URI: https://serhii.io
 Description: Custom plugin for shobar.com.ua that adds a nice menu page. Use the [sho_menu] shortcode to display the menu
-Version: 0.2
+Version: 0.1
 License: no
 Text Domain: sho-menu
 Tags: custom-menu
@@ -25,6 +25,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 $update_checker = PucFactory::buildUpdateChecker('https://github.com/sho-bar/sho-menu', __FILE__, 'sho-menu');
 $update_checker->setBranch('main');
+$update_checker->setAuthentication('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');
 
 (new Hook())
     ->registerActivationHooks()

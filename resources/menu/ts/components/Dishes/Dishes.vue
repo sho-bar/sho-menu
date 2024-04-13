@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Category } from '@/types'
+import type { Category, Dish } from '@/types'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import DishItem from '@menu/components/Dishes/DishItem.vue'
@@ -10,6 +10,7 @@ import Loading from '@/components/Loading.vue'
 const store = useStore()
 const childCategories = computed<Category[]>(() => store.getters['sidebar/childCategories'])
 const selectedParent = computed<Category | null>(() => store.getters['sidebar/selectedParent'])
+const dishes = computed<Dish[]>(() => store.getters['dishes/dishes'])
 const loading = computed<boolean>(() => store.getters['dishes/loading'])
 </script>
 
@@ -22,7 +23,7 @@ const loading = computed<boolean>(() => store.getters['dishes/loading'])
 
         <loading v-if="loading" />
 
-        <div v-else="childCategories.length === 0" class="sho-menu__dishes__empty">
+        <div v-else-if="dishes.length === 0" class="sho-menu__dishes__empty">
             Позицій у цій категорії ще немає
         </div>
 

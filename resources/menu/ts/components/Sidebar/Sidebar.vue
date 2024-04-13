@@ -30,7 +30,11 @@ function selectChildCategory(category: Category): void {
     >
         <small class="sho-menu__sidebar__label">Меню:</small>
 
-        <ul>
+        <p v-if="parentCategories.length === 0" class="sho-menu__sidebar__empty">
+            Поки що категорій немає
+        </p>
+
+        <ul v-else>
             <li
                 v-for="c in parentCategories"
                 :key="c.id"

@@ -37,6 +37,7 @@ const dishes: Module<DishesState, RootState> = {
     getters: {
         loading: s => s.loading,
         selectedDish: s => s.selectedDish,
+        dishes: s => s.dishes,
     },
 
     mutations: {
@@ -51,6 +52,10 @@ const dishes: Module<DishesState, RootState> = {
 
             axios.get<Dish[]>(url)
                 .then(resp => {
+                    if (resp.data.length === 0) {
+                        return
+                    }
+
                     state.dishes = resp.data
 
                     dispatch('sidebar/attachDishesToChildCategories', resp.data, {
@@ -86,6 +91,10 @@ const dishes: Module<DishesState, RootState> = {
             if (dishFromUrl) {
                 dispatch('selectDish', dishFromUrl)
             }
+        },
+
+        changeLoading({ state }, loading: boolean): void {
+            state.loading = loading
         },
     },
 }

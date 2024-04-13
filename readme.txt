@@ -14,9 +14,9 @@ Sho Menu is a custom WordPress plugin for Shobar Restaurant
 Sho Menu is a custom WordPress plugin for Shobar Restaurant that adds a pretty menu to your website.
 
 == Changelog ==
-
 = 0.2 =
 * Change plugin description
+* Fix loading dishes when there are no categories
 
 = 0.1 =
 * Initial release
