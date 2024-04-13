@@ -7,4 +7,15 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
+    'Curl\\Curl' => $vendorDir . '/curl/curl/src/Curl/Curl.php',
+    'Serhii\\TinyLogger\\CurlHandler' => $vendorDir . '/serhii/tiny-logger/src/CurlHandler.php',
+    'Serhii\\TinyLogger\\JsonFieldValue' => $vendorDir . '/serhii/tiny-logger/src/JsonFieldValue.php',
+    'Serhii\\TinyLogger\\Logger' => $vendorDir . '/serhii/tiny-logger/src/Logger.php',
+    'Serhii\\TinyLogger\\Option' => $vendorDir . '/serhii/tiny-logger/src/Option.php',
+    'Serhii\\TinyLogger\\Text' => $vendorDir . '/serhii/tiny-logger/src/Text.php',
+    'ShoMenu\\Dish' => $baseDir . '/app/Dish.php',
+    'ShoMenu\\Helper' => $baseDir . '/app/Helper.php',
+    'ShoMenu\\Hook' => $baseDir . '/app/Hook.php',
+    'ShoMenu\\PostTypes\\Columns' => $baseDir . '/app/PostTypes/Columns.php',
+    'ShoMenu\\PostTypes\\DishesPostType' => $baseDir . '/app/PostTypes/DishesPostType.php',
 );
