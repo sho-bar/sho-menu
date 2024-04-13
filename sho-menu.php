@@ -1,4 +1,9 @@
 <?php
+
+declare(strict_types=1);
+
+use ShoMenu\Hook;
+
 /*
 Plugin Name: Sho Menu
 Author: Serhii Cho
@@ -17,7 +22,7 @@ define('SHO_MENU_ENTRY_FILE', __FILE__);
 
 require_once 'vendor/autoload.php';
 
-(new \ShoMenu\Hook)
+(new Hook())
     ->registerActivationHooks()
     ->registerMenuAssets()
     ->registerShortcodes()
