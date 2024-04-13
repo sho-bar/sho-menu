@@ -1,5 +1,5 @@
 === Sho Menu ===
-Stable tag: 0.3
+Stable tag: 0.2
 Requires at least: 6.0
 Tested up to: 6.5.2
 Tags: menu, album, images, files, restaurant, food, food menu
