@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use ShoMenu\Hook;
-
 /*
 Plugin Name: Sho Menu
 Author: Serhii Cho
@@ -15,12 +13,18 @@ Text Domain: sho-menu
 Tags: custom-menu
 */
 
+use ShoMenu\Hook;
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+
 defined('ABSPATH') || exit;
 define('SHO_MENU_PATH', plugin_dir_path(__FILE__));
 define('SHO_MENU_URL', plugin_dir_url(__FILE__));
 define('SHO_MENU_ENTRY_FILE', __FILE__);
 
-require_once 'vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
+
+$update_checker = PucFactory::buildUpdateChecker('https://github.com/sho-bar/sho-menu', __FILE__, 'sho-menu');
+$update_checker->setBranch('main');
 
 (new Hook())
     ->registerActivationHooks()
