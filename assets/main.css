@@ -102,7 +102,7 @@
     padding: 15px 18px !important;
     font-size: 1.2em;
     border-radius: 7px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
     margin-bottom: 8px;
   }
   .sho-menu__sidebar > ul > li > svg {
@@ -118,7 +118,7 @@
   max-height: 80vh;
   max-width: 470px;
   border-radius: 15px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
   padding: 30px 25px;
   overflow-y: auto;
   position: relative;
@@ -430,8 +430,9 @@
 
 @media (max-width: 800px) {
   .sho-menu__header img {
+    height: 130px;
     border-radius: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
   }
   .sho-menu__sidebar-btn {
     display: inline-flex;
