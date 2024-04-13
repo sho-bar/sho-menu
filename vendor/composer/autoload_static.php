@@ -10,6 +10,7 @@ class ComposerStaticInit6c87968e593dc9535bc6daa6a481a1c6
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '75b88b4ed4d07a48c26155d671e68412' => __DIR__ . '/..' . '/serhii/tiny-logger/logger.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
+        'd05ecc14ff93fd612a81ec7e8ab4c2c9' => __DIR__ . '/..' . '/yahnis-elsts/plugin-update-checker/load-v5p4.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -19,6 +20,15 @@ class ComposerStaticInit6c87968e593dc9535bc6daa6a481a1c6
             'Symfony\\Component\\VarDumper\\' => 28,
             'ShoMenu\\' => 8,
             'Serhii\\TinyLogger\\' => 18,
+        ),
+        'D' => 
+        array (
+            'Database\\Seeders\\' => 17,
+            'Database\\Factories\\' => 19,
+        ),
+        'A' => 
+        array (
+            'App\\' => 4,
         ),
     );
 
@@ -38,6 +48,18 @@ class ComposerStaticInit6c87968e593dc9535bc6daa6a481a1c6
         'Serhii\\TinyLogger\\' => 
         array (
             0 => __DIR__ . '/..' . '/serhii/tiny-logger/src',
+        ),
+        'Database\\Seeders\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravel/pint/database/seeders',
+        ),
+        'Database\\Factories\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravel/pint/database/factories',
+        ),
+        'App\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravel/pint/app',
         ),
     );
 

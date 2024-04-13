@@ -12,9 +12,12 @@
         }
     ],
     "require-dev": {
-        "symfony/var-dumper": "^7.0"
+        "symfony/var-dumper": "^7.0",
+        "laravel/pint": "^1.15"
     },
     "require": {
-        "serhii/tiny-logger": "^2.1"
+        "php": "^8.2",
+        "serhii/tiny-logger": "^2.1",
+        "yahnis-elsts/plugin-update-checker": "^5.4"
     }
 }
