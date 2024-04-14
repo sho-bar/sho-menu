@@ -20,8 +20,7 @@ function selectChildCategory(category: Category): void {
             class="sho-menu__categories-bar__item"
             :class="{ 'sho-menu__categories-bar__item--is-selected': selectedChild && category.id === selectedChild.id }"
             @click="selectChildCategory(category)"
-        >
-            {{ category.name }}
-        </div>
+            v-html="category.name"
+        ></div>
     </div>
 </template>
