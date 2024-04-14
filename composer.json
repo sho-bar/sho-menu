@@ -23,7 +23,9 @@
     "scripts": {
         "build": [
             "composer install --no-dev --optimize-autoloader",
-            "yarn prod"
+            "yarn prod",
+            "git add .",
+            "git commit -m 'Build release for production'"
         ],
         "pint": "./vendor/bin/pint"
     }
