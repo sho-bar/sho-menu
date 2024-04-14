@@ -16,6 +16,7 @@ Sho Menu is a custom WordPress plugin for Shobar Restaurant that adds a pretty m
 == Changelog ==
 
 = 0.8 =
+* Added loading all the dishes as long as there are more of them in the database
 
 = 0.7 =
 * Added disc to each li element in nested categories in menu sidebar

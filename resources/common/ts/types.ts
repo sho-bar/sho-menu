@@ -1,3 +1,5 @@
+import type { Dispatch } from 'vuex'
+
 export type Globals = {
     ajaxUrl: string
     nonce: string
@@ -24,4 +26,24 @@ export type Dish = {
     weight_unit: string | null
     "sho-menu-dish-category": number[]
     image_url: string | null
+}
+
+export type NoDishesResponse = {
+    code: string
+    message: string
+    data: {
+        status: number
+    }
+}
+
+export type FetchDishesActionParams = {
+    page: number
+    loading: boolean
+}
+
+export type FetchDishesMutationParams = {
+    selectedParent: Category
+    dispatch: Dispatch
+    page: number
+    loading: boolean
 }

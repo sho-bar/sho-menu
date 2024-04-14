@@ -1,4 +1,4 @@
-import type { Category, Dish } from '@/types'
+import type { Category, Dish, FetchDishesActionParams } from '@/types'
 import type SidebarState from './SidebarState'
 import type RootState from '@menu/store/RootState'
 import type { Dispatch } from 'vuex'
@@ -67,7 +67,12 @@ const sidebar: Module<SidebarState, RootState> = {
             removeParamToUrl('child')
             addParamToUrl('parent', category.slug)
 
-            dispatch('dishes/fetchDishes', null, { root: true })
+            const args: FetchDishesActionParams = {
+                page: 1,
+                loading: true
+            }
+
+            dispatch('dishes/fetchDishes', args, { root: true })
         },
 
         selectChildCategory({ state, dispatch }, category: Category): void {
