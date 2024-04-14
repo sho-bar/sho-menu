@@ -1,9 +1,9 @@
 .sho-menu__sidebar
-    min-width: 200px
+    min-width: 250px
     position: sticky
     top: 5px
     max-height: calc(100vh - 5px)
-    overflow: auto
+    overflow-y: auto
     background-color: white
 
     .admin-bar &
@@ -33,11 +33,11 @@
             cursor: pointer
             transition: color 0.3s
             border-bottom: 1px solid #eee
-            padding-bottom: 5px
-            margin-bottom: 3px
+            padding: 5px 0
             user-select: none
             font-family: "Montserrat-Bold", serif
-            line-height: 1.2
+            line-height: 1.4
+            font-size: .9em
 
             & > svg
                 display: none
@@ -62,10 +62,11 @@
                 li
                     color: black
                     font-weight: bold
-                    font-size: .75em
+                    font-size: .9em
                     padding: 3px 0
                     font-family: "Montserrat-Regular", serif
                     margin-bottom: 3px
+                    word-wrap: break-word
 
                     &.is-selected
                         color: $gold-color
