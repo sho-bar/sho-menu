@@ -41,7 +41,7 @@ function selectChildCategory(category: Category): void {
                 @click.self="selectParentCategory(c)"
                 :class="{ 'is-selected': selectedParent && c.id === selectedParent.id }"
             >
-                {{ c.name }}
+                <span v-html="c.name" @click.self="selectParentCategory(c)"></span>
 
                 <chevron-right-icon width="22" height="22" />
 
@@ -51,9 +51,8 @@ function selectChildCategory(category: Category): void {
                         :key="child.id"
                         @click="selectChildCategory(child)"
                         :class="{ 'is-selected': selectedChild && child.id === selectedChild.id }"
-                    >
-                        {{ child.name }}
-                    </li>
+                        v-html="child.name"
+                    ></li>
                 </ul>
             </li>
         </ul>
