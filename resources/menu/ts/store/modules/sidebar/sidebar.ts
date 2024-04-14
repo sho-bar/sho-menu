@@ -31,7 +31,9 @@ const sidebar: Module<SidebarState, RootState> = {
     mutations: {
         FETCH_CATEGORIES(state, dispatch: Dispatch): void {
             let url = '/wp-json/wp/v2/sho-menu-dish-category'
-                + '?_fields=id,slug,name,parent,description'
+                + '?per_page=100'
+                + '&page=1'
+                + '&_fields=id,slug,name,parent,description'
 
             state.loading = true
 
