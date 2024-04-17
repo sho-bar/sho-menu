@@ -16,6 +16,8 @@ Sho Menu is a custom WordPress plugin for Shobar Restaurant that adds a pretty m
 == Changelog ==
 
 = 0.10 =
+* Fixed style issue for the "close dish popup" button. The "x" icon was very small
+* Fixed style issue for the ">" icon in the categories column. It was very small for categories with long names
 
 = 0.9 =
 * Fixed font for category items inside dishes column

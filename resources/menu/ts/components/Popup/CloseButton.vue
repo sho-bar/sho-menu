@@ -3,11 +3,10 @@ import CloseIcon from '@/components/Icons/CloseIcon.vue'
 </script>
 
 <template>
-    <button
-        type="button"
+    <div
         class="sho-menu__dish-popup__close"
         aria-label="Закрити"
     >
         <close-icon width="22" height="22" />
-    </button>
+    </div>
 </template>
