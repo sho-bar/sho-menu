@@ -27,7 +27,10 @@ function closePopup(): void {
                 <close-button @click="closePopup" />
 
                 <div class="sho-menu__dish-popup__content">
-                    <div class="sho-menu__dish-popup__image">
+                    <div
+                        v-if="selectedDish.image_url"
+                        class="sho-menu__dish-popup__image"
+                    >
                         <img
                             v-if="selectedDish.image_url"
                             :src="selectedDish.image_url"

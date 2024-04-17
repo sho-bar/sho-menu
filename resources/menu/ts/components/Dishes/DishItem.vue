@@ -40,7 +40,7 @@ function selectDish(): void {
             </small>
         </div>
 
-        <div class="sho-menu__dishes__item__image">
+        <div v-if="dish.image_url" class="sho-menu__dishes__item__image">
             <img
                 v-if="dish.image_url"
                 :src="dish.image_url"
