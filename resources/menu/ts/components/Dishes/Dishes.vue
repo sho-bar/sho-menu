@@ -23,7 +23,10 @@ const loading = computed<boolean>(() => store.getters['dishes/loading'])
 
         <loading v-if="loading" />
 
-        <div v-else-if="dishes.length === 0" class="sho-menu__dishes__empty">
+        <div
+            v-else-if="dishes.length === 0 || childCategories.length === 0"
+            class="sho-menu__dishes__empty"
+        >
             Позицій у цій категорії ще немає
         </div>
 
