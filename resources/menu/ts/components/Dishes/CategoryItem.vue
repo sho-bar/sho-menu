@@ -13,7 +13,7 @@ const { category } = defineProps<Props>()
         class="sho-menu__dishes__category"
         :id="`sho-menu-category-${category.id}`"
     >
-        <h2>{{ category.name }}</h2>
-        <p>{{ category.description }}</p>
+        <h2 v-html="category.name"></h2>
+        <p v-html="category.description"></p>
     </div>
 </template>
