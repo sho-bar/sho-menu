@@ -8,7 +8,8 @@ import addParamToUrl from '@/modules/addParamToUrl'
 import removeParamToUrl from '@/modules/removeParamToUrl'
 import getDishFromUrl from '@menu/modules/getDishFromUrl'
 
-const selectFields = [
+const MAX_DISHES_PER_PAGE = 100
+const SELECT_FIELDS = [
     'id',
     'slug',
     'title.rendered',
@@ -38,10 +39,10 @@ const dishes: Module<DishesState, RootState> = {
     mutations: {
         FETCH_DISHES(state, { selectedParent, dispatch, page, loading }: FetchDishesMutationParams): void {
             let url = '/wp-json/wp/v2/sho-menu-dishes'
-                + '?per_page=100'
+                + `?per_page=${MAX_DISHES_PER_PAGE}`
                 + `&page=${page}`
                 + `&sho-menu-dish-category=${selectedParent.id}`
-                + `&_fields=${selectFields.join(',')}`
+                + `&_fields=${SELECT_FIELDS.join(',')}`
 
             state.loading = loading
 
@@ -60,7 +61,10 @@ const dishes: Module<DishesState, RootState> = {
                     })
 
                     dispatch('selectNeedingDish')
-                    dispatch('fetchDishes', { page: page + 1, loading: false })
+
+                    if (dishes.length === MAX_DISHES_PER_PAGE) {
+                        dispatch('fetchDishes', { page: page + 1, loading: false })
+                    }
                 })
                 .catch(err => console.error(err))
                 .finally(() => state.loading = false)

@@ -17,6 +17,7 @@ Sho Menu is a custom WordPress plugin for Shobar Restaurant that adds a pretty m
 
 = 0.9 =
 * Fixed font for category items inside dishes column
+* Fixed error in the browser console
 
 = 0.8 =
 * Added loading all the dishes as long as there are more of them in the database

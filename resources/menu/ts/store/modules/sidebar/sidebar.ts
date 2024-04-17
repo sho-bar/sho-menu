@@ -9,6 +9,8 @@ import getCategoryFromUrl from '@menu/modules/getCategoryFromUrl'
 import removeParamToUrl from '@/modules/removeParamToUrl'
 import screenSizeIs from '@/modules/screenSizeIs'
 
+const MAX_CATEGORIES_PER_PAGE = 100
+
 const sidebar: Module<SidebarState, RootState> = {
     namespaced: true,
 
@@ -31,7 +33,7 @@ const sidebar: Module<SidebarState, RootState> = {
     mutations: {
         FETCH_CATEGORIES(state, dispatch: Dispatch): void {
             let url = '/wp-json/wp/v2/sho-menu-dish-category'
-                + '?per_page=100'
+                + `?per_page=${MAX_CATEGORIES_PER_PAGE}`
                 + '&page=1'
                 + '&_fields=id,slug,name,parent,description'
 
