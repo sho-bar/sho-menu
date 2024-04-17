@@ -5,7 +5,7 @@ import { useStore } from 'vuex'
 import DishItem from '@menu/components/Dishes/DishItem.vue'
 import CategoryItem from '@menu/components/Dishes/CategoryItem.vue'
 import CategoriesBar from '@menu/components/Dishes/CategoriesBar.vue'
-import Loading from '@/components/Loading.vue'
+import DishesLoading from '@/components/DishesLoading.vue'
 
 const store = useStore()
 const childCategories = computed<Category[]>(() => store.getters['sidebar/childCategories'])
@@ -21,7 +21,7 @@ const loading = computed<boolean>(() => store.getters['dishes/loading'])
     >
         <categories-bar />
 
-        <loading v-if="loading" />
+        <dishes-loading v-if="loading" />
 
         <div
             v-else-if="dishes.length === 0 || childCategories.length === 0"
