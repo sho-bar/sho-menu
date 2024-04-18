@@ -24,7 +24,7 @@ const loading = computed<boolean>(() => store.getters['dishes/loading'])
         <dishes-loading v-if="loading" />
 
         <div
-            v-else-if="dishes.length === 0 || childCategories.length === 0"
+            v-else-if="childCategories.length === 0"
             class="sho-menu__dishes__empty"
         >
             Позицій у цій категорії ще немає
@@ -32,17 +32,20 @@ const loading = computed<boolean>(() => store.getters['dishes/loading'])
 
         <div v-else>
             <div v-for="category in childCategories" :key="category.id">
-                <div
-                    v-if="category.dishes && category.dishes.length > 0"
-                    class="sho-menu__dishes__section"
-                >
+                <div class="sho-menu__dishes__section">
                     <category-item :category="category" />
 
-                    <dish-item
-                        v-for="dish in category.dishes"
-                        :key="dish.id"
-                        :dish="dish"
-                    />
+                    <div v-if="category.dishes && category.dishes.length > 0">
+                        <dish-item
+                            v-for="dish in category.dishes"
+                            :key="dish.id"
+                            :dish="dish"
+                        />
+                    </div>
+
+                    <div v-else class="sho-menu__dishes__empty">
+                        Позицій у цій категорії ще немає
+                    </div>
                 </div>
             </div>
         </div>
