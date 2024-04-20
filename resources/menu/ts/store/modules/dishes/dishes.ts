@@ -18,6 +18,7 @@ const SELECT_FIELDS = [
     'weight',
     'weight_unit',
     'sho-menu-dish-category',
+    'designations',
     'image_url',
 ]
 
