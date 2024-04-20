@@ -3,6 +3,7 @@ import type { Dish } from '@/types'
 import { useStore } from 'vuex'
 import WeightIcon from '@/components/Icons/WeightIcon.vue'
 import EditButton from '@menu/components/Dishes/EditButton.vue'
+import Designations from '@menu/components/Dishes/Designations.vue'
 
 type Props = {
     dish: Dish
@@ -38,6 +39,8 @@ function selectDish(): void {
                 {{ dish.weight }}
                 {{ dish.weight_unit }}
             </small>
+
+            <designations :dish="dish" />
         </div>
 
         <div v-if="dish.image_url" class="sho-menu__dishes__item__image">

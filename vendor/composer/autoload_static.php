@@ -49,6 +49,7 @@ class ComposerStaticInit6c87968e593dc9535bc6daa6a481a1c6
         'Serhii\\TinyLogger\\Option' => __DIR__ . '/..' . '/serhii/tiny-logger/src/Option.php',
         'Serhii\\TinyLogger\\Text' => __DIR__ . '/..' . '/serhii/tiny-logger/src/Text.php',
         'ShoMenu\\Dish' => __DIR__ . '/../..' . '/app/Dish.php',
+        'ShoMenu\\Enums\\Designation' => __DIR__ . '/../..' . '/app/Enums/Designation.php',
         'ShoMenu\\Helper' => __DIR__ . '/../..' . '/app/Helper.php',
         'ShoMenu\\Hook' => __DIR__ . '/../..' . '/app/Hook.php',
         'ShoMenu\\PostTypes\\Columns' => __DIR__ . '/../..' . '/app/PostTypes/Columns.php',

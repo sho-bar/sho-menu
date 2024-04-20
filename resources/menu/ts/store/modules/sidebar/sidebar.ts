@@ -8,6 +8,8 @@ import addParamToUrl from '@/modules/addParamToUrl'
 import getCategoryFromUrl from '@menu/modules/getCategoryFromUrl'
 import removeParamToUrl from '@/modules/removeParamToUrl'
 import screenSizeIs from '@/modules/screenSizeIs'
+import observeCategories from '@menu/modules/observeCategories'
+import scrollToCategory from '@menu/modules/scrollToCategory'
 
 const MAX_CATEGORIES_PER_PAGE = 100
 
@@ -83,6 +85,21 @@ const sidebar: Module<SidebarState, RootState> = {
             addParamToUrl('child', category.slug)
 
             dispatch('scrollToChildCategory', category.id)
+        },
+
+        observeCategories({ state }): void {
+            observeCategories((id: number) => {
+                const category = state.childCategories.find(c => c.id === id)
+
+                if (!category) {
+                    console.warn(`Category with id ${id} not found in state.childCategories`)
+                    return
+                }
+
+                state.selectedChild = category
+                addParamToUrl('child', category.slug)
+                scrollToCategory(id)
+            })
         },
 
         selectNeedingParentCategory({ state, dispatch }): void {

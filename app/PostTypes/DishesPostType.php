@@ -7,6 +7,7 @@ namespace ShoMenu\PostTypes;
 use WP_Post;
 use WP_Term;
 use ShoMenu\Dish;
+use ShoMenu\Enums\Designation;
 
 final class DishesPostType
 {
@@ -133,6 +134,12 @@ final class DishesPostType
                 'callback' => [$this, 'weightUnitBoxMarkup'],
             ],
             [
+                'id' => 'sho-menu-designations',
+                'title' => 'Обозначения',
+                'slug' => 'designations',
+                'callback' => [$this, 'designationsBoxMarkup'],
+            ],
+            [
                 'id' => 'sho-menu-info',
                 'title' => '<span>ℹ️ Інформація</span>',
                 'slug' => 'info',
@@ -172,6 +179,45 @@ final class DishesPostType
         echo "<input type='text' name='sho-menu-weight-unit' value='{$value}'>";
     }
 
+    public function designationsBoxMarkup(WP_Post $post): void
+    {
+        wp_nonce_field('save_meta', 'sho_menu_nonce');
+
+        $designations = Designation::all();
+        $selected = Dish::getDesignations($post->ID);
+        $checkboxes = '';
+
+        foreach ($designations as $designation) {
+            $checked = in_array($designation, $selected, true) ? 'checked' : '';
+
+            $checkboxes .= <<<HTML
+                <label>
+                    <input
+                        type="checkbox"
+                        name="sho-menu-designation[]"
+                        value="{$designation->value}"
+                        {$checked}
+                    />
+
+                    <img
+                        src="{$designation->icon()}"
+                        width="11"
+                        height="11"
+                        style="margin-right: 1px;"
+                    />
+
+                    {$designation->description()}
+                </label>
+            HTML;
+        }
+
+        echo <<<HTML
+            <div style="display: flex; flex-direction: column; gap: 3px;">
+                {$checkboxes}
+            </div>
+        HTML;
+    }
+
     public function infoBoxMarkup(WP_Post $post): void
     {
         echo <<<HTML
@@ -204,6 +250,16 @@ final class DishesPostType
             update_post_meta($post_id, '_sho_menu_price', $price);
             update_post_meta($post_id, '_sho_menu_weight', $weight);
             update_post_meta($post_id, '_sho_menu_weight_unit', $weight_unit);
+
+            $designations = $_POST['sho-menu-designation'] ?? [];
+
+            if (!is_array($designations)) {
+                return;
+            }
+
+            $save_value = implode(',', $designations);
+
+            update_post_meta($post_id, '_sho_menu_designations', $save_value);
         });
     }
 
@@ -254,21 +310,21 @@ final class DishesPostType
         add_action('rest_api_init', function () {
             register_rest_field('sho-menu-dishes', 'price', [
                 'get_callback' => function ($post) {
-                    $price = get_post_meta($post['id'], '_sho_menu_price', true);
+                    $price = Dish::getMeta('price', $post['id']);
                     return $price === false ? null : (int) $price;
                 },
             ]);
 
             register_rest_field('sho-menu-dishes', 'weight', [
                 'get_callback' => function ($post) {
-                    $weight = get_post_meta($post['id'], '_sho_menu_weight', true);
+                    $weight = Dish::getMeta('weight', $post['id']);
                     return $weight === false ? null : (int) $weight;
                 },
             ]);
 
             register_rest_field('sho-menu-dishes', 'weight_unit', [
                 'get_callback' => function ($post) {
-                    $unit = get_post_meta($post['id'], '_sho_menu_weight_unit', true);
+                    $unit = Dish::getMeta('weight_unit', $post['id']);
                     return $unit === false ? null : $unit;
                 },
             ]);
@@ -277,6 +333,19 @@ final class DishesPostType
                 'get_callback' => function ($post) {
                     $image = get_the_post_thumbnail_url($post['id']);
                     return $image === false ? null : $image;
+                },
+            ]);
+
+            register_rest_field('sho-menu-dishes', 'designations', [
+                'get_callback' => function ($post) {
+                    $selected = Dish::getDesignations($post['id']);
+                    $result = [];
+
+                    foreach ($selected as $item) {
+                        $result[] = $item->toArray();
+                    }
+
+                    return $result;
                 },
             ]);
         });

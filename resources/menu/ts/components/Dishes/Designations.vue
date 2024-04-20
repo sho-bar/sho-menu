@@ -1,0 +1,28 @@
+<script setup lang="ts">
+import type { Dish } from '@/types'
+
+type Props = {
+    dish: Dish
+}
+
+const { dish } = defineProps<Props>()
+</script>
+
+<template>
+    <div v-if="dish.designations.length > 0" class="sho-menu__designations">
+        <div
+            v-for="des in dish.designations"
+            :key="des.slug"
+            class="sho-menu__designations__item"
+        >
+            <img
+                :src="des.icon"
+                :alt="des.description"
+                width="20"
+                height="20"
+            />
+
+            <span>{{ des.description }}</span>
+        </div>
+    </div>
+</template>

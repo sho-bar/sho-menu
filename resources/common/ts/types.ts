@@ -26,6 +26,13 @@ export type Dish = {
     weight_unit: string | null
     "sho-menu-dish-category": number[]
     image_url: string | null
+    designations: Designation[]
+}
+
+export type Designation = {
+    slug: string
+    description: string
+    icon: string
 }
 
 export type NoDishesResponse = {
