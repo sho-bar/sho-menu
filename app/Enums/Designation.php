@@ -13,12 +13,27 @@ enum Designation: string
     case ORGANIC = 'organic';
     case UKRAINE = 'ukraine';
 
+    /**
+     * @return array<int, self>
+     */
+    public static function all(): array
+    {
+        return [
+            self::GARLIC,
+            self::CHILI,
+            self::FARMER,
+            self::NEW,
+            self::ORGANIC,
+            self::UKRAINE,
+        ];
+    }
+
     public function description(): string
     {
         return match ($this) {
             self::GARLIC => 'У складі страви є часник',
             self::CHILI => 'Гостра страва',
-            self::FARMER => 'Страва містить фермерський продукт',
+            self::FARMER => 'Містить фермерський продукт',
             self::NEW => 'Новинка',
             self::ORGANIC => 'Органічний продукт',
             self::UKRAINE => 'Українського виробництва',

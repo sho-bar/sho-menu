@@ -7,6 +7,7 @@ namespace ShoMenu\PostTypes;
 use WP_Post;
 use WP_Term;
 use ShoMenu\Dish;
+use ShoMenu\Enums\Designation;
 
 final class DishesPostType
 {
@@ -133,6 +134,12 @@ final class DishesPostType
                 'callback' => [$this, 'weightUnitBoxMarkup'],
             ],
             [
+                'id' => 'sho-menu-designations',
+                'title' => 'Обозначения',
+                'slug' => 'designations',
+                'callback' => [$this, 'designationsBoxMarkup'],
+            ],
+            [
                 'id' => 'sho-menu-info',
                 'title' => '<span>ℹ️ Інформація</span>',
                 'slug' => 'info',
@@ -170,6 +177,46 @@ final class DishesPostType
         $value = $value === '' ? ' г' : $value;
 
         echo "<input type='text' name='sho-menu-weight-unit' value='{$value}'>";
+    }
+
+    public function designationsBoxMarkup(WP_Post $post): void
+    {
+        wp_nonce_field('save_meta', 'sho_menu_nonce');
+
+        $value = Dish::getMeta('designations', $post->ID);
+        $designations = Designation::all();
+        $checkboxes = '';
+
+        foreach ($designations as $designation) {
+            // $checked = in_array($mod['id'], $chosen_mods, true) ? 'checked' : '';
+            $checked = '';
+
+            $checkboxes .= <<<HTML
+                <label>
+                    <input
+                        type="checkbox"
+                        name="shobar-modifiers[]"
+                        value="{$designation->value}"
+                        {$checked}
+                    />
+
+                    <img
+                        src="{$designation->icon()}"
+                        width="11"
+                        height="11"
+                        style="margin-right: 1px;"
+                    />
+
+                    {$designation->description()}
+                </label>
+            HTML;
+        }
+
+        echo <<<HTML
+            <div style="display: flex; flex-direction: column; gap: 3px;">
+                {$checkboxes}
+            </div>
+        HTML;
     }
 
     public function infoBoxMarkup(WP_Post $post): void
