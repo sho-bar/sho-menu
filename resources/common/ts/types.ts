@@ -28,6 +28,12 @@ export type Dish = {
     image_url: string | null
 }
 
+export type Designation = {
+    slug: string
+    description: string
+    icon: string
+}
+
 export type NoDishesResponse = {
     code: string
     message: string
