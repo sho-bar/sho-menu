@@ -183,13 +183,14 @@ final class DishesPostType
     {
         wp_nonce_field('save_meta', 'sho_menu_nonce');
 
-        $value = Dish::getMeta('designations', $post->ID);
+        $meta_value = Dish::getMeta('designations', $post->ID);
+        $value = Designation::tryFrom($meta_value);
+
         $designations = Designation::all();
         $checkboxes = '';
 
         foreach ($designations as $designation) {
-            // $checked = in_array($mod['id'], $chosen_mods, true) ? 'checked' : '';
-            $checked = '';
+            $checked = in_array($value, $designations, true) ? 'checked' : '';
 
             $checkboxes .= <<<HTML
                 <label>
