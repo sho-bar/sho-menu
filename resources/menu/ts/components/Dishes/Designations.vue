@@ -18,8 +18,8 @@ const { dish } = defineProps<Props>()
             <img
                 :src="des.icon"
                 :alt="des.description"
-                width="20"
-                height="20"
+                width="25"
+                height="25"
             />
 
             <span>{{ des.description }}</span>
