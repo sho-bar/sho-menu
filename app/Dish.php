@@ -13,7 +13,10 @@ final class Dish
         return get_post_meta($post_id, "_sho_menu_{$name}", true);
     }
 
-    public static function getDesignations(int $post_id)
+    /**
+     * @return array<int, Designation>
+     */
+    public static function getDesignations(int $post_id): array
     {
         $meta_value = self::getMeta('designations', $post_id);
         $meta_values = explode(',', $meta_value);

@@ -338,7 +338,14 @@ final class DishesPostType
 
             register_rest_field('sho-menu-dishes', 'designations', [
                 'get_callback' => function ($post) {
-                    return Dish::getDesignations($post['id']);
+                    $selected = Dish::getDesignations($post['id']);
+                    $result = [];
+
+                    foreach ($selected as $item) {
+                        $result[] = $item->toArray();
+                    }
+
+                    return $result;
                 },
             ]);
         });

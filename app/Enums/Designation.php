@@ -28,6 +28,19 @@ enum Designation: string
         ];
     }
 
+    /**
+     * @param array<int, self> $designations
+     * @return array{slug: string, description: string, icon: string}
+     */
+    public function toArray(): array
+    {
+        return [
+            'slug' => $this->value,
+            'description' => $this->description(),
+            'icon' => $this->icon(),
+        ];
+    }
+
     public function description(): string
     {
         return match ($this) {
