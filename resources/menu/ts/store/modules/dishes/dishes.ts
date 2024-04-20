@@ -1,5 +1,4 @@
 import type { Dish, NoDishesResponse, FetchDishesActionParams, FetchDishesMutationParams } from '@/types'
-import type { Dispatch } from 'vuex'
 import type DishesState from './DishesState'
 import type RootState from '@menu/store/RootState'
 import axios from 'axios'
@@ -63,7 +62,15 @@ const dishes: Module<DishesState, RootState> = {
                     dispatch('selectNeedingDish')
 
                     if (dishes.length === MAX_DISHES_PER_PAGE) {
-                        dispatch('fetchDishes', { page: page + 1, loading: false })
+                        dispatch('fetchDishes', {
+                            page: page + 1,
+                            loading: false,
+                        })
+                    } else {
+                        // there are no more dishes to fetch
+                        setTimeout(() => {
+                            dispatch('sidebar/observeCategories', null, { root: true })
+                        }, 50)
                     }
                 })
                 .catch(err => console.error(err))

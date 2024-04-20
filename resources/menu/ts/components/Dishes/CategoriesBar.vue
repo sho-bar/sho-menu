@@ -4,6 +4,7 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
+
 const childCategories = computed<Category[]>(() => store.getters['sidebar/childCategories'])
 const selectedChild = computed<Category | null>(() => store.getters['sidebar/selectedChild'])
 
