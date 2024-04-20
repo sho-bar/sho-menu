@@ -3,6 +3,7 @@ export default (callback: (categoryId: number) => void): void => {
     const categoryElements: Element[] = Array.from(elements)
 
     if (categoryElements.length === 0) {
+        console.warn('No category elements found')
         return
     }
 

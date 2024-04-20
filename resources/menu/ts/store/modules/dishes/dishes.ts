@@ -70,7 +70,7 @@ const dishes: Module<DishesState, RootState> = {
                         // there are no more dishes to fetch
                         setTimeout(() => {
                             dispatch('sidebar/observeCategories', null, { root: true })
-                        }, 50)
+                        }, 500)
                     }
                 })
                 .catch(err => console.error(err))
