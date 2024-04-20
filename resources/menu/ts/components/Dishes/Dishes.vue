@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Category, Dish } from '@/types'
+import type { Category } from '@/types'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import DishItem from '@menu/components/Dishes/DishItem.vue'
@@ -10,7 +10,6 @@ import DishesLoading from '@/components/DishesLoading.vue'
 const store = useStore()
 const childCategories = computed<Category[]>(() => store.getters['sidebar/childCategories'])
 const selectedParent = computed<Category | null>(() => store.getters['sidebar/selectedParent'])
-const dishes = computed<Dish[]>(() => store.getters['dishes/dishes'])
 const loading = computed<boolean>(() => store.getters['dishes/loading'])
 </script>
 
