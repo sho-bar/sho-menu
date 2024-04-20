@@ -18,6 +18,7 @@ function selectChildCategory(category: Category): void {
         <div
             v-for="category in childCategories"
             :key="category.id"
+            :data-category-id="category.id"
             class="sho-menu__categories-bar__item"
             :class="{ 'sho-menu__categories-bar__item--is-selected': selectedChild && category.id === selectedChild.id }"
             @click="selectChildCategory(category)"
