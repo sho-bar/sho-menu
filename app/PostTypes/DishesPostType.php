@@ -184,19 +184,25 @@ final class DishesPostType
         wp_nonce_field('save_meta', 'sho_menu_nonce');
 
         $meta_value = Dish::getMeta('designations', $post->ID);
-        $value = Designation::tryFrom($meta_value);
+        $meta_values = explode(',', $meta_value);
+
+        $selected_designations = [];
+
+        foreach ($meta_values as $value) {
+            $selected_designations[] = Designation::tryFrom($value);
+        }
 
         $designations = Designation::all();
         $checkboxes = '';
 
         foreach ($designations as $designation) {
-            $checked = in_array($value, $designations, true) ? 'checked' : '';
+            $checked = in_array($designation, $selected_designations, true) ? 'checked' : '';
 
             $checkboxes .= <<<HTML
                 <label>
                     <input
                         type="checkbox"
-                        name="shobar-modifiers[]"
+                        name="sho-menu-designation[]"
                         value="{$designation->value}"
                         {$checked}
                     />
@@ -252,6 +258,16 @@ final class DishesPostType
             update_post_meta($post_id, '_sho_menu_price', $price);
             update_post_meta($post_id, '_sho_menu_weight', $weight);
             update_post_meta($post_id, '_sho_menu_weight_unit', $weight_unit);
+
+            $designations = $_POST['sho-menu-designation'] ?? [];
+
+            if (!is_array($designations)) {
+                return;
+            }
+
+            $save_value = implode(',', $designations);
+
+            update_post_meta($post_id, '_sho_menu_designations', $save_value);
         });
     }
 
