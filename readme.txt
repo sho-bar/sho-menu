@@ -1,5 +1,5 @@
 === Sho Menu ===
-Stable tag: 0.18
+Stable tag: 1.0
 Requires at least: 6.0
 Tested up to: 6.5.2
 Tags: menu, album, images, files, restaurant, food, food menu
@@ -15,8 +15,9 @@ Sho Menu is a custom WordPress plugin for Shobar Restaurant that adds a pretty m
 
 == Changelog ==
 
-= 0.18 =
+= 1.0 =
 * Added dynamic changing of the dish icon weight to the popup as well. Forgot to do it in the previous version
+* Added dark theme for the menu
 
 = 0.17 =
 * Added dynamic changing of the dish icon weight. For drinks and foods it will be different
