@@ -7,6 +7,7 @@ import EditButton from '@menu/components/Dishes/EditButton.vue'
 import CloseButton from '@menu/components/Popup/CloseButton.vue'
 import AppearTransition from '@/components/Transitions/AppearTransition.vue'
 import Designations from '@menu/components/Dishes/Designations.vue'
+import DishWeight from '@menu/components/DishWeight.vue'
 
 const store = useStore()
 const selectedDish = computed<Dish | null>(() => store.getters['dishes/selectedDish'])
@@ -47,9 +48,7 @@ function closePopup(): void {
                         </span>
 
                         <small class="sho-menu__dish-popup__weight">
-                            <weight-icon width="16" height="16" />
-                            {{ selectedDish.weight }}
-                            {{ selectedDish.weight_unit }}
+                            <dish-weight :dish="selectedDish" />
                         </small>
                     </div>
 
