@@ -10,6 +10,9 @@
     background-color: white
     z-index: 10
 
+    .sho-dark-theme &
+        background-color: $dark-bg
+
     .admin-bar &
         top: 32px
 
@@ -18,6 +21,9 @@
 
     &::-webkit-scrollbar-thumb
         background: #e3e3e3
+
+        .sho-dark-theme &
+            background: #777
 
     &__item
         border-radius: 8px
@@ -28,9 +34,16 @@
         font-size: .9em
         white-space: nowrap
 
+        .sho-dark-theme &
+            border-color: $dark-border-color
+
         &--is-selected
             border-color: $gold-color
             color: $gold-color
+
+            .sho-dark-theme &
+                border-color: $gold-color-lighter
+                color: $gold-color-lighter
 
 @media (max-width: 810px)
     .sho-menu__categories-bar

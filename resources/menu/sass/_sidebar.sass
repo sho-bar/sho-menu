@@ -6,6 +6,9 @@
     overflow-y: auto
     background-color: white
 
+    .sho-dark-theme &
+        background-color: $dark-bg
+
     .admin-bar &
         top: 35px
         max-height: calc(100vh - 35px)
@@ -39,6 +42,10 @@
             line-height: 1.4
             font-size: .9em
 
+            .sho-dark-theme &
+                color: #eee
+                border-bottom-color: $dark-border-color
+
             & > svg
                 display: none
                 pointer-events: none
@@ -47,8 +54,14 @@
             &.is-selected
                 color: $gold-color
 
+                .sho-dark-theme &
+                    color: $gold-color-lighter
+
             &:hover
                 color: $gold-color
+
+                .sho-dark-theme &
+                    color: $gold-color-lighter
 
             &:last-child
                 border-bottom: none
@@ -69,11 +82,20 @@
                     margin-bottom: 2px
                     word-wrap: break-word
 
+                    .sho-dark-theme &
+                        color: #eee
+
                     &.is-selected
                         color: $gold-color
 
+                        .sho-dark-theme &
+                            color: $gold-color-lighter
+
                     &:hover
                         color: $gold-color
+
+                        .sho-dark-theme &
+                            color: $gold-color-lighter
 
                     &:last-child
                         margin-bottom: 0

@@ -1,7 +1,7 @@
 <template>
     <div class="sho-menu__dishes__loading">
         <div
-            v-for="i in 10"
+            v-for="i in 15"
             :key="i"
             class="sho-menu__dishes__loading__item"
         >

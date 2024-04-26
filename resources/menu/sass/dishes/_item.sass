@@ -6,11 +6,17 @@
     border-bottom: 1px solid #eee
     position: relative
 
+    .sho-dark-theme &
+        border-color: $dark-border-color
+
     &:hover .sho-menu__dishes__item__edit
         opacity: .8
 
     &:hover
         background-color: #f9f9f9
+
+        .sho-dark-theme &
+            background-color: $dark-bg-hover
 
     &:last-child
         border-bottom: none
