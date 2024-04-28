@@ -3,7 +3,7 @@
         'name' => 'sho-bar/sho-menu',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '226f64c455d5c36bc8b6e55f18a8b49c912e7d94',
+        'reference' => '7a5665a893afdba1cb7103ca2396efdceb2377d1',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -31,7 +31,7 @@
         'sho-bar/sho-menu' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '226f64c455d5c36bc8b6e55f18a8b49c912e7d94',
+            'reference' => '7a5665a893afdba1cb7103ca2396efdceb2377d1',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
