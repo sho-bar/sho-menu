@@ -46,7 +46,10 @@ function closePopup(): void {
                             {{ selectedDish.price }} грн
                         </span>
 
-                        <small class="sho-menu__dish-popup__weight">
+                        <small
+                            v-if="selectedDish.weight !== '0' && selectedDish.weight !== ''"
+                            class="sho-menu__dish-popup__weight"
+                        >
                             <dish-weight :dish="selectedDish" />
                         </small>
                     </div>

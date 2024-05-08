@@ -34,7 +34,10 @@ function selectDish(): void {
                 class="sho-menu__dishes__item__description"
             ></p>
 
-            <small class="sho-menu__dishes__item__weight">
+            <small
+                v-if="dish.weight !== '0' && dish.weight !== ''"
+                class="sho-menu__dishes__item__weight"
+            >
                 <dish-weight :dish="dish" />
             </small>
 
