@@ -166,7 +166,7 @@ final class DishesPostType
         $value = Dish::getMeta('weight', $post->ID);
         $value = $value === '' ? 0 : $value;
 
-        echo "<input type='number' name='sho-menu-weight' value='{$value}'>";
+        echo "<input type='text' name='sho-menu-weight' value='{$value}'>";
     }
 
     public function weightUnitBoxMarkup(WP_Post $post): void
@@ -318,7 +318,7 @@ final class DishesPostType
             register_rest_field('sho-menu-dishes', 'weight', [
                 'get_callback' => function ($post) {
                     $weight = Dish::getMeta('weight', $post['id']);
-                    return $weight === false ? null : (int) $weight;
+                    return $weight === false ? null : $weight;
                 },
             ]);
 

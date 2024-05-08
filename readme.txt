@@ -16,6 +16,7 @@ Sho Menu is a custom WordPress plugin for Shobar Restaurant that adds a pretty m
 == Changelog ==
 
 = 1.3 =
+* Added so that you can write any text to the weight field for the dish
 
 = 1.2 =
 * Fix issue with styling designations. When there are more than 4 designations, they get smushed together. It fixed now

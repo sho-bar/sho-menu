@@ -2,7 +2,6 @@
 import type { Dish } from '@/types'
 import { useStore } from 'vuex'
 import { computed } from 'vue'
-import WeightIcon from '@/components/Icons/WeightIcon.vue'
 import EditButton from '@menu/components/Dishes/EditButton.vue'
 import CloseButton from '@menu/components/Popup/CloseButton.vue'
 import AppearTransition from '@/components/Transitions/AppearTransition.vue'
