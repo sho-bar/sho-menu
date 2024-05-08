@@ -9,6 +9,7 @@ import getCategoryFromUrl from '@menu/modules/getCategoryFromUrl'
 import removeParamToUrl from '@/modules/removeParamToUrl'
 import screenSizeIs from '@/modules/screenSizeIs'
 import observeCategories from '@menu/modules/observeCategories'
+import jumpToTopDishes from '@menu/modules/jumpToTopDishes'
 import scrollToCategory from '@menu/modules/scrollToCategory'
 
 const MAX_CATEGORIES_PER_PAGE = 100
@@ -150,7 +151,12 @@ const sidebar: Module<SidebarState, RootState> = {
             }
         },
 
-        scrollToChildCategory({ state }, categoryId: number): void {
+        scrollToChildCategory({ }, categoryId?: number): void {
+            if (!categoryId) {
+                jumpToTopDishes()
+                return
+            }
+
             const elem = document.getElementById(`sho-menu-category-${categoryId}`)
 
             if (!elem) {

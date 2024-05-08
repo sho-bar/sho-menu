@@ -28,6 +28,7 @@ const dishes: Module<DishesState, RootState> = {
         loading: true,
         selectedDish: null,
         dishes: [],
+        isFetching: false,
     },
 
     getters: {
@@ -37,6 +38,14 @@ const dishes: Module<DishesState, RootState> = {
 
     mutations: {
         FETCH_DISHES(state, { selectedParent, dispatch, page, loading }: FetchDishesMutationParams): void {
+            if (!state.isFetching) {
+                dispatch('sidebar/scrollToChildCategory', null, {
+                    root: true,
+                })
+            }
+
+            state.isFetching = true
+
             let url = '/wp-json/wp/v2/sho-menu-dishes'
                 + `?per_page=${MAX_DISHES_PER_PAGE}`
                 + `&page=${page}`
@@ -70,10 +79,14 @@ const dishes: Module<DishesState, RootState> = {
                         // there are no more dishes to fetch
                         setTimeout(() => {
                             dispatch('sidebar/observeCategories', null, { root: true })
+                            state.isFetching = false
                         }, 500)
                     }
                 })
-                .catch(err => console.error(err))
+                .catch(err => {
+                    console.error(err)
+                    state.isFetching = false
+                })
                 .finally(() => state.loading = false)
         },
     },
