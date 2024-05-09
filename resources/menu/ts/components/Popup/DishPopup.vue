@@ -42,7 +42,7 @@ function closePopup(): void {
                     <h2 v-html="selectedDish.title.rendered"></h2>
 
                     <div class="sho-menu__dish-popup__meta">
-                        <span class="sho-menu__dish-popup__price">
+                        <span v-if="selectedDish.price" class="sho-menu__dish-popup__price">
                             {{ selectedDish.price }} грн
                         </span>
 
