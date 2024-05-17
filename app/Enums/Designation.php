@@ -12,6 +12,7 @@ enum Designation: string
     case NEW = 'new';
     case ORGANIC = 'organic';
     case UKRAINE = 'ukraine';
+    case POPULAR = 'popular';
 
     /**
      * @return array<int, self>
@@ -25,6 +26,7 @@ enum Designation: string
             self::NEW,
             self::ORGANIC,
             self::UKRAINE,
+            self::POPULAR,
         ];
     }
 
@@ -50,6 +52,7 @@ enum Designation: string
             self::NEW => 'Новинка',
             self::ORGANIC => 'Органічний продукт',
             self::UKRAINE => 'Українського виробництва',
+            self::POPULAR => 'Популярна страва',
         };
     }
 
@@ -62,6 +65,7 @@ enum Designation: string
             self::NEW => SHO_MENU_URL . 'assets/img/designations/new.png',
             self::ORGANIC => SHO_MENU_URL . 'assets/img/designations/organic.png',
             self::UKRAINE => SHO_MENU_URL . 'assets/img/designations/ukraine.png',
+            self::POPULAR => SHO_MENU_URL . 'assets/img/designations/popular.png',
         };
     }
 }
