@@ -18,6 +18,10 @@ onMounted(() => {
 })
 
 function fetchDishes(): void {
+    if (dish.recommended_dishes.length === 0) {
+        return
+    }
+
     loading.value = true
 
     const ids = dish.recommended_dishes.map(d => d.id)
@@ -44,12 +48,18 @@ function handleResponse(resp: Dish[] | NoDishesResponse): void {
 </script>
 
 <template>
-    <ul class="sho-menu-recommended">
-        <RecommendedItem
-            v-for="d in dishes"
-            :key="d.id"
-            :dish="d"
-        >
-        </RecommendedItem>
-    </ul>
+    <div class="sho-menu-recommended">
+        <h2 class="sho-menu-recommended__title">
+            Рекомендуємо до страви
+        </h2>
+
+        <ul>
+            <RecommendedItem
+                v-for="d in dishes"
+                :key="d.id"
+                :dish="d"
+            >
+            </RecommendedItem>
+        </ul>
+    </div>
 </template>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Dish } from '@/types'
 import { useStore } from 'vuex'
-import addParamToUrl from '@/modules/addParamToUrl'
+import DishMeta from '@menu/components/Popup/DishMeta.vue'
 
 type Props = {
     dish: Dish
@@ -24,7 +24,13 @@ function selectDish(): void {
                 :alt="dish.title.rendered"
             />
 
-            <span v-html="dish.title.rendered"></span>
+            <div class="sho-menu-recommended__content">
+                <span v-html="dish.title.rendered"></span>
+
+                <div>
+                    <dish-meta :dish />
+                </div>
+            </div>
         </a>
     </li>
 </template>
