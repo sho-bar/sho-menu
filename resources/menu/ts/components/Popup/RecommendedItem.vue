@@ -10,10 +10,8 @@ type Props = {
 const store = useStore()
 const { dish } = defineProps<Props>()
 
-
 function selectDish(): void {
-    addParamToUrl('dish', dish.id.toString())
-    window.location.reload()
+    store.dispatch('dishes/selectDish', dish)
 }
 </script>
 
@@ -26,7 +24,7 @@ function selectDish(): void {
                 :alt="dish.title.rendered"
             />
 
-            <span>{{ dish.title.rendered }}</span>
+            <span v-html="dish.title.rendered"></span>
         </a>
     </li>
 </template>
