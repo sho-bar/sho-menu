@@ -7,7 +7,11 @@ const SPINNER_HTML = `<div class="sho-recommended-dishes__loading">
 </div>`
 
 export default class DishSearchDropdown {
-    constructor(private input: HTMLInputElement, private dropdown: HTMLElement) {
+    constructor(
+        private input: HTMLInputElement,
+        private dropdown: HTMLElement,
+        private list: HTMLElement,
+    ) {
     }
 
     public init(): void {
@@ -83,6 +87,20 @@ export default class DishSearchDropdown {
     }
 
     private listenForDishClick(dish: SearchResultItem): void {
-        console.log(dish)
+        this.addSelectedDish(dish)
+        this.input.value = ''
+    }
+
+    private addSelectedDish(dish: SearchResultItem): void {
+        const input = document.createElement('input')
+        input.type = 'hidden'
+        input.name = 'sho-recommended-dishes[]'
+        input.value = dish.id.toString()
+
+        const li = document.createElement('li')
+        li.innerHTML = dish.title
+        li.appendChild(input)
+
+        this.list.appendChild(li)
     }
 }

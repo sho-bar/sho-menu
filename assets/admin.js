@@ -17,9 +17,10 @@ __webpack_require__.r(__webpack_exports__);
 var HIDE_CLASS = 'sho-recommended-dishes__dropdown--hide';
 var SPINNER_HTML = "<div class=\"sho-recommended-dishes__loading\">\n    <span class=\"spinner is-active\"></span> \u0417\u0430\u0433\u0440\u0443\u0437\u043A\u0430...\n</div>";
 var DishSearchDropdown = function () {
-  function DishSearchDropdown(input, dropdown) {
+  function DishSearchDropdown(input, dropdown, list) {
     this.input = input;
     this.dropdown = dropdown;
+    this.list = list;
   }
   DishSearchDropdown.prototype.init = function () {
     this.input.addEventListener('input', this.handleInput.bind(this));
@@ -84,7 +85,18 @@ var DishSearchDropdown = function () {
     this.dropdown.classList.remove(HIDE_CLASS);
   };
   DishSearchDropdown.prototype.listenForDishClick = function (dish) {
-    console.log(dish);
+    this.addSelectedDish(dish);
+    this.input.value = '';
+  };
+  DishSearchDropdown.prototype.addSelectedDish = function (dish) {
+    var input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'sho-recommended-dishes[]';
+    input.value = dish.id.toString();
+    var li = document.createElement('li');
+    li.innerHTML = dish.title;
+    li.appendChild(input);
+    this.list.appendChild(li);
   };
   return DishSearchDropdown;
 }();
@@ -6401,16 +6413,21 @@ __webpack_require__.r(__webpack_exports__);
 document.addEventListener('DOMContentLoaded', function () {
   (function ActivateDishSearchingDropdownWhenTyping() {
     var input = document.getElementById('sho-recommended-dishes');
-    var dropdown = document.getElementById('sho-recommended-dishes-dropdown');
     if (!input) {
       console.error("Element with ID 'sho-recommended-dishes' not found");
       return;
     }
+    var dropdown = document.getElementById('sho-recommended-dishes-dropdown');
     if (!dropdown) {
       console.error("Element with ID 'sho-recommended-dishes-dropdown' not found");
       return;
     }
-    new _admin_modules_DishSearchDropdown__WEBPACK_IMPORTED_MODULE_0__["default"](input, dropdown).init();
+    var list = document.getElementById('sho-recommended-dishes-list');
+    if (!list) {
+      console.error("Element with ID 'sho-recommended-dishes-list' not found");
+      return;
+    }
+    new _admin_modules_DishSearchDropdown__WEBPACK_IMPORTED_MODULE_0__["default"](input, dropdown, list).init();
   })();
 });
 })();

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace ShoMenu;
 
 use ShoMenu\Enums\Designation;
+use ShoMenu\PostTypes\DishesPostType;
 
 final class Dish
 {
@@ -37,10 +38,16 @@ final class Dish
     }
 
     /**
-     * @return array[]
+     * @return WP_Post[]
      */
-    public static function getRecommended(): array
+    public static function getRecommended(int $post_id): array
     {
-        return [];
+        $meta_value = self::getMeta('recommended_dishes', $post_id);
+        $ids = explode(',', $meta_value);
+
+        return get_posts([
+            'post_type' => DishesPostType::POST_TYPE,
+            'post__in' => $ids,
+        ]);
     }
 }
