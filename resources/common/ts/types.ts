@@ -29,6 +29,12 @@ export type Dish = {
     designations: Designation[]
 }
 
+export type RecommendedDish = {
+    id: number
+    title: string
+    slug: string
+}
+
 export type SearchResultItem = {
     id: number
     title: string

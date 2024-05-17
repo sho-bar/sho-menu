@@ -6,6 +6,7 @@ namespace ShoMenu;
 
 use ShoMenu\Enums\Designation;
 use ShoMenu\PostTypes\DishesPostType;
+use WP_Post;
 
 final class Dish
 {
@@ -45,9 +46,23 @@ final class Dish
         $meta_value = self::getMeta('recommended_dishes', $post_id);
         $ids = explode(',', $meta_value);
 
-        return get_posts([
+        $posts = get_posts([
             'post_type' => DishesPostType::POST_TYPE,
             'post__in' => $ids,
         ]);
+
+        $result = [];
+
+        foreach ($posts as $post) {
+            $result[] = [
+                'id' => $post->ID,
+                'title' => $post->post_title,
+                'slug' => $post->post_name,
+            ];
+        }
+
+        unset($posts);
+
+        return $result;
     }
 }

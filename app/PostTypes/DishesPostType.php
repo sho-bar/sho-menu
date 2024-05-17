@@ -403,9 +403,7 @@ final class DishesPostType
 
             register_rest_field('sho-menu-dishes', 'recommended_dishes', [
                 'get_callback' => function ($post) {
-                    $recommended = Dish::getRecommended($post['id']);
-
-                    return $recommended;
+                    return Dish::getRecommended($post['id']);
                 },
             ]);
         });
