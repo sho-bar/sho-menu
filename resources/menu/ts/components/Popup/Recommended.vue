@@ -4,6 +4,7 @@ import { onMounted, ref } from 'vue'
 import axios from 'axios'
 import dishFields from '@menu/modules/dishFields'
 import RecommendedItem from '@menu/components/Popup/RecommendedItem.vue'
+import Spinner from '@/components/Spinner.vue'
 
 type Props = {
     dish: Dish
@@ -48,18 +49,20 @@ function handleResponse(resp: Dish[] | NoDishesResponse): void {
 </script>
 
 <template>
-    <div class="sho-menu-recommended">
+    <spinner v-if="loading" />
+
+    <div v-else class="sho-menu-recommended">
         <h2 class="sho-menu-recommended__title">
             Рекомендуємо до страви
         </h2>
 
         <ul>
-            <RecommendedItem
+            <recommended-item
                 v-for="d in dishes"
                 :key="d.id"
                 :dish="d"
             >
-            </RecommendedItem>
+            </recommended-item>
         </ul>
     </div>
 </template>
