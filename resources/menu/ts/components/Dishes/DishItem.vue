@@ -38,10 +38,10 @@ function selectDish(): void {
                 v-if="dish.weight !== '0' && dish.weight !== ''"
                 class="sho-menu__dishes__item__weight"
             >
-                <dish-weight :dish="dish" />
+                <dish-weight :dish />
             </small>
 
-            <designations :dish="dish" />
+            <designations :dish />
         </div>
 
         <div v-if="dish.image_url" class="sho-menu__dishes__item__image">

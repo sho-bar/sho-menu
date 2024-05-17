@@ -39,7 +39,7 @@ final class Dish
     }
 
     /**
-     * @return WP_Post[]
+     * @return object[]
      */
     public static function getRecommended(int $post_id): array
     {
@@ -54,15 +54,33 @@ final class Dish
         $result = [];
 
         foreach ($posts as $post) {
-            $result[] = [
+            $image = get_the_post_thumbnail_url($post->ID);
+
+            $result[] = (object) [
                 'id' => $post->ID,
                 'title' => $post->post_title,
                 'slug' => $post->post_name,
+                'image_url' => $image === false ? null : $image,
             ];
         }
 
         unset($posts);
 
         return $result;
+    }
+
+    /**
+     * @return number[]
+     */
+    public static function getRecommendedIds(int $post_id): array
+    {
+        $meta_value = self::getMeta('recommended_dishes', $post_id);
+        $ids = explode(',', $meta_value);
+
+        return get_posts([
+            'post_type' => DishesPostType::POST_TYPE,
+            'post__in' => $ids,
+            'fields' => 'ids',
+        ]);
     }
 }

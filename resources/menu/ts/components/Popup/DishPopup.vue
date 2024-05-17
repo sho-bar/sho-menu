@@ -7,6 +7,7 @@ import CloseButton from '@menu/components/Popup/CloseButton.vue'
 import AppearTransition from '@/components/Transitions/AppearTransition.vue'
 import Designations from '@menu/components/Dishes/Designations.vue'
 import DishWeight from '@menu/components/DishWeight.vue'
+import Recommended from '@menu/components/Popup/Recommended.vue'
 
 const store = useStore()
 const selectedDish = computed<Dish | null>(() => store.getters['dishes/selectedDish'])
@@ -60,6 +61,7 @@ function closePopup(): void {
                     ></p>
 
                     <designations :dish="selectedDish" />
+                    <recommended :dish="selectedDish" />
                 </div>
             </div>
         </div>

@@ -152,6 +152,32 @@
     display: none;
   }
 }
+.sho-menu-recommended {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sho-menu-recommended li {
+  margin: 0;
+  padding: 8px;
+  border: 1px solid #e6e6e6;
+  border-radius: 6px;
+}
+.sho-menu-recommended li a {
+  text-decoration: none;
+  color: black;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.sho-menu-recommended li a img {
+  height: 80px;
+  border-radius: 8px;
+}
+
 .sho-menu__dish-popup {
   background: white;
   color: black;

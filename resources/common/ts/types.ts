@@ -27,12 +27,14 @@ export type Dish = {
     "sho-menu-dish-category": number[]
     image_url: string | null
     designations: Designation[]
+    recommended_dishes: RecommendedDish[]
 }
 
 export type RecommendedDish = {
     id: number
     title: string
     slug: string
+    image_url: string | null
 }
 
 export type SearchResultItem = {

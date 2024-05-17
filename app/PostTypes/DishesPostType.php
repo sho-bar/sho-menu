@@ -234,11 +234,11 @@ final class DishesPostType
         foreach ($recommended_dishes as $dish) {
             $selected .= <<<HTML
                 <li class="has-been-saved">
-                    {$dish->post_title}
+                    {$dish->title}
                     <input
                         type="hidden"
                         name="sho-recommended-dishes[]"
-                        value="{$dish->ID}"
+                        value="{$dish->id}"
                     />
                 </li>
             HTML;
