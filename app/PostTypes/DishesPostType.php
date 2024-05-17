@@ -140,6 +140,12 @@ final class DishesPostType
                 'callback' => [$this, 'designationsBoxMarkup'],
             ],
             [
+                'id' => 'sho-menu-recommended',
+                'title' => 'Реккомендовані',
+                'slug' => 'recommended',
+                'callback' => [$this, 'recommendedBoxMarkup'],
+            ],
+            [
                 'id' => 'sho-menu-info',
                 'title' => '<span>ℹ️ Інформація</span>',
                 'slug' => 'info',
@@ -214,6 +220,27 @@ final class DishesPostType
         echo <<<HTML
             <div style="display: flex; flex-direction: column; gap: 3px;">
                 {$checkboxes}
+            </div>
+        HTML;
+    }
+
+    public function recommendedBoxMarkup(WP_Post $post): void
+    {
+        wp_nonce_field('save_meta', 'sho_menu_nonce');
+
+        // $value = Dish::getMeta('weight_unit', $post->ID);
+
+        echo <<<HTML
+            <div class="sho-recommended-dishes">
+                <input
+                    type="text"
+                    name="sho-menu-weight-unit"
+                    id="sho-recommended-dishes"
+                    placeholder="Почни набирати назву"
+                />
+
+                <ul id="sho-recommended-dishes-dropdown" class="sho-recommended-dishes__dropdown">
+                </ul>
             </div>
         HTML;
     }
@@ -346,6 +373,14 @@ final class DishesPostType
                     }
 
                     return $result;
+                },
+            ]);
+
+            register_rest_field('sho-menu-dishes', 'recommended_dishes', [
+                'get_callback' => function ($post) {
+                    $recommended = Dish::getRecommended();
+
+                    return $recommended;
                 },
             ]);
         });

@@ -35,4 +35,12 @@ final class Dish
 
         return $result;
     }
+
+    /**
+     * @return array[]
+     */
+    public static function getRecommended(): array
+    {
+        return [];
+    }
 }

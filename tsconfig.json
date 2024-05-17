@@ -1,7 +1,8 @@
 {
     "include": [
         "resources/common/ts/**/*",
-        "resources/menu/ts/**/*"
+        "resources/menu/ts/**/*",
+        "resources/admin/ts/**/*",
     ],
     "compilerOptions": {
         "target": "es5",
@@ -23,6 +24,9 @@
             ],
             "@menu/*": [
                 "./resources/menu/ts/*"
+            ],
+            "@admin/*": [
+                "./resources/admin/ts/*"
             ],
         },
         "esModuleInterop": true,

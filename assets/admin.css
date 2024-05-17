@@ -1,0 +1,54 @@
+.sho-recommended-dishes {
+  position: relative;
+}
+.sho-recommended-dishes input {
+  width: 100%;
+}
+.sho-recommended-dishes__loading {
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sho-recommended-dishes__dropdown {
+  background: white;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
+  margin: 0 2px;
+  border: 1px solid #aeaeae;
+  border-top: 0;
+  position: absolute;
+  top: 30px;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  box-shadow: 0 15px 13px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.2s, transform 0.2s;
+}
+.sho-recommended-dishes__dropdown--hide {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+.sho-recommended-dishes__dropdown li {
+  padding: 6px 13px;
+  margin: 0;
+  transition: background-color 0.1s;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  border-bottom: 1px solid #d2cccc;
+}
+.sho-recommended-dishes__dropdown li:hover {
+  background-color: #f0f0f0;
+}
+.sho-recommended-dishes__dropdown li:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+.sho-recommended-dishes__dropdown li:nth-child(odd):hover {
+  background-color: #f0f0f0;
+}
+.sho-recommended-dishes__dropdown li:last-child {
+  border-radius: 0 0 8px 8px;
+  border: 0;
+}

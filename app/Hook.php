@@ -31,6 +31,26 @@ final class Hook
         return $this;
     }
 
+    public function registerAdminAssets(): self
+    {
+        add_action('admin_enqueue_scripts', function (): void {
+            $css_url = SHO_MENU_URL . 'assets/admin.css';
+            $css_path = SHO_MENU_PATH . 'assets/admin.css';
+            $js_url = SHO_MENU_URL . 'assets/admin.js';
+            $js_path = SHO_MENU_PATH . 'assets/admin.js';
+
+            wp_enqueue_script('sho-menu-admin-js', $js_url, [], Helper::fileVersion($js_path), true);
+            wp_enqueue_style('sho-menu-admin-style', $css_url, [], Helper::fileVersion($css_path));
+
+            wp_localize_script('sho-menu-admin-js', 'shoMenuGlobals', [
+                'ajaxUrl' => admin_url('admin-ajax.php'),
+                'nonce' => wp_create_nonce('sho_menu_nonce'),
+            ]);
+        });
+
+        return $this;
+    }
+
     public function registerShortcodes(): self
     {
         add_shortcode('sho_menu', function (): string {
