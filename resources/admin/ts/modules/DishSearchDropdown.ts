@@ -8,7 +8,6 @@ const SPINNER_HTML = `<div class="sho-recommended-dishes__loading">
 
 export default class DishSearchDropdown {
     constructor(private input: HTMLInputElement, private dropdown: HTMLElement) {
-        this.hideDropdown()
     }
 
     public init(): void {
@@ -20,7 +19,7 @@ export default class DishSearchDropdown {
         const target = e.target as HTMLInputElement
         const inpValue = target.value
 
-        if (inpValue.length < 2) {
+        if (inpValue.length < 1) {
             return
         }
 
@@ -61,6 +60,9 @@ export default class DishSearchDropdown {
         for (const dish of dishes) {
             const li = document.createElement('li')
             li.innerHTML = dish.title
+            li.addEventListener('click', () => {
+                this.listenForDishClick(dish)
+            })
             this.dropdown.appendChild(li)
         }
     }
@@ -70,11 +72,17 @@ export default class DishSearchDropdown {
     }
 
     private hideDropdown(): void {
-        this.loading(false)
-        this.dropdown.classList.add(HIDE_CLASS)
+        setTimeout(() => {
+            this.loading(false)
+            this.dropdown.classList.add(HIDE_CLASS)
+        }, 100)
     }
 
     private showDropdown(): void {
         this.dropdown.classList.remove(HIDE_CLASS)
+    }
+
+    private listenForDishClick(dish: SearchResultItem): void {
+        console.log(dish)
     }
 }

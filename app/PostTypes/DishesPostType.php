@@ -239,8 +239,10 @@ final class DishesPostType
                     placeholder="Почни набирати назву"
                 />
 
-                <ul id="sho-recommended-dishes-dropdown" class="sho-recommended-dishes__dropdown">
-                </ul>
+                <ul
+                    id="sho-recommended-dishes-dropdown"
+                    class="sho-recommended-dishes__dropdown sho-recommended-dishes__dropdown--hide"
+                ></ul>
             </div>
         HTML;
     }

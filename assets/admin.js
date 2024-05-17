@@ -20,7 +20,6 @@ var DishSearchDropdown = function () {
   function DishSearchDropdown(input, dropdown) {
     this.input = input;
     this.dropdown = dropdown;
-    this.hideDropdown();
   }
   DishSearchDropdown.prototype.init = function () {
     this.input.addEventListener('input', this.handleInput.bind(this));
@@ -29,7 +28,7 @@ var DishSearchDropdown = function () {
   DishSearchDropdown.prototype.handleInput = function (e) {
     var target = e.target;
     var inpValue = target.value;
-    if (inpValue.length < 2) {
+    if (inpValue.length < 1) {
       return;
     }
     this.fetchMatchingDishes(inpValue);
@@ -56,22 +55,36 @@ var DishSearchDropdown = function () {
     this.createDishesList(dishes);
   };
   DishSearchDropdown.prototype.createDishesList = function (dishes) {
-    for (var _i = 0, dishes_1 = dishes; _i < dishes_1.length; _i++) {
-      var dish = dishes_1[_i];
+    var _this = this;
+    var _loop_1 = function _loop_1(dish) {
       var li = document.createElement('li');
       li.innerHTML = dish.title;
-      this.dropdown.appendChild(li);
+      li.addEventListener('click', function () {
+        _this.listenForDishClick(dish);
+      });
+      this_1.dropdown.appendChild(li);
+    };
+    var this_1 = this;
+    for (var _i = 0, dishes_1 = dishes; _i < dishes_1.length; _i++) {
+      var dish = dishes_1[_i];
+      _loop_1(dish);
     }
   };
   DishSearchDropdown.prototype.loading = function (show) {
     this.dropdown.innerHTML = show ? SPINNER_HTML : '';
   };
   DishSearchDropdown.prototype.hideDropdown = function () {
-    this.loading(false);
-    this.dropdown.classList.add(HIDE_CLASS);
+    var _this = this;
+    setTimeout(function () {
+      _this.loading(false);
+      _this.dropdown.classList.add(HIDE_CLASS);
+    }, 100);
   };
   DishSearchDropdown.prototype.showDropdown = function () {
     this.dropdown.classList.remove(HIDE_CLASS);
+  };
+  DishSearchDropdown.prototype.listenForDishClick = function (dish) {
+    console.log(dish);
   };
   return DishSearchDropdown;
 }();
