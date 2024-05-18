@@ -52,7 +52,7 @@ enum Designation: string
             self::NEW => 'Новинка',
             self::ORGANIC => 'Органічний продукт',
             self::UKRAINE => 'Українського виробництва',
-            self::POPULAR => 'Популярна страва',
+            self::POPULAR => 'Популярне',
         };
     }
 
