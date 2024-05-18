@@ -145,13 +145,6 @@ final class DishesPostType
                 'slug' => 'recommended',
                 'callback' => [$this, 'recommendedBoxMarkup'],
             ],
-            [
-                'id' => 'sho-menu-info',
-                'title' => '<span>ℹ️ Інформація</span>',
-                'slug' => 'info',
-                'priority' => 'high',
-                'callback' => [$this, 'infoBoxMarkup'],
-            ],
         ];
     }
 
@@ -263,18 +256,6 @@ final class DishesPostType
                     class="sho-recommended-dishes__list"
                 >{$selected}</ul>
             </div>
-        HTML;
-    }
-
-    public function infoBoxMarkup(WP_Post $post): void
-    {
-        echo <<<HTML
-        <b>Категорії:</b><br>
-        <span>
-            Коли ви вибираєте категорію, то автоматично вибирається батьківська категорія.
-                Це означає, що у кожної позиції має бути мінімум дві категорії: основна і
-                батьківська. Наприклад: "Супи" і "Перші страви".
-        </span>
         HTML;
     }
 
