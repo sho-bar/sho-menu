@@ -228,11 +228,14 @@ final class DishesPostType
             $selected .= <<<HTML
                 <li class="has-been-saved">
                     {$dish->title}
+
                     <input
                         type="hidden"
                         name="sho-recommended-dishes[]"
                         value="{$dish->id}"
                     />
+
+                    <button type="button" data-dish-id="{$dish->id}">x</button>
                 </li>
             HTML;
         }

@@ -12,6 +12,7 @@ export default class DishSearchDropdown {
         private dropdown: HTMLElement,
         private list: HTMLElement,
     ) {
+        this.addDeleteListenerForExistingDishes()
     }
 
     public init(): void {
@@ -96,10 +97,37 @@ export default class DishSearchDropdown {
         input.name = 'sho-recommended-dishes[]'
         input.value = dish.id.toString()
 
+        const button = document.createElement('button')
+        button.type = 'button'
+        button.innerHTML = 'x'
+        button.dataset.dishId = dish.id.toString()
+        button.addEventListener('click', this.deleteDish)
+
         const li = document.createElement('li')
         li.innerHTML = dish.title
         li.appendChild(input)
+        li.appendChild(button)
 
         this.list.appendChild(li)
+    }
+
+    private deleteDish(e: Event): void {
+        const target = e.target as HTMLButtonElement
+        const dishId = target.dataset.dishId
+
+        if (!dishId) {
+            console.error('Cannot delete the dish without ID')
+            return
+        }
+
+        const li = target.parentElement as HTMLLIElement
+        li.remove()
+    }
+
+    private addDeleteListenerForExistingDishes(): void {
+        const selector = '#sho-recommended-dishes-list .has-been-saved button'
+        const buttons = this.list.querySelectorAll<HTMLButtonElement>(selector)
+
+        buttons.forEach(btn => btn.addEventListener('click', this.deleteDish))
     }
 }

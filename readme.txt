@@ -16,7 +16,8 @@ Sho Menu is a custom WordPress plugin for Shobar Restaurant that adds a pretty m
 == Changelog ==
 
 = 1.10 =
-* Rename some titles and labels
+* Renamed some titles and labels
+* Added an ability to remove recommended dishes from the dish card
 
 = 1.9 =
 * Remove "information" block from the admin panel
