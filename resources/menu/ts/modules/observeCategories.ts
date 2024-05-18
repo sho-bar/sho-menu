@@ -1,5 +1,5 @@
 export default (callback: (categoryId: number) => void): void => {
-    const elements = document.querySelectorAll('.sho-menu__dishes__category')
+    const elements = document.querySelectorAll('.sho-menu__dishes__section')
     const categoryElements: Element[] = Array.from(elements)
 
     if (categoryElements.length === 0) {
@@ -13,7 +13,9 @@ export default (callback: (categoryId: number) => void): void => {
                 return
             }
 
-            const categoryId = entry.target.getAttribute('data-category-id')
+            const target = entry.target as HTMLElement
+            const child = target.querySelector<HTMLElement>('.sho-menu__dishes__category')!
+            const categoryId = child.getAttribute('data-category-id')
 
             if (!categoryId) {
                 return

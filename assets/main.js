@@ -20272,7 +20272,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function (callback) {
-  var elements = document.querySelectorAll('.sho-menu__dishes__category');
+  var elements = document.querySelectorAll('.sho-menu__dishes__section');
   var categoryElements = Array.from(elements);
   if (categoryElements.length === 0) {
     console.warn('No category elements found');
@@ -20283,7 +20283,9 @@ __webpack_require__.r(__webpack_exports__);
       if (!entry.isIntersecting) {
         return;
       }
-      var categoryId = entry.target.getAttribute('data-category-id');
+      var target = entry.target;
+      var child = target.querySelector('.sho-menu__dishes__category');
+      var categoryId = child.getAttribute('data-category-id');
       if (!categoryId) {
         return;
       }
