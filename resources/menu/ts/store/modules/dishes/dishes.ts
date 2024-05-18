@@ -6,20 +6,9 @@ import { Module } from 'vuex'
 import addParamToUrl from '@/modules/addParamToUrl'
 import removeParamToUrl from '@/modules/removeParamToUrl'
 import getDishFromUrl from '@menu/modules/getDishFromUrl'
+import dishFields from '@menu/modules/dishFields'
 
 const MAX_DISHES_PER_PAGE = 100
-const SELECT_FIELDS = [
-    'id',
-    'slug',
-    'title.rendered',
-    'content.rendered',
-    'price',
-    'weight',
-    'weight_unit',
-    'sho-menu-dish-category',
-    'designations',
-    'image_url',
-]
 
 const dishes: Module<DishesState, RootState> = {
     namespaced: true,
@@ -50,7 +39,7 @@ const dishes: Module<DishesState, RootState> = {
                 + `?per_page=${MAX_DISHES_PER_PAGE}`
                 + `&page=${page}`
                 + `&sho-menu-dish-category=${selectedParent.id}`
-                + `&_fields=${SELECT_FIELDS.join(',')}`
+                + `&_fields=${dishFields.join(',')}`
 
             state.loading = loading
 

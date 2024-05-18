@@ -1,4 +1,6 @@
 {
     "/assets/main.js": "/assets/main.js",
+    "/assets/admin.js": "/assets/admin.js",
+    "/assets/admin.css": "/assets/admin.css",
     "/assets/main.css": "/assets/main.css"
 }

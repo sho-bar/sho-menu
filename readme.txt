@@ -1,5 +1,5 @@
 === Sho Menu ===
-Stable tag: 1.5
+Stable tag: 1.6
 Requires at least: 6.0
 Tested up to: 6.5.2
 Tags: menu, album, images, files, restaurant, food, food menu
@@ -14,6 +14,11 @@ Sho Menu is a custom WordPress plugin for Shobar Restaurant that adds a pretty m
 Sho Menu is a custom WordPress plugin for Shobar Restaurant that adds a pretty menu to your website.
 
 == Changelog ==
+
+= 1.6 =
+* Added a new designation "Популярне" with a star icon
+* Added recommended dishes to each dish card when you open it
+* Fixed issue with wrong category change when scrolling from the bottom of the menu
 
 = 1.5 =
 * If price is 0, hide it in the dish card

@@ -6,7 +6,8 @@ import EditButton from '@menu/components/Dishes/EditButton.vue'
 import CloseButton from '@menu/components/Popup/CloseButton.vue'
 import AppearTransition from '@/components/Transitions/AppearTransition.vue'
 import Designations from '@menu/components/Dishes/Designations.vue'
-import DishWeight from '@menu/components/DishWeight.vue'
+import Recommended from '@menu/components/Popup/Recommended.vue'
+import DishMeta from '@menu/components/Popup/DishMeta.vue'
 
 const store = useStore()
 const selectedDish = computed<Dish | null>(() => store.getters['dishes/selectedDish'])
@@ -41,18 +42,7 @@ function closePopup(): void {
 
                     <h2 v-html="selectedDish.title.rendered"></h2>
 
-                    <div class="sho-menu__dish-popup__meta">
-                        <span v-if="selectedDish.price" class="sho-menu__dish-popup__price">
-                            {{ selectedDish.price }} грн
-                        </span>
-
-                        <small
-                            v-if="selectedDish.weight !== '0' && selectedDish.weight !== ''"
-                            class="sho-menu__dish-popup__weight"
-                        >
-                            <dish-weight :dish="selectedDish" />
-                        </small>
-                    </div>
+                    <dish-meta :dish="selectedDish" />
 
                     <p
                         v-html="selectedDish.content.rendered"
@@ -60,6 +50,11 @@ function closePopup(): void {
                     ></p>
 
                     <designations :dish="selectedDish" />
+
+                    <recommended
+                        v-if="selectedDish.recommended_dishes.length > 0"
+                        :dish="selectedDish"
+                    />
                 </div>
             </div>
         </div>

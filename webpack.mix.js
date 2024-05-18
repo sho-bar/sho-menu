@@ -2,7 +2,9 @@ let mix = require('laravel-mix')
 const webpack = require('webpack')
 
 mix.ts('resources/menu/ts/main.ts', 'assets/main.js').vue()
+mix.ts('resources/admin/ts/main.ts', 'assets/admin.js').vue()
 mix.sass('resources/menu/sass/main.sass', 'assets/main.css')
+mix.sass('resources/admin/sass/main.sass', 'assets/admin.css')
 
 mix.options({
     processCssUrls: false,
@@ -19,4 +21,5 @@ mix.webpackConfig({
 mix.alias({
     '@': '/resources/common/ts',
     '@menu': '/resources/menu/ts',
+    '@admin': '/resources/admin/ts',
 })

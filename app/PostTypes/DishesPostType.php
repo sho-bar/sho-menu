@@ -140,6 +140,12 @@ final class DishesPostType
                 'callback' => [$this, 'designationsBoxMarkup'],
             ],
             [
+                'id' => 'sho-menu-recommended',
+                'title' => 'Реккомендовані блюда',
+                'slug' => 'recommended',
+                'callback' => [$this, 'recommendedBoxMarkup'],
+            ],
+            [
                 'id' => 'sho-menu-info',
                 'title' => '<span>ℹ️ Інформація</span>',
                 'slug' => 'info',
@@ -218,6 +224,48 @@ final class DishesPostType
         HTML;
     }
 
+    public function recommendedBoxMarkup(WP_Post $post): void
+    {
+        wp_nonce_field('save_meta', 'sho_menu_nonce');
+
+        $recommended_dishes = Dish::getRecommended($post->ID);
+        $selected = '';
+
+        foreach ($recommended_dishes as $dish) {
+            $selected .= <<<HTML
+                <li class="has-been-saved">
+                    {$dish->title}
+                    <input
+                        type="hidden"
+                        name="sho-recommended-dishes[]"
+                        value="{$dish->id}"
+                    />
+                </li>
+            HTML;
+        }
+
+        echo <<<HTML
+            <div class="sho-recommended-dishes">
+                <input
+                    type="text"
+                    name="sho-menu-weight-unit"
+                    id="sho-recommended-dishes"
+                    placeholder="Почни набирати назву"
+                />
+
+                <ul
+                    id="sho-recommended-dishes-dropdown"
+                    class="sho-recommended-dishes__dropdown sho-recommended-dishes__dropdown--hide"
+                ></ul>
+
+                <ul
+                    id="sho-recommended-dishes-list"
+                    class="sho-recommended-dishes__list"
+                >{$selected}</ul>
+            </div>
+        HTML;
+    }
+
     public function infoBoxMarkup(WP_Post $post): void
     {
         echo <<<HTML
@@ -253,13 +301,17 @@ final class DishesPostType
 
             $designations = $_POST['sho-menu-designation'] ?? [];
 
-            if (!is_array($designations)) {
-                return;
+            if (is_array($designations)) {
+                $save_value = implode(',', $designations);
+                update_post_meta($post_id, '_sho_menu_designations', $save_value);
             }
 
-            $save_value = implode(',', $designations);
+            $recommended_dishes = $_POST['sho-recommended-dishes'] ?? [];
 
-            update_post_meta($post_id, '_sho_menu_designations', $save_value);
+            if (is_array($recommended_dishes)) {
+                $save_value = implode(',', $recommended_dishes);
+                update_post_meta($post_id, '_sho_menu_recommended_dishes', $save_value);
+            }
         });
     }
 
@@ -346,6 +398,12 @@ final class DishesPostType
                     }
 
                     return $result;
+                },
+            ]);
+
+            register_rest_field('sho-menu-dishes', 'recommended_dishes', [
+                'get_callback' => function ($post) {
+                    return Dish::getRecommended($post['id']);
                 },
             ]);
         });
