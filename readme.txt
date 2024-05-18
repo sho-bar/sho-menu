@@ -17,6 +17,7 @@ Sho Menu is a custom WordPress plugin for Shobar Restaurant that adds a pretty m
 
 = 1.11 =
 * Changed "Рекомендуємо" to "Рекомендуємо з" in the dish card
+* Changed using small images in the menu instead of the full-size images
 
 = 1.10 =
 * Renamed some titles and labels
