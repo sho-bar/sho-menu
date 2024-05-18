@@ -155,6 +155,11 @@
 .sho-menu-recommended__title {
   margin-top: 14px !important;
 }
+.sho-menu-recommended__content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
 .sho-menu-recommended ul {
   list-style: none;
   padding: 0;
@@ -162,11 +167,6 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
-.sho-menu-recommended ul__content {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
 }
 .sho-menu-recommended ul li {
   margin: 0;
