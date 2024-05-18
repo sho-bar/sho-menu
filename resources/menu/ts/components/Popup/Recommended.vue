@@ -52,7 +52,7 @@ function handleResponse(resp: Dish[] | NoDishesResponse): void {
     <spinner v-if="loading" />
 
     <div v-else class="sho-menu-recommended">
-        <h2 class="sho-menu-recommended__title">Рекомендуємо</h2>
+        <h2 class="sho-menu-recommended__title">Рекомендуємо з</h2>
 
         <ul>
             <recommended-item
