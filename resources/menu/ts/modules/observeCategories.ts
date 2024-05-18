@@ -1,8 +1,8 @@
 export default (callback: (categoryId: number) => void): void => {
-    const elements = document.querySelectorAll('.sho-menu__dishes__section')
-    const categoryElements: Element[] = Array.from(elements)
+    const dishes = document.querySelectorAll('.sho-menu__dishes__item')
+    const dishesElements: Element[] = Array.from(dishes)
 
-    if (categoryElements.length === 0) {
+    if (dishesElements.length === 0) {
         console.warn('No category elements found')
         return
     }
@@ -13,11 +13,10 @@ export default (callback: (categoryId: number) => void): void => {
                 return
             }
 
-            const target = entry.target as HTMLElement
-            const child = target.querySelector<HTMLElement>('.sho-menu__dishes__category')!
-            const categoryId = child.getAttribute('data-category-id')
+            const categoryId = entry.target.getAttribute('data-category-id')
 
             if (!categoryId) {
+                console.warn("Category element doesn't have data-category-id attribute")
                 return
             }
 
@@ -25,7 +24,7 @@ export default (callback: (categoryId: number) => void): void => {
         })
     })
 
-    for (const element of categoryElements) {
-        observer.observe(element)
+    for (const dish of dishesElements) {
+        observer.observe(dish)
     }
 }

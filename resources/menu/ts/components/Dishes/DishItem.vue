@@ -7,9 +7,10 @@ import DishWeight from '@menu/components/DishWeight.vue'
 
 type Props = {
     dish: Dish
+    categoryId: number
 }
 
-const { dish } = defineProps<Props>()
+const { dish, categoryId } = defineProps<Props>()
 
 const store = useStore()
 
@@ -19,7 +20,11 @@ function selectDish(): void {
 </script>
 
 <template>
-    <div @click="selectDish" class="sho-menu__dishes__item">
+    <div
+        @click="selectDish"
+        class="sho-menu__dishes__item"
+        :data-category-id="categoryId"
+    >
         <edit-button :id="dish.id" />
 
         <div class="sho-menu__dishes__item__content">

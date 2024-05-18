@@ -40,6 +40,7 @@ const loading = computed<boolean>(() => store.getters['dishes/loading'])
                             v-for="dish in category.dishes"
                             :key="dish.id"
                             :dish="dish"
+                            :category-id="category.id"
                         />
                     </div>
 
