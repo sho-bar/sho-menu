@@ -7,7 +7,7 @@ Plugin Name: Sho Menu
 Author: Serhii Cho
 Author URI: https://serhii.io
 Description: Custom plugin for shobar.com.ua that adds a nice menu page. Use the [sho_menu] shortcode to display the menu
-Version: 1.7
+Version: 1.8
 License: no
 Text Domain: sho-menu
 Tags: custom-menu

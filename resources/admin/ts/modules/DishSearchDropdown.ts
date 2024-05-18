@@ -56,7 +56,6 @@ export default class DishSearchDropdown {
         }
 
         this.showDropdown()
-
         this.createDishesList(dishes)
     }
 
@@ -79,7 +78,7 @@ export default class DishSearchDropdown {
         setTimeout(() => {
             this.loading(false)
             this.dropdown.classList.add(HIDE_CLASS)
-        }, 100)
+        }, 700)
     }
 
     private showDropdown(): void {
