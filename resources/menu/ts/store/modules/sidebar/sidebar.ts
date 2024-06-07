@@ -99,6 +99,7 @@ const sidebar: Module<SidebarState, RootState> = {
 
                 state.selectedChild = category
                 addParamToUrl('child', category.slug)
+
                 scrollToCategory(id)
             })
         },
@@ -163,7 +164,7 @@ const sidebar: Module<SidebarState, RootState> = {
                 return
             }
 
-            elem.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            elem.scrollIntoView({ behavior: 'instant', block: 'start' })
         },
     },
 }

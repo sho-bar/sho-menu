@@ -1,5 +1,6 @@
 export default (id: number): void => {
-    const el = document.querySelector<HTMLElement>(`[data-category-id="${id}"]`)
+    const selector = `.sho-menu__categories-bar__item[data-category-id="${id}"]`
+    const el = document.querySelector<HTMLElement>(selector)
 
     if (!el) {
         console.warn(`Category with id ${id} not found in DOM`)
