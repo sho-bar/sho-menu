@@ -1,6 +1,6 @@
 .sho-menu__categories-bar
     display: none
-    gap: 5px
+    gap: 8px
     align-items: center
     margin-bottom: 6px
     padding: 6px 0
@@ -28,7 +28,7 @@
     &__item
         border-radius: 8px
         padding: 6px 15px
-        border: 1px solid #dcdcdc
+        outline: 1px solid #dcdcdc
         text-transform: uppercase
         font-family: "Montserrat-Bold", sans-serif
         font-size: .9em
@@ -38,7 +38,8 @@
             border-color: $dark-border-color
 
         &--is-selected
-            border-color: $gold-color
+            outline-color: $gold-color
+            outline-width: 2px
             color: $gold-color
 
             .sho-dark-theme &
