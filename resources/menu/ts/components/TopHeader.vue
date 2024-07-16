@@ -4,7 +4,7 @@ import ShowSidebarBtn from '@menu/components/Sidebar/ShowSidebarBtn.vue'
 
 <template>
     <div class="sho-menu__header">
-        <img :src="shoMenuGlobals.mainUrl + 'assets/img/menu-header.webp'" />
+        <!-- <img :src="shoMenuGlobals.mainUrl + 'assets/img/menu-header.webp'" /> -->
         <show-sidebar-btn />
     </div>
 </template>
