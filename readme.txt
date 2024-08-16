@@ -15,6 +15,9 @@ Sho Menu is a custom WordPress plugin for Shobar Restaurant that adds a pretty m
 
 == Changelog ==
 
+= 1.18 =
+* Fixed bug with menu categories on mobile. When we have lots of categories, the list is not scrollable
+
 = 1.17 =
 * Fixed styles for the top header on the menu
 
