@@ -148,7 +148,11 @@ const sidebar: Module<SidebarState, RootState> = {
                     continue
                 }
 
-                category.dishes = matchedDishes
+                if (!category.dishes) {
+                    category.dishes = []
+                }
+
+                category.dishes.push(...matchedDishes)
             }
         },
 
