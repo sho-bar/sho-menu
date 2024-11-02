@@ -15,6 +15,9 @@ Sho Menu is a custom WordPress plugin for Shobar Restaurant that adds a pretty m
 
 == Changelog ==
 
+= 1.25 =
+* Change recommended dishes images to be smaller resolution
+
 = 1.24 =
 * Change images resolutions to be bigger in the menu popup windows
 

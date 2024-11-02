@@ -54,7 +54,7 @@ final class Dish
         $result = [];
 
         foreach ($posts as $post) {
-            $image = get_the_post_thumbnail_url($post->ID, 'large');
+            $image = get_the_post_thumbnail_url($post->ID, 'thumbnail');
 
             $result[] = (object) [
                 'id' => $post->ID,
