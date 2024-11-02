@@ -26,6 +26,7 @@ export type Dish = {
     weight_unit: string | null
     "sho-menu-dish-category": number[]
     image_url: string | null
+    image_url_lg: string | null
     designations: Designation[]
     recommended_dishes: RecommendedDish[]
 }

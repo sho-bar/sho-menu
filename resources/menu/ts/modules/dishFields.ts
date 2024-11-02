@@ -9,5 +9,6 @@ export default [
     'sho-menu-dish-category',
     'designations',
     'image_url',
+    'image_url_lg',
     'recommended_dishes',
 ]

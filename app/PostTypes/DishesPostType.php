@@ -372,6 +372,13 @@ final class DishesPostType
                 },
             ]);
 
+            register_rest_field('sho-menu-dishes', 'image_url_lg', [
+                'get_callback' => function ($post) {
+                    $image = get_the_post_thumbnail_url($post['id'], 'large');
+                    return $image === false ? null : $image;
+                },
+            ]);
+
             register_rest_field('sho-menu-dishes', 'designations', [
                 'get_callback' => function ($post) {
                     $selected = Dish::getDesignations($post['id']);
