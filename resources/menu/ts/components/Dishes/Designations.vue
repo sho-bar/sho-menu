@@ -22,7 +22,9 @@ const { dish } = defineProps<Props>()
                 height="25"
             />
 
-            <span>{{ des.description }}</span>
+            <span :class="{ 'sho-menu__designations__item--red': des.slug === 'ended' }">
+                {{ des.description }}
+            </span>
         </div>
     </div>
 </template>

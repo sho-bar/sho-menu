@@ -6,6 +6,7 @@ namespace ShoMenu\Enums;
 
 enum Designation: string
 {
+    case ENDED = 'ended';
     case GARLIC = 'garlic';
     case CHILI = 'chili';
     case FARMER = 'farmer';
@@ -20,6 +21,7 @@ enum Designation: string
     public static function all(): array
     {
         return [
+            self::ENDED,
             self::GARLIC,
             self::CHILI,
             self::FARMER,
@@ -46,6 +48,7 @@ enum Designation: string
     public function description(): string
     {
         return match ($this) {
+            self::ENDED => 'Закінчилось',
             self::GARLIC => 'У складі страви є часник',
             self::CHILI => 'Гостра страва',
             self::FARMER => 'Містить фермерський продукт',
@@ -59,6 +62,7 @@ enum Designation: string
     public function icon(): string
     {
         return match ($this) {
+            self::ENDED => SHO_MENU_URL . 'assets/img/designations/ended.png',
             self::GARLIC => SHO_MENU_URL . 'assets/img/designations/garlic.png',
             self::CHILI => SHO_MENU_URL . 'assets/img/designations/chili.png',
             self::FARMER => SHO_MENU_URL . 'assets/img/designations/farmer.png',
