@@ -48,7 +48,7 @@ export type SearchResultItem = {
 export type Designation = {
     slug: string
     description: string
-    icon: string
+    icon: string | null
 }
 
 export type NoDishesResponse = {

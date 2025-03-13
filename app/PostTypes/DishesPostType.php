@@ -189,6 +189,19 @@ final class DishesPostType
         foreach ($designations as $designation) {
             $checked = in_array($designation, $selected, true) ? 'checked' : '';
 
+            $icon = '';
+
+            if ($designation->icon()) {
+                $icon = <<<HTML
+                    <img
+                        src="{$designation->icon()}"
+                        width="11"
+                        height="11"
+                        style="margin-right: 1px;"
+                    />
+                HTML;
+            }
+
             $checkboxes .= <<<HTML
                 <label>
                     <input
@@ -198,12 +211,7 @@ final class DishesPostType
                         {$checked}
                     />
 
-                    <img
-                        src="{$designation->icon()}"
-                        width="11"
-                        height="11"
-                        style="margin-right: 1px;"
-                    />
+                    {$icon}
 
                     {$designation->description()}
                 </label>

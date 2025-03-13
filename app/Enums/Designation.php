@@ -34,7 +34,7 @@ enum Designation: string
 
     /**
      * @param array<int, self> $designations
-     * @return array{slug: string, description: string, icon: string}
+     * @return array{slug: string, description: string, icon: string|null}
      */
     public function toArray(): array
     {
@@ -59,10 +59,10 @@ enum Designation: string
         };
     }
 
-    public function icon(): string
+    public function icon(): string|null
     {
         return match ($this) {
-            self::ENDED => SHO_MENU_URL . 'assets/img/designations/ended.png',
+            self::ENDED => null,
             self::GARLIC => SHO_MENU_URL . 'assets/img/designations/garlic.png',
             self::CHILI => SHO_MENU_URL . 'assets/img/designations/chili.png',
             self::FARMER => SHO_MENU_URL . 'assets/img/designations/farmer.png',

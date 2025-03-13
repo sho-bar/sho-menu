@@ -14,17 +14,17 @@ const { dish } = defineProps<Props>()
             v-for="des in dish.designations"
             :key="des.slug"
             class="sho-menu__designations__item"
+            :class="{ 'sho-menu__designations__item--warning': des.slug === 'ended' }"
         >
             <img
+                v-if="des.icon"
                 :src="des.icon"
                 :alt="des.description"
                 width="25"
                 height="25"
             />
 
-            <span :class="{ 'sho-menu__designations__item--red': des.slug === 'ended' }">
-                {{ des.description }}
-            </span>
+            <span>{{ des.description }}</span>
         </div>
     </div>
 </template>
