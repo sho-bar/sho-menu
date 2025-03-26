@@ -6,20 +6,20 @@ type Props = {
     dish: Dish
 }
 
-const props = defineProps<Props>()
+defineProps<Props>()
 </script>
 
 <template>
     <div class="sho-menu__dish-popup__meta">
-        <span v-if="props.dish.price" class="sho-menu__dish-popup__price">
-            {{ props.dish.price }} грн
+        <span v-if="dish.price && dish.price !== '0'" class="sho-menu__dish-popup__price">
+            {{ dish.price }} грн
         </span>
 
         <small
-            v-if="props.dish.weight !== '0' && props.dish.weight !== ''"
+            v-if="dish.weight !== '0' && dish.weight !== ''"
             class="sho-menu__dish-popup__weight"
         >
-            <dish-weight :dish="props.dish" />
+            <dish-weight :dish="dish" />
         </small>
     </div>
 </template>

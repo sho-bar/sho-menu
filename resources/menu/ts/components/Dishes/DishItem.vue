@@ -30,7 +30,7 @@ function selectDish(): void {
         <div class="sho-menu__dishes__item__content">
             <h3 v-html="dish.title.rendered"></h3>
 
-            <span v-if="dish.price" class="sho-menu__dishes__item__price">
+            <span v-if="dish.price && dish.price !== '0'" class="sho-menu__dishes__item__price">
                 {{ dish.price }} грн
             </span>
 
