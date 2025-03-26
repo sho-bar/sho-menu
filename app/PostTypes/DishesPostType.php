@@ -239,7 +239,7 @@ final class DishesPostType
 
                     <input
                         type="hidden"
-                        name="sho-recommended-dishes[]"
+                        name="sho-menu-recommended-dishes[]"
                         value="{$dish->id}"
                     />
 
@@ -252,7 +252,7 @@ final class DishesPostType
             <div class="sho-recommended-dishes">
                 <input
                     type="text"
-                    name="sho-menu-weight-unit"
+                    name="sho-menu-recommended-dishes"
                     id="sho-recommended-dishes"
                     placeholder="Почни набирати назву"
                 />
@@ -298,7 +298,7 @@ final class DishesPostType
                 update_post_meta($post_id, '_sho_menu_designations', $save_value);
             }
 
-            $recommended_dishes = $_POST['sho-recommended-dishes'] ?? [];
+            $recommended_dishes = $_POST['sho-menu-recommended-dishes'] ?? [];
 
             if (is_array($recommended_dishes)) {
                 $save_value = implode(',', $recommended_dishes);
