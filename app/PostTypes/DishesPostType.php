@@ -153,9 +153,9 @@ final class DishesPostType
         wp_nonce_field('save_meta', 'sho_menu_nonce');
 
         $value = Dish::getMeta('price', $post->ID);
-        $value = $value === '' ? 0 : $value;
+        $value = $value === '' ? '0' : $value;
 
-        echo "<input type='number' name='sho-menu-price' value='{$value}'>";
+        echo "<input type='text' name='sho-menu-price' value='{$value}'>";
     }
 
     public function weightBoxMarkup(WP_Post $post): void
@@ -355,7 +355,7 @@ final class DishesPostType
             register_rest_field('sho-menu-dishes', 'price', [
                 'get_callback' => function ($post) {
                     $price = Dish::getMeta('price', $post['id']);
-                    return $price === false ? null : (int) $price;
+                    return $price === false ? null : $price;
                 },
             ]);
 

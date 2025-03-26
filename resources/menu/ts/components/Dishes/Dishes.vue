@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { Category } from '@/types'
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
 import { useStore } from 'vuex'
 import DishItem from '@menu/components/Dishes/DishItem.vue'
 import CategoryItem from '@menu/components/Dishes/CategoryItem.vue'
@@ -39,8 +39,8 @@ const loading = computed<boolean>(() => store.getters['dishes/loading'])
                         <dish-item
                             v-for="dish in category.dishes"
                             :key="dish.id"
-                            :dish="dish"
                             :category-id="category.id"
+                            :dish
                         />
                     </div>
 

@@ -21,7 +21,7 @@ export type Dish = {
     slug: string
     title: { rendered: string }
     content: { rendered: string; protected: boolean }
-    price: number | null
+    price: string | null
     weight: string | null
     weight_unit: string | null
     "sho-menu-dish-category": number[]
