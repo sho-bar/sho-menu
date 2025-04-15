@@ -11,6 +11,7 @@ import screenSizeIs from '@/modules/screenSizeIs'
 import observeCategories from '@menu/modules/observeCategories'
 import jumpToTopDishes from '@menu/modules/jumpToTopDishes'
 import scrollToCategory from '@menu/modules/scrollToCategory'
+import filterCategories from '@menu/modules/filterCategories'
 
 const MAX_CATEGORIES_PER_PAGE = 100
 
@@ -49,8 +50,9 @@ const sidebar: Module<SidebarState, RootState> = {
                         return
                     }
 
-                    state.allCategories = resp.data
-                    state.parentCategories = resp.data.filter(c => c.parent === 0)
+                    const filteredCategories = filterCategories(resp.data)
+                    state.allCategories = filteredCategories
+                    state.parentCategories = filteredCategories.filter(c => c.parent === 0)
 
                     dispatch('selectNeedingParentCategory')
                     dispatch('selectNeedingChildCategory')
