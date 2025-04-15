@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'sho-bar/sho-menu',
-        'pretty_version' => 'dev-main',
-        'version' => 'dev-main',
-        'reference' => '128b0c2eb9e673af4e1e8a475353d324b35c6ab1',
+        'pretty_version' => '1.4.x-dev',
+        'version' => '1.4.9999999.9999999-dev',
+        'reference' => '9967767621aed7ea63fbd1e4e89be5f5114af99f',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -29,9 +29,9 @@
             'dev_requirement' => false,
         ),
         'sho-bar/sho-menu' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => '128b0c2eb9e673af4e1e8a475353d324b35c6ab1',
+            'pretty_version' => '1.4.x-dev',
+            'version' => '1.4.9999999.9999999-dev',
+            'reference' => '9967767621aed7ea63fbd1e4e89be5f5114af99f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
