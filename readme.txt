@@ -1,5 +1,5 @@
 === Sho Menu ===
-Stable tag: 1.31
+Stable tag: 1.4
 Requires at least: 6.0
 Tested up to: 6.5.2
 Tags: menu, album, images, files, restaurant, food, food menu
@@ -15,29 +15,32 @@ Sho Menu is a custom WordPress plugin for Shobar Restaurant that adds a pretty m
 
 == Changelog ==
 
+= 1.4 =
+* Added an ability to hide categories from the menu
+
 = 1.31 =
 * Change main branch to master
 
 = 1.30 =
-* Fix 0 price is showing up on the dish item
+* Fixed 0 price is showing up on the dish item
 
 = 1.29 =
-* Fix bug with menu item weight
+* Fixed bug with menu item weight
 
 = 1.28 =
-* Add so that you can set a dish price as a string and not as a number
+* Added so that you can set a dish price as a string and not as a number
 
 = 1.27 =
-* Remove icon from desination "Закінчилось"
+* Removed icon from desination "Закінчилось"
 
 = 1.26 =
 * Add one more designation "Закінчилось"
 
 = 1.25 =
-* Change recommended dishes images to be smaller resolution
+* Changed recommended dishes images to be smaller resolution
 
 = 1.24 =
-* Change images resolutions to be bigger in the menu popup windows
+* Changed images resolutions to be bigger in the menu popup windows
 
 = 1.23 =
 * Changed the images resolution to be smaller in the menu
