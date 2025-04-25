@@ -94,7 +94,7 @@ export default class DishSearchDropdown {
     private addSelectedDish(dish: SearchResultItem): void {
         const input = document.createElement('input')
         input.type = 'hidden'
-        input.name = 'sho-recommended-dishes[]'
+        input.name = 'sho-menu-recommended-dishes[]'
         input.value = dish.id.toString()
 
         const button = document.createElement('button')
