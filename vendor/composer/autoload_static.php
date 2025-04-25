@@ -7,40 +7,19 @@ namespace Composer\Autoload;
 class ComposerStaticInit6c87968e593dc9535bc6daa6a481a1c6
 {
     public static $files = array (
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '75b88b4ed4d07a48c26155d671e68412' => __DIR__ . '/..' . '/serhii/tiny-logger/logger.php',
-        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         '256558b1ddf2fa4366ea7d7602798dd1' => __DIR__ . '/..' . '/yahnis-elsts/plugin-update-checker/load-v5p5.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
-            'Symfony\\Polyfill\\Mbstring\\' => 26,
-            'Symfony\\Component\\VarDumper\\' => 28,
             'ShoMenu\\' => 8,
             'Serhii\\TinyLogger\\' => 18,
-        ),
-        'D' => 
-        array (
-            'Database\\Seeders\\' => 17,
-            'Database\\Factories\\' => 19,
-        ),
-        'A' => 
-        array (
-            'App\\' => 4,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Symfony\\Polyfill\\Mbstring\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
-        ),
-        'Symfony\\Component\\VarDumper\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/var-dumper',
-        ),
         'ShoMenu\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
@@ -48,18 +27,6 @@ class ComposerStaticInit6c87968e593dc9535bc6daa6a481a1c6
         'Serhii\\TinyLogger\\' => 
         array (
             0 => __DIR__ . '/..' . '/serhii/tiny-logger/src',
-        ),
-        'Database\\Seeders\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/laravel/pint/database/seeders',
-        ),
-        'Database\\Factories\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/laravel/pint/database/factories',
-        ),
-        'App\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/laravel/pint/app',
         ),
     );
 
@@ -75,6 +42,18 @@ class ComposerStaticInit6c87968e593dc9535bc6daa6a481a1c6
 
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'Curl\\Curl' => __DIR__ . '/..' . '/curl/curl/src/Curl/Curl.php',
+        'Serhii\\TinyLogger\\CurlHandler' => __DIR__ . '/..' . '/serhii/tiny-logger/src/CurlHandler.php',
+        'Serhii\\TinyLogger\\JsonFieldValue' => __DIR__ . '/..' . '/serhii/tiny-logger/src/JsonFieldValue.php',
+        'Serhii\\TinyLogger\\Logger' => __DIR__ . '/..' . '/serhii/tiny-logger/src/Logger.php',
+        'Serhii\\TinyLogger\\Option' => __DIR__ . '/..' . '/serhii/tiny-logger/src/Option.php',
+        'Serhii\\TinyLogger\\Text' => __DIR__ . '/..' . '/serhii/tiny-logger/src/Text.php',
+        'ShoMenu\\Dish' => __DIR__ . '/../..' . '/app/Dish.php',
+        'ShoMenu\\Enums\\Designation' => __DIR__ . '/../..' . '/app/Enums/Designation.php',
+        'ShoMenu\\Helper' => __DIR__ . '/../..' . '/app/Helper.php',
+        'ShoMenu\\Hook' => __DIR__ . '/../..' . '/app/Hook.php',
+        'ShoMenu\\PostTypes\\Columns' => __DIR__ . '/../..' . '/app/PostTypes/Columns.php',
+        'ShoMenu\\PostTypes\\DishesPostType' => __DIR__ . '/../..' . '/app/PostTypes/DishesPostType.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
