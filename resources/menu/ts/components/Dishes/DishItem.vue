@@ -52,7 +52,7 @@ function selectDish(): void {
         <div v-if="dish.image_url" class="sho-menu__dishes__item__image">
             <img
                 v-if="dish.image_url"
-                :src="dish.image_url"
+                :src="dish.image_url + `?v=${Math.random()}`"
                 :alt="dish.title.rendered"
             />
         </div>
