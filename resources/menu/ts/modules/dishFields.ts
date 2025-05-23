@@ -11,4 +11,5 @@ export default [
     'image_url',
     'image_url_lg',
     'recommended_dishes',
+    'modified',
 ]

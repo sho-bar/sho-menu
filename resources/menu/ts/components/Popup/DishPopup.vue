@@ -34,7 +34,7 @@ function closePopup(): void {
                         class="sho-menu__dish-popup__image"
                     >
                         <img
-                            :src="selectedDish.image_url_lg + `?v=${Math.random()}`"
+                            :src="selectedDish.image_url_lg + `?v=${selectedDish.modified}`"
                             :alt="selectedDish.title.rendered"
                         />
                     </div>

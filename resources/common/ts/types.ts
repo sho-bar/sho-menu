@@ -29,6 +29,7 @@ export type Dish = {
     image_url_lg: string | null
     designations: Designation[]
     recommended_dishes: RecommendedDish[]
+    modified: string
 }
 
 export type RecommendedDish = {
