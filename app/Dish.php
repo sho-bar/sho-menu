@@ -6,7 +6,6 @@ namespace ShoMenu;
 
 use ShoMenu\Enums\Designation;
 use ShoMenu\PostTypes\DishesPostType;
-use WP_Post;
 
 final class Dish
 {
