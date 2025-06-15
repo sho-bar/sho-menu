@@ -1,0 +1,7 @@
+{
+    "intelephense.environment.includePaths": ["../../.."],
+    "cSpell.words": ["Shobar", "YahnisElsts", "ABSPATH"],
+    "[typescript]": {
+        "editor.formatOnSave": false
+    }
+}
