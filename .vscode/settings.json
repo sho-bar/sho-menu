@@ -1,5 +1,6 @@
 {
     "intelephense.environment.includePaths": ["../../.."],
+    "intelephense.environment.phpVersion": "8.3.0",
     "cSpell.words": ["Shobar", "YahnisElsts", "ABSPATH"],
     "[typescript]": {
         "editor.formatOnSave": false
