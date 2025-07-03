@@ -16,7 +16,7 @@
         "laravel/pint": "^1.15"
     },
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "serhii/tiny-logger": "^2.1",
         "yahnis-elsts/plugin-update-checker": "^5.4"
     },
