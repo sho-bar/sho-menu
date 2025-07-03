@@ -26,9 +26,9 @@ const dishes: Module<DishesState, RootState> = {
     },
 
     mutations: {
-        FETCH_DISHES(state, { selectedParent, dispatch, page, loading }: FetchDishesMutationParams): void {
+        async FETCH_DISHES(state, { selectedParent, dispatch, page, loading }: FetchDishesMutationParams): Promise<void> {
             if (!state.isFetching) {
-                dispatch('sidebar/scrollToChildCategory', null, {
+                await dispatch('sidebar/scrollToChildCategory', null, {
                     root: true,
                 })
             }
@@ -43,40 +43,37 @@ const dishes: Module<DishesState, RootState> = {
 
             state.loading = loading
 
-            axios.get<Dish[] | NoDishesResponse>(url)
-                .then(resp => {
-                    const dishes = resp.data
+            try {
+            const resp = await axios.get<Dish[] | NoDishesResponse>(url)
+            const dishes = resp.data
 
-                    if ('message' in dishes || dishes.length === 0) {
-                        return
-                    }
+            if ('message' in dishes || dishes.length === 0) {
+                return
+            }
 
-                    state.dishes.push(...dishes)
+            state.dishes.push(...dishes)
 
-                    dispatch('sidebar/attachDishesToChildCategories', dishes, {
-                        root: true,
-                    })
+            await dispatch('sidebar/attachDishesToChildCategories', dishes, {
+                root: true,
+            })
 
-                    dispatch('selectNeedingDish')
+            await dispatch('selectNeedingDish')
 
-                    if (dishes.length === MAX_DISHES_PER_PAGE) {
-                        dispatch('fetchDishes', {
-                            page: page + 1,
-                            loading: false,
-                        })
-                    } else {
-                        // there are no more dishes to fetch
-                        setTimeout(() => {
-                            dispatch('sidebar/observeCategories', null, { root: true })
-                            state.isFetching = false
-                        }, 500)
-                    }
-                })
-                .catch(err => {
-                    console.error(err)
+            if (dishes.length === MAX_DISHES_PER_PAGE) {
+                await dispatch('fetchDishes', { page: page + 1, loading: false })
+            } else {
+                // there are no more dishes to fetch
+                setTimeout(async () => {
+                    await dispatch('sidebar/observeCategories', null, { root: true })
                     state.isFetching = false
-                })
-                .finally(() => state.loading = false)
+                }, 500)
+            }
+            } catch (err) {
+                console.error(err)
+                state.isFetching = false
+            }
+
+            state.loading = false
         },
     },
 
