@@ -1,5 +1,13 @@
 # Release Notes
 
+## v2.2.0 (2025-06-18)
+- Added Docker to the project
+- Replace abandoned dev dependency
+
+## v2.1.6 (2025-06-16)
+- Removed `use Exception` from `logger.php`. It was causing a PHP warning
+- Added PHP 8.4 to Github Actions testing to make sure it works on 8.4
+
 ## v2.1.5 (2024-11-01)
 - Updated `composer.json` file
 - Removed backslashes from PHP native functions
