@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Category, Dish } from '@/types'
+import type { Category } from '@/types'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import DishItem from '@menu/components/Dishes/DishItem.vue'

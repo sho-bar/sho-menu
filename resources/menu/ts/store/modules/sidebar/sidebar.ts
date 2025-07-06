@@ -154,7 +154,14 @@ const sidebar: Module<SidebarState, RootState> = {
                     category.dishes = []
                 }
 
-                category.dishes.push(...matchedDishes)
+                for (const matchedDish of matchedDishes) {
+                    // check if category dishes already contains the dish
+                    if (category.dishes.some(d => d.id === matchedDish.id)) {
+                        continue
+                    }
+
+                    category.dishes.push(matchedDish)
+                }
             }
         },
 
