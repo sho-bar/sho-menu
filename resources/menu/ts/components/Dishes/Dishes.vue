@@ -11,7 +11,6 @@ const store = useStore()
 
 const childCategories = computed<Category[]>(() => store.getters['sidebar/childCategories'])
 const selectedParent = computed<Category | null>(() => store.getters['sidebar/selectedParent'])
-const dishes = computed<Dish[]>(() => store.getters['dishes/dishes'])
 const loading = computed<boolean>(() => store.getters['dishes/loading'])
 </script>
 
@@ -38,7 +37,7 @@ const loading = computed<boolean>(() => store.getters['dishes/loading'])
 
                     <div v-if="category.dishes && category.dishes.length > 0">
                         <dish-item
-                            v-for="dish in dishes"
+                            v-for="dish in category.dishes"
                             :key="dish.id"
                             :category-id="category.id"
                             :dish

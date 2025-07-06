@@ -23,7 +23,6 @@ const dishes: Module<DishesState, RootState> = {
     getters: {
         loading: s => s.loading,
         selectedDish: s => s.selectedDish,
-        dishes: s => s.dishes,
     },
 
     mutations: {
