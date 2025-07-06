@@ -76,7 +76,7 @@ const sidebar: Module<SidebarState, RootState> = {
 
             const args: FetchDishesActionParams = {
                 page: 1,
-                loading: true
+                loading: true,
             }
 
             dispatch('dishes/fetchDishes', args, { root: true })
