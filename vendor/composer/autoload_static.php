@@ -4,45 +4,22 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit6c87968e593dc9535bc6daa6a481a1c6
+class ComposerStaticInitdf7d38dc29dadbfce5e89563dd8dadb5
 {
     public static $files = array (
-        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        '062a54fe8f6f91078b197f2922521dd9' => __DIR__ . '/..' . '/laravel/pint/overrides/Runner/Parallel/ProcessFactory.php',
         '75b88b4ed4d07a48c26155d671e68412' => __DIR__ . '/..' . '/serhii/tiny-logger/logger.php',
-        '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         'f6d4f6bcee7247df6b777884c3e22f98' => __DIR__ . '/..' . '/yahnis-elsts/plugin-update-checker/load-v5p6.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
-            'Symfony\\Polyfill\\Mbstring\\' => 26,
-            'Symfony\\Component\\VarDumper\\' => 28,
             'ShoMenu\\' => 8,
             'Serhii\\TinyLogger\\' => 18,
-        ),
-        'D' => 
-        array (
-            'Database\\Seeders\\' => 17,
-            'Database\\Factories\\' => 19,
-        ),
-        'A' => 
-        array (
-            'App\\' => 4,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Symfony\\Polyfill\\Mbstring\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
-        ),
-        'Symfony\\Component\\VarDumper\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/var-dumper',
-        ),
         'ShoMenu\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
@@ -50,18 +27,6 @@ class ComposerStaticInit6c87968e593dc9535bc6daa6a481a1c6
         'Serhii\\TinyLogger\\' => 
         array (
             0 => __DIR__ . '/..' . '/serhii/tiny-logger/src',
-        ),
-        'Database\\Seeders\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/laravel/pint/database/seeders',
-        ),
-        'Database\\Factories\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/laravel/pint/database/factories',
-        ),
-        'App\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/laravel/pint/app',
         ),
     );
 
@@ -82,10 +47,10 @@ class ComposerStaticInit6c87968e593dc9535bc6daa6a481a1c6
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit6c87968e593dc9535bc6daa6a481a1c6::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit6c87968e593dc9535bc6daa6a481a1c6::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit6c87968e593dc9535bc6daa6a481a1c6::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit6c87968e593dc9535bc6daa6a481a1c6::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitdf7d38dc29dadbfce5e89563dd8dadb5::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitdf7d38dc29dadbfce5e89563dd8dadb5::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitdf7d38dc29dadbfce5e89563dd8dadb5::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitdf7d38dc29dadbfce5e89563dd8dadb5::$classMap;
 
         }, null, ClassLoader::class);
     }
