@@ -15,6 +15,7 @@ enum Designation: string
     case UKRAINE = 'ukraine';
     case POPULAR = 'popular';
     case FOR_BEAR = 'for_bear';
+    case FOR_SEASON = 'for_season';
 
     /**
      * @return array<int, self>
@@ -31,6 +32,7 @@ enum Designation: string
             self::UKRAINE,
             self::POPULAR,
             self::FOR_BEAR,
+            self::FOR_SEASON,
         ];
     }
 
@@ -59,6 +61,7 @@ enum Designation: string
             self::UKRAINE => 'Українського виробництва',
             self::POPULAR => 'Популярне',
             self::FOR_BEAR => 'Ідеально до пива',
+            self::FOR_SEASON => 'Сезонне',
         };
     }
 
@@ -74,6 +77,7 @@ enum Designation: string
             self::UKRAINE => SHO_MENU_URL . 'assets/img/designations/ukraine.png',
             self::POPULAR => SHO_MENU_URL . 'assets/img/designations/popular.png',
             self::FOR_BEAR => SHO_MENU_URL . 'assets/img/designations/for-bear.png',
+            self::FOR_SEASON => SHO_MENU_URL . 'assets/img/designations/for-season.png',
         };
     }
 }
