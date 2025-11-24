@@ -77,7 +77,7 @@ enum Designation: string
             self::UKRAINE => SHO_MENU_URL . 'assets/img/designations/ukraine.png',
             self::POPULAR => SHO_MENU_URL . 'assets/img/designations/popular.png',
             self::FOR_BEAR => SHO_MENU_URL . 'assets/img/designations/for-bear.png',
-            self::FOR_SEASON => SHO_MENU_URL . 'assets/img/designations/for-season.png',
+            self::FOR_SEASON => SHO_MENU_URL . 'assets/img/designations/seasons.png',
         };
     }
 }
