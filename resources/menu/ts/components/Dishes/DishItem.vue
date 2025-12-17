@@ -28,17 +28,7 @@ function selectDish(): void {
         <edit-button :id="dish.id" />
 
         <div class="sho-menu__dishes__item__content">
-            <div class="sho-menu__dishes__item__heading">
-                <h3 v-html="dish.title.rendered"></h3>
-
-                <div class="sho-menu__dishes__item__heading__image">
-                    <img
-                        v-if="dish.image_url"
-                        :src="dish.image_url + `?v=${dish.modified}`"
-                        :alt="dish.title.rendered"
-                    />
-                </div>
-            </div>
+            <h3 v-html="dish.title.rendered"></h3>
 
             <span v-if="dish.price && dish.price !== '0'" class="sho-menu__dishes__item__price">
                 {{ dish.price }} грн
@@ -61,6 +51,7 @@ function selectDish(): void {
 
         <div v-if="dish.image_url" class="sho-menu__dishes__item__image">
             <img
+                v-if="dish.image_url"
                 :src="dish.image_url + `?v=${dish.modified}`"
                 :alt="dish.title.rendered"
             />

@@ -21,9 +21,6 @@
     &:last-child
         border-bottom: none
 
-    &__heading__image
-        display: none
-
     &__edit
         position: absolute
         right: 9px
@@ -59,12 +56,12 @@
         @include dish-weight
 
     &__image
-        min-width: 170px
+        width: 170px
 
-    &__heading img,
-    &__image img
-        border-radius: 8px
-        max-width: 100%
+        img
+            border-radius: 8px
+            display: block
+            max-width: 100%
 
 @media (max-width: 810px)
     .sho-menu__dishes__item
@@ -80,16 +77,8 @@
 
 @media (max-width: 440px)
     .sho-menu__dishes__item
-        &__heading
-            display: flex
-            gap: 7px
-
-            &__image
-                min-width: 100px
-                display: block
+        flex-direction: column-reverse
 
         &__image
-            display: none !important
-
-        &__content h3
-            font-size: .9rem
+            margin-left: auto
+            margin-right: auto
