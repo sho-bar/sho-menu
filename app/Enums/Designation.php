@@ -16,6 +16,7 @@ enum Designation: string
     case POPULAR = 'popular';
     case FOR_BEAR = 'for_bear';
     case FOR_SEASON = 'for_season';
+    case BLACKOUT = 'blackout';
 
     /**
      * @return array<int, self>
@@ -33,6 +34,7 @@ enum Designation: string
             self::POPULAR,
             self::FOR_BEAR,
             self::FOR_SEASON,
+            self::BLACKOUT,
         ];
     }
 
@@ -62,6 +64,7 @@ enum Designation: string
             self::POPULAR => 'Популярне',
             self::FOR_BEAR => 'Ідеально до пива',
             self::FOR_SEASON => 'Сезонне',
+            self::BLACKOUT => 'Недоступно під час блекауту',
         };
     }
 
@@ -78,6 +81,7 @@ enum Designation: string
             self::POPULAR => SHO_MENU_URL . 'assets/img/designations/popular.png',
             self::FOR_BEAR => SHO_MENU_URL . 'assets/img/designations/for-bear.png',
             self::FOR_SEASON => SHO_MENU_URL . 'assets/img/designations/seasons.png',
+            self::BLACKOUT => SHO_MENU_URL . 'assets/img/designations/blackout.png',
         };
     }
 }

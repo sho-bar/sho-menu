@@ -1,17 +1,24 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { Dish } from '@/types'
 
-type Props = {
-    dish: Dish
-}
+const props = defineProps<{ dish: Dish }>()
 
-const { dish } = defineProps<Props>()
+const designations = computed(() => {
+    // Make 'blackout' designation last in the list
+    return props.dish.designations
+        .sort((a, b) => {
+            if (a.slug === 'blackout') return 1
+            if (b.slug === 'blackout') return -1
+            return 0
+        })
+})
 </script>
 
 <template>
-    <div v-if="dish.designations.length > 0" class="sho-menu__designations">
+    <div v-if="designations.length > 0" class="sho-menu__designations">
         <div
-            v-for="des in dish.designations"
+            v-for="des in designations"
             :key="des.slug"
             class="sho-menu__designations__item"
             :class="{ 'sho-menu__designations__item--warning': des.slug === 'ended' }"
