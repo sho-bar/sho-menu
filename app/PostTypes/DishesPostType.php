@@ -59,6 +59,10 @@ final class DishesPostType
 
             switch ($column_name) {
                 case 'price':
+                    // Output nonce only once, price or weight it doesn't matter.
+                    // No need to output it twice.
+                    wp_nonce_field('save_meta', 'sho_menu_nonce');
+
                     $value = Dish::getMeta('price', $post->ID) ?: '0';
                     echo $this->getQuickField('Ціна', 'sho-menu-price', $value);
                     break;
@@ -436,7 +440,12 @@ final class DishesPostType
                         <label>
                             <span class="title">{$title}</span>
                             <span class="input-text-wrap" style="margin-left: 40px">
-                                <input type="text" name="{$name}" value="{$value}">
+                                <input
+                                    type="text"
+                                    name="{$name}"
+                                    value="{$value}"
+                                    style="max-width: 135px"
+                                >
                             </span>
                         </label>
                     </div>
