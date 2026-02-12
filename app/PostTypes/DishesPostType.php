@@ -55,12 +55,16 @@ final class DishesPostType
                 return;
             }
 
+            global $post;
+
             switch ($column_name) {
                 case 'price':
-                    echo $this->getQuickField('Ціна', 'sho-menu-price');
+                    $value = Dish::getMeta('price', $post->ID) ?: '0';
+                    echo $this->getQuickField('Ціна', 'sho-menu-price', $value);
                     break;
                 case 'weight':
-                    echo $this->getQuickField('Вага', 'sho-menu-weight');
+                    $value = Dish::getMeta('weight', $post->ID) ?: '';
+                    echo $this->getQuickField('Вага', 'sho-menu-weight', $value);
                     break;
             }
         }, 10, 2);
@@ -423,7 +427,7 @@ final class DishesPostType
         });
     }
 
-    private function getQuickField(string $title, string $name): string
+    private function getQuickField(string $title, string $name, string $value): string
     {
         return <<<HTML
             <fieldset class="inline-edit-col-right">
@@ -432,7 +436,7 @@ final class DishesPostType
                         <label>
                             <span class="title">{$title}</span>
                             <span class="input-text-wrap" style="margin-left: 40px">
-                                <input type="text" name="{$name}" value="">
+                                <input type="text" name="{$name}" value="{$value}">
                             </span>
                         </label>
                     </div>
