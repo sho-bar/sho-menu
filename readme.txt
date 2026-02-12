@@ -16,7 +16,7 @@ Sho Menu is a custom WordPress plugin for Shobar Restaurant that adds a pretty m
 == Changelog ==
 
 = 1.56 =
-* 
+* Added 'price' and 'weight' to quick edit on admin panel for dishes
 
 = 1.55 =
 * Added a new designation "Blackout"
