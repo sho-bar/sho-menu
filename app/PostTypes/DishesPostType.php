@@ -49,6 +49,21 @@ final class DishesPostType
                 );
             }
         });
+
+        add_action('quick_edit_custom_box', function ($column_name, $post_type) {
+            if ($post_type !== 'sho-menu-dishes') {
+                return;
+            }
+
+            switch ($column_name) {
+                case 'price':
+                    echo $this->getQuickField('Ціна', 'sho-menu-price');
+                    break;
+                case 'weight':
+                    echo $this->getQuickField('Вага', 'sho-menu-weight');
+                    break;
+            }
+        }, 10, 2);
     }
 
     private function registerPostType(): void
@@ -406,5 +421,23 @@ final class DishesPostType
                 },
             ]);
         });
+    }
+
+    private function getQuickField(string $title, string $name): string
+    {
+        return <<<HTML
+            <fieldset class="inline-edit-col-right">
+                <div class="inline-edit-col">
+                    <div class="inline-edit-group wp-clearfix alignleft">
+                        <label>
+                            <span class="title">{$title}</span>
+                            <span class="input-text-wrap" style="margin-left: 40px">
+                                <input type="text" name="{$name}" value="">
+                            </span>
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+        HTML;
     }
 }
