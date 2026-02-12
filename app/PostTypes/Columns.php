@@ -24,7 +24,15 @@ final class Columns
         // What data should be shown to each column in admin panel
         add_action("manage_{$post_type}_posts_custom_column", function ($column, $post_id) {
             $result = Dish::getMeta($column, $post_id);
-            echo $result ? $result : ' - ';
+
+            if ($result) {
+                echo <<<HTML
+                <span class="sho-menu-{$column}-value" data-post-id="{$post_id}">{$result}</span>
+                HTML;
+                return;
+            }
+
+            echo ' - ';
         }, 10, 2);
     }
 }

@@ -50,28 +50,7 @@ final class DishesPostType
             }
         });
 
-        add_action('quick_edit_custom_box', function ($column_name, $post_type) {
-            if ($post_type !== 'sho-menu-dishes') {
-                return;
-            }
-
-            global $post;
-
-            switch ($column_name) {
-                case 'price':
-                    // Output nonce only once, price or weight it doesn't matter.
-                    // No need to output it twice.
-                    wp_nonce_field('save_meta', 'sho_menu_nonce');
-
-                    $value = Dish::getMeta('price', $post->ID) ?: '0';
-                    echo $this->getQuickField('Ціна', 'sho-menu-price', $value);
-                    break;
-                case 'weight':
-                    $value = Dish::getMeta('weight', $post->ID) ?: '';
-                    echo $this->getQuickField('Вага', 'sho-menu-weight', $value);
-                    break;
-            }
-        }, 10, 2);
+        $this->addFieldsToQuickEditMenu();
     }
 
     private function registerPostType(): void
@@ -431,7 +410,7 @@ final class DishesPostType
         });
     }
 
-    private function getQuickField(string $title, string $name, string $value): string
+    private function getQuickField(string $title, string $name): string
     {
         return <<<HTML
             <fieldset class="inline-edit-col-right">
@@ -440,17 +419,66 @@ final class DishesPostType
                         <label>
                             <span class="title">{$title}</span>
                             <span class="input-text-wrap" style="margin-left: 40px">
-                                <input
-                                    type="text"
-                                    name="{$name}"
-                                    value="{$value}"
-                                    style="max-width: 135px"
-                                >
+                                <input type="text" name="{$name}" value="" style="max-width: 135px">
                             </span>
                         </label>
                     </div>
                 </div>
             </fieldset>
         HTML;
+    }
+
+    private function addFieldsToQuickEditMenu(): void
+    {
+        add_action('quick_edit_custom_box', function ($column_name, $post_type) {
+            if ($post_type !== 'sho-menu-dishes') {
+                return;
+            }
+
+            switch ($column_name) {
+                case 'price':
+                    // Output nonce only once, price or weight it doesn't matter.
+                    // No need to output it twice.
+                    wp_nonce_field('save_meta', 'sho_menu_nonce');
+
+                    echo $this->getQuickField('Ціна', 'sho-menu-price');
+                    break;
+                case 'weight':
+                    echo $this->getQuickField('Вага', 'sho-menu-weight');
+                    break;
+            }
+        }, 10, 2);
+
+        $this->populateQuickEditFields();
+    }
+
+    private function populateQuickEditFields(): void
+    {
+        add_action('admin_footer', function () {
+            $screen = get_current_screen();
+
+            if ($screen->id !== 'edit-sho-menu-dishes') {
+                return;
+            }
+
+            echo <<<HTML
+            <script>
+                jQuery(function($) {
+                    $('#the-list').on('click', 'button.editinline', function () {
+                        // Get the post ID from the row
+                        var post_id = $(this).closest('tr').attr('id').replace('post-', '')
+
+                        // Get the values from your column spans
+                        var price = $('#post-' + post_id + ' .sho-menu-price-value').text()
+                        var weight = $('#post-' + post_id + ' .sho-menu-weight-value').text()
+
+                        // Populate the quick edit fields
+                        $(':input[name="sho-menu-price"]').val(price)
+                        $(':input[name="sho-menu-weight"]').val(weight)
+                    })
+                });
+            </script>
+            HTML;
+        });
     }
 }
