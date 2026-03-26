@@ -20,7 +20,7 @@ function scrollToTop(): void {
     const target = document.querySelector('.sho-menu__header')
 
     if (!target) {
-        console.error('.sho-menu__categories-bar class not found')
+        console.error('.sho-menu__header class not found')
         return
     }
 
