@@ -6,11 +6,17 @@ import DishItem from '@menu/components/Dishes/DishItem.vue'
 import CategoryItem from '@menu/components/Dishes/CategoryItem.vue'
 import CategoriesBar from '@menu/components/Dishes/CategoriesBar.vue'
 import DishesLoading from '@/components/DishesLoading.vue'
+import ToTop from '@menu/components/Dishes/ToTop.vue'
 
 const store = useStore()
 
-const childCategories = computed<Category[]>(() => store.getters['sidebar/childCategories'])
-const selectedParent = computed<Category | null>(() => store.getters['sidebar/selectedParent'])
+const childCategories = computed<Category[]>(
+    () => store.getters['sidebar/childCategories'],
+)
+const selectedParent = computed<Category | null>(
+    () => store.getters['sidebar/selectedParent'],
+)
+
 const loading = computed<boolean>(() => store.getters['dishes/loading'])
 </script>
 
@@ -23,14 +29,13 @@ const loading = computed<boolean>(() => store.getters['dishes/loading'])
 
         <dishes-loading v-if="loading" />
 
-        <div
-            v-else-if="childCategories.length === 0"
-            class="sho-menu__dishes__empty"
-        >
+        <div v-else-if="childCategories.length === 0" class="sho-menu__dishes__empty">
             Позицій у цій категорії ще немає
         </div>
 
         <div v-else>
+            <to-top />
+
             <div v-for="category in childCategories" :key="category.id">
                 <div class="sho-menu__dishes__section">
                     <category-item :category="category" />
