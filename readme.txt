@@ -17,6 +17,7 @@ Sho Menu is a custom WordPress plugin for Shobar Restaurant that adds a pretty m
 
 = 1.59 =
 * Fixed bug with clicking edit button opens popup item
+* Added a button "Not available" to each menu item for admins for quick edit
 
 = 1.58 =
 * Added 'Top top' button when you scroll down in the menu
