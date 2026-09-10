@@ -3,6 +3,7 @@ import type { Dish } from '@/types'
 import { useStore } from 'vuex'
 import { computed } from 'vue'
 import EditButton from '@menu/components/Dishes/EditButton.vue'
+import AvailabilityButton from '@menu/components/Dishes/AvailabilityButton.vue'
 import CloseButton from '@menu/components/Popup/CloseButton.vue'
 import AppearTransition from '@/components/Transitions/AppearTransition.vue'
 import Designations from '@menu/components/Dishes/Designations.vue'
@@ -25,8 +26,11 @@ function closePopup(): void {
             @click.self="closePopup"
         >
             <div class="sho-menu__dish-popup">
-                <edit-button :id="selectedDish.id" />
-                <close-button @click="closePopup" />
+                <div class="sho-menu__actions">
+                    <availability-button v-if="shoMenuGlobals.isAuth === '1'" :dish="selectedDish" />
+                    <edit-button v-if="shoMenuGlobals.isAuth === '1'" :id="selectedDish.id" />
+                    <close-button @click="closePopup" />
+                </div>
 
                 <div class="sho-menu__dish-popup__content">
                     <div

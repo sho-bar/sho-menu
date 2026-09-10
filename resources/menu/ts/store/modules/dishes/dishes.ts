@@ -82,6 +82,23 @@ const dishes: Module<DishesState, RootState> = {
 
             state.loading = false
         },
+
+        async TOGGLE_AVAILABILITY(_, { dishId }) {
+            const params = new FormData()
+
+            params.append('action', 'sho_menu_toggle_dish_availability')
+            params.append('_ajax_nonce', window.shoMenuGlobals.nonce)
+            params.append('dish_id', dishId)
+
+            let url = window.shoMenuGlobals.ajaxUrl
+
+            try {
+                const resp = await axios.post(url, params)
+                console.log(resp.data)
+            } catch (err) {
+                console.error(err)
+            }
+        },
     },
 
     actions: {
@@ -110,6 +127,10 @@ const dishes: Module<DishesState, RootState> = {
 
         changeLoading({ state }, loading: boolean): void {
             state.loading = loading
+        },
+
+        toggleAvailability({ commit }, dishId: number): void {
+            commit('TOGGLE_AVAILABILITY', { dishId })
         },
     },
 }

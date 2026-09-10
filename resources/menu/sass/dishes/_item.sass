@@ -9,9 +9,6 @@
     .sho-dark-theme &
         border-color: $dark-border-color
 
-    &:hover .sho-menu__dishes__item__edit
-        opacity: .8
-
     &:hover
         background-color: #f9f9f9
 
@@ -20,25 +17,6 @@
 
     &:last-child
         border-bottom: none
-
-    &__edit
-        position: absolute
-        right: 9px
-        bottom: 9px
-        color: black
-        background-color: white
-        width: 35px
-        height: 35px
-        display: flex
-        justify-content: center
-        align-items: center
-        border-radius: 50%
-        border: 1px solid black
-        opacity: 0
-
-        &:hover
-            color: $gold-color
-            border-color: $gold-color
 
     &__content
         width: 100%
@@ -65,9 +43,6 @@
 
 @media (max-width: 810px)
     .sho-menu__dishes__item
-        &__edit
-            opacity: .8
-
         &__content
             h3
                 @include dish-title-sm

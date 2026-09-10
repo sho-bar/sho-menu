@@ -38,6 +38,15 @@ final class Dish
     }
 
     /**
+     * @param array<int, Designation> $designations
+     */
+    public static function setDesignations(int $post_id, array $designations): void
+    {
+        $values = array_map(fn (Designation $d) => $d->value, $designations);
+        update_post_meta($post_id, '_sho_menu_designations', implode(',', $values));
+    }
+
+    /**
      * @return object[]
      */
     public static function getRecommended(int $post_id): array
@@ -68,9 +77,6 @@ final class Dish
         return $result;
     }
 
-    /**
-     * @return number[]
-     */
     public static function getRecommendedIds(int $post_id): array
     {
         $meta_value = self::getMeta('recommended_dishes', $post_id);

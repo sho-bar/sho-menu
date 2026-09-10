@@ -4,7 +4,7 @@ import CloseIcon from '@/components/Icons/CloseIcon.vue'
 
 <template>
     <div
-        class="sho-menu__dish-popup__close"
+        class="sho-menu__actions__item"
         aria-label="Закрити"
     >
         <close-icon width="22" height="22" />

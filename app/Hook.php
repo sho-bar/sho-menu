@@ -6,6 +6,7 @@ namespace ShoMenu;
 
 use ShoMenu\PostTypes\Columns;
 use ShoMenu\PostTypes\DishesPostType;
+use ShoMenu\Ajax\Ajax;
 
 final class Hook
 {
@@ -79,6 +80,15 @@ final class Hook
 
         register_deactivation_hook(SHO_MENU_ENTRY_FILE, function (): void {
             flush_rewrite_rules();
+        });
+
+        return $this;
+    }
+
+    public function registerAjax(): self
+    {
+        add_action('wp_ajax_sho_menu_toggle_dish_availability', function () {
+            (new Ajax())->toggleDishAvailability();
         });
 
         return $this;

@@ -10,9 +10,8 @@ const { id } = defineProps<Props>()
 
 <template>
     <a
-        v-if="shoMenuGlobals.isAuth === '1'"
         :href="`/wp-admin/post.php?post=${id}&action=edit`"
-        class="sho-menu__dishes__item__edit"
+        class="sho-menu__actions__item"
     >
         <pencil-icon width="20" height="20" />
     </a>

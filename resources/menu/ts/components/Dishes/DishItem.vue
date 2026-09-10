@@ -2,6 +2,7 @@
 import type { Dish } from '@/types'
 import { useStore } from 'vuex'
 import EditButton from '@menu/components/Dishes/EditButton.vue'
+import AvailabilityButton from '@menu/components/Dishes/AvailabilityButton.vue'
 import Designations from '@menu/components/Dishes/Designations.vue'
 import DishWeight from '@menu/components/DishWeight.vue'
 
@@ -25,7 +26,10 @@ function selectDish(): void {
         class="sho-menu__dishes__item"
         :data-category-id="categoryId"
     >
-        <edit-button :id="dish.id" />
+        <div v-if="shoMenuGlobals.isAuth === '1'" class="sho-menu__actions">
+            <availability-button @click.stop :dish />
+            <edit-button @click.stop :id="dish.id" />
+        </div>
 
         <div class="sho-menu__dishes__item__content">
             <h3 v-html="dish.title.rendered"></h3>
