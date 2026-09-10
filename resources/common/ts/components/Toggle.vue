@@ -1,19 +1,14 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
-const elem = ref(null)
-
-const emit = defineEmits<{
-    (e: 'switched', elem: HTMLInputElement | null): void
-}>()
+defineProps<{ modelValue: boolean }>()
+const emit = defineEmits<{ 'update:modelValue': [value: boolean] }>()
 </script>
 
 <template>
     <input
-        ref="elem"
-        @input="emit('switched', elem)"
         type="checkbox"
         id="switch"
+        @change="emit('update:modelValue', ($event.target as HTMLInputElement).checked)"
+        :checked="modelValue"
     />
     <label for="switch">Toggle</label>
 </template>

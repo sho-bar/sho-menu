@@ -39,7 +39,6 @@ const dishes: Module<DishesState, RootState> = {
                 + `?per_page=${MAX_DISHES_PER_PAGE}`
                 + `&page=${page}`
                 + `&sho-menu-dish-category=${selectedParent.id}`
-                + `&_fields=${dishFields.join(',')}`
 
             state.loading = loading
 
