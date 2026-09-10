@@ -26,6 +26,9 @@ const dishes: Module<DishesState, RootState> = {
     },
 
     mutations: {
+        async TOGGLE_AVAILABILITY(_, { dishId }) {
+            console.log(dishId)
+        },
         async FETCH_DISHES(state, { selectedParent, dispatch, page, loading }: FetchDishesMutationParams): Promise<void> {
             if (!state.isFetching) {
                 await dispatch('sidebar/scrollToChildCategory', null, {
@@ -109,6 +112,9 @@ const dishes: Module<DishesState, RootState> = {
 
         changeLoading({ state }, loading: boolean): void {
             state.loading = loading
+        },
+        toggleAvailability({ commit }, dishId: number): void {
+            commit('TOGGLE_AVAILABILITY', dishId)
         },
     },
 }
