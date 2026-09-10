@@ -3,7 +3,7 @@ Stable tag: 1.59
 Requires at least: 6.0
 Tested up to: 6.8.1
 Tags: menu, album, images, files, restaurant, food, food menu
-Requires PHP: 8.3.22
+Requires PHP: 8.3.0
 License: no
 Donate link: https://www.buymeacoffee.com/serhiicho
 
