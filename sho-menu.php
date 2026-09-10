@@ -25,8 +25,6 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 $update_checker = PucFactory::buildUpdateChecker('https://github.com/sho-bar/sho-menu', __FILE__, 'sho-menu');
 $update_checker->setBranch('master');
-$update_checker->setAuthentication('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');
-/* $update_checker->setAuthentication('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'); */
 
 (new Hook())
     ->registerActivationHooks()
