@@ -26,8 +26,8 @@ function selectDish(): void {
         class="sho-menu__dishes__item"
         :data-category-id="categoryId"
     >
-        <div class="sho-menu__actions">
-            <availability-button @click.stop v-if="shoMenuGlobals.isAuth === '1'" :dish />
+        <div v-if="shoMenuGlobals.isAuth === '1'" class="sho-menu__actions">
+            <availability-button @click.stop :dish />
             <edit-button @click.stop :id="dish.id" />
         </div>
 
