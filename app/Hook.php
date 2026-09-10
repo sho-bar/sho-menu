@@ -87,9 +87,8 @@ final class Hook
 
     public function registerAjax(): self
     {
-        Ajax::createEntry('sho_menu_toggle_dish_availability', function () {
-            echo (new Ajax())->toggleDishAvailability();
-            wp_die();
+        add_action('wp_ajax_sho_menu_toggle_dish_availability', function () {
+            (new Ajax())->toggleDishAvailability();
         });
 
         return $this;
