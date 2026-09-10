@@ -27,8 +27,8 @@ function closePopup(): void {
         >
             <div class="sho-menu__dish-popup">
                 <div class="sho-menu__actions">
-                    <edit-button :id="selectedDish.id" />
-                    <availability-button :id="selectedDish.id" />
+                    <availability-button v-if="shoMenuGlobals.isAuth === '1'" :id="selectedDish.id" />
+                    <edit-button v-if="shoMenuGlobals.isAuth === '1'" :id="selectedDish.id" />
                     <close-button @click="closePopup" />
                 </div>
 

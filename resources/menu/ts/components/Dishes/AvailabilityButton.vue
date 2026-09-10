@@ -1,20 +1,27 @@
 <script setup lang="ts">
-import PencilIcon from '@/components/Icons/PencilIcon.vue'
+import Toggle from '@/components/Toggle.vue'
 
 type Props = {
     id: number
 }
 
 const { id } = defineProps<Props>()
+
+function toggleAvailability(elem: HTMLInputElement | null): void {
+    if (!elem) {
+        console.error('elem input not found for toggleAvailablity')
+        return
+    }
+
+    console.log(elem.checked)
+}
 </script>
 
 <template>
-    <a
-        v-if="shoMenuGlobals.isAuth === '1'"
-        @click.stop
-        :href="`/wp-admin/post.php?post=${id}&action=edit`"
-        class="sho-menu__actions__item"
-    >
-        <pencil-icon width="20" height="20" />
-    </a>
+    <div class="sho-menu__toggle">
+        <toggle
+            @switched="toggleAvailability"
+        />
+    </div>
 </template>
+

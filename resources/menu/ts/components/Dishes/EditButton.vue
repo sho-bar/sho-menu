@@ -10,8 +10,6 @@ const { id } = defineProps<Props>()
 
 <template>
     <a
-        v-if="shoMenuGlobals.isAuth === '1'"
-        @click.stop
         :href="`/wp-admin/post.php?post=${id}&action=edit`"
         class="sho-menu__actions__item"
     >
