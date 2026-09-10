@@ -32,4 +32,5 @@ $update_checker->setAuthentication('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');
     ->registerAdminAssets()
     ->registerMenuAssets()
     ->registerShortcodes()
-    ->registerCustomPostType();
+    ->registerCustomPostType()
+    ->registerAjax();

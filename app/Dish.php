@@ -68,9 +68,6 @@ final class Dish
         return $result;
     }
 
-    /**
-     * @return number[]
-     */
     public static function getRecommendedIds(int $post_id): array
     {
         $meta_value = self::getMeta('recommended_dishes', $post_id);

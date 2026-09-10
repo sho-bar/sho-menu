@@ -1,16 +1,22 @@
 <script setup lang="ts">
-defineProps<{ modelValue: boolean }>()
-const emit = defineEmits<{ 'update:modelValue': [value: boolean] }>()
+const props = defineProps<{
+    available: boolean
+    id: string
+}>()
+
+const emit = defineEmits<{
+    'updated': [value: boolean]
+}>()
 </script>
 
 <template>
     <input
+        :id
         type="checkbox"
-        id="switch"
-        @change="emit('update:modelValue', ($event.target as HTMLInputElement).checked)"
-        :checked="modelValue"
+        @change="emit('updated', ($event.target as HTMLInputElement).checked)"
+        :checked="available"
     />
-    <label for="switch">Toggle</label>
+    <label :for="id">Toggle</label>
 </template>
 
 <style lang="css" scoped>
